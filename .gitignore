@@ -5,6 +5,7 @@
 /config
 /.pnp
 .pnp.js
+/sessions
 
 # testing
 /coverage
