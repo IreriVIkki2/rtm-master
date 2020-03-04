@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import fetch from "isomorphic-unfetch";
 import baseUrl from "../baseUrl";
-import UserContext from "../context/UserContext";
 
-export default class Index extends Component {
-    static contextType = UserContext;
+export class About extends Component {
     static async getInitialProps(ctx) {
         const res = await fetch(`${baseUrl}/api/programs`);
         const json = await res.json();
@@ -22,9 +20,11 @@ export default class Index extends Component {
     render() {
         return (
             <div>
-                <h1>Home Page</h1>
+                <h1>About Page</h1>
                 <pre>{JSON.stringify(this.props.programs, undefined, 2)}</pre>
             </div>
         );
     }
 }
+
+export default About;

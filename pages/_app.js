@@ -13,7 +13,11 @@ export default class MyApp extends App {
         const user = req && req.session ? req.session.decodedToken : null;
         const res = user && (await fetch(`${baseUrl}/api/profile/${user.uid}`));
         const profile = res ? await res.json() : null;
-        return { user, ...profile };
+        let childProps = {};
+        if (Component.getInitialProps) {
+            childProps = await Component.getInitialProps(ctx);
+        }
+        return { user, ...profile, childProps };
     }
 
     constructor(props) {

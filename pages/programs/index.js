@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import fetch from "isomorphic-unfetch";
+import baseUrl from "../../baseUrl";
 
 export class Programs extends Component {
-    static async getInitialProps({ req }) {
-        const { referer } = req.headers;
-        const baseUrl = referer
-            .split("/")
-            .slice(0, 3)
-            .join("/");
+    static async getInitialProps(ctx) {
         const res = await fetch(`${baseUrl}/api/programs`);
         const json = await res.json();
         return { programs: json.programs };
