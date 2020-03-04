@@ -15,6 +15,9 @@ export class Programs extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
         sessionStorage.setItem("programs", JSON.stringify(this.props.programs));
     }
 

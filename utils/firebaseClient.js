@@ -15,10 +15,10 @@ module.exports = {
         }
 
         return {
-            firebase: firebase,
             db: firebase.firestore(),
             storage: firebase.storage(),
             auth: firebase.auth(),
         };
     },
+    firebase,
 };
