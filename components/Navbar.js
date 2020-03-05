@@ -4,7 +4,7 @@ import Link from "next/link";
 import UserContext from "../context/UserContext";
 
 const Navbar = ({}) => {
-    const { user, signIn, signOut, profile } = useContext(UserContext);
+    const { user, signIn, signOut, profile, isAdmin } = useContext(UserContext);
     return (
         <nav style={{ display: "flex", alignItems: "center" }}>
             <div>
@@ -55,6 +55,13 @@ const Navbar = ({}) => {
                             <p>{user.displayName}</p>
                         </div>
                     </Link>
+
+                    {isAdmin && (
+                        <Link href="/admin-panel">
+                            <a>Admin panel</a>
+                        </Link>
+                    )}
+
                     <button onClick={signOut}>Logout</button>
                 </div>
             ) : (

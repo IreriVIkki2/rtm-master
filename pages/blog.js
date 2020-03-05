@@ -4,12 +4,11 @@ import baseUrl from "../baseUrl";
 import UserContext from "../context/UserContext";
 import crud from "../utils/firebaseCRUD";
 
-export default class Index extends Component {
+export default class extends Component {
     static contextType = UserContext;
     static async getInitialProps(ctx) {
         const res = await fetch(`${baseUrl}/api/pages/home`);
         const json = await res.json();
-        console.log("Index -> getInitialProps -> json", json);
         return { page: json.page };
     }
 
@@ -26,6 +25,9 @@ export default class Index extends Component {
         const { page } = this.props;
         return (
             <div>
+                <h1>
+                    This is the <b>BLOG</b> page
+                </h1>
                 <h1>{page.header__title}</h1>
                 <pre>{JSON.stringify(page, undefined, 2)}</pre>
             </div>

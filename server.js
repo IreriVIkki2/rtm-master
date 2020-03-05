@@ -4,7 +4,7 @@ const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 const next = require("next");
 const admin = require("firebase-admin");
-
+const cookieSecret = require("./config/cookieSecret");
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -23,9 +23,9 @@ app.prepare().then(() => {
     server.use(bodyParser.json());
     server.use(
         session({
-            secret: "geheimnis",
+            secret: cookieSecret,
             saveUninitialized: true,
-            store: new FileStore({ secret: "geheimnis" }),
+            store: new FileStore({ secret: cookieSecret }),
             resave: false,
             rolling: true,
             cookie: { maxAge: 604800000, httpOnly: true }, // week
