@@ -1,5 +1,5 @@
-import { firebaseClient, firebase } from "../utils/firebaseClient";
-import { v4 as uuid } from "uuid";
+const { firebaseClient } = require("../utils/firebaseClient");
+const { newProgramObject } = require("./initialObjects");
 
 class FirebaseCrud {
     constructor() {
@@ -33,24 +33,22 @@ class FirebaseCrud {
     /**
      * @method
      *
-     * @returns {Object} This return a new programs object pre-filled with placeholder values which the admin must replace fully before publishing it as a new program
+     * @returns {Promise} This return a promise which resolves to a program id that is then used to query the newly created program from firestore ready for editing.
      */
     createNewProgram() {
-        const pid = uuid().replace(/-/g, "");
+        return new Promise(async (resolve, reject) => {
+            const newProgram = newProgramObject();
 
-        let data = {
-            name: "Los Angeles",
-            state: "CA",
-            country: "USA",
-        };
-
-        const programRef = firebaseClient()
-            .db.collection("programs")
-            .doc(pid);
-
-        programRef.set(data, { merge: true });
-
-        return pid;
+            await firebaseClient()
+                .db.collection("programs")
+                .doc(newProgram._id)
+                .set(newProgram)
+                .then(() => resolve(newProgram._id))
+                .catch(err => {
+                    console.error(err);
+                    return reject(err);
+                });
+        });
     }
 }
 module.exports = new FirebaseCrud();

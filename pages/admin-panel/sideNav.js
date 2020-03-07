@@ -1,6 +1,17 @@
+import { useRouter } from "next/router";
+import firebaseCRUD from "../../utils/firebaseCRUD";
 import Link from "next/link";
 
 export default () => {
+    const router = useRouter();
+
+    const handleNewProgramClick = async () => {
+        await firebaseCRUD
+            .createNewProgram()
+            .then(pid => router.push(`/admin-panel/programs/edit/${pid}`))
+            .catch(err => console.error(err));
+    };
+
     return (
         <aside
             style={{
@@ -28,11 +39,15 @@ export default () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link
-                                            href={`/admin-panel/programs/edit/${"asdf"}`}
+                                        <span
+                                            style={{
+                                                cursor: "pointer",
+                                                color: "blue",
+                                            }}
+                                            onClick={handleNewProgramClick}
                                         >
                                             <a>New program</a>
-                                        </Link>
+                                        </span>
                                     </li>
                                     <li>
                                         <Link href="/admin-panel/programs">

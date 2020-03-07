@@ -45,14 +45,12 @@ export default class MyApp extends App {
                         body: JSON.stringify({ token }),
                     });
                 });
-                // .then(res => this.addDbListener()); --- add profile listener
             } else {
                 this.setState({ user: null });
                 fetch("/api/logout", {
                     method: "POST",
                     credentials: "same-origin",
                 });
-                // .then(() => this.removeDbListener()); ---- remove profile listener
             }
         });
     }
@@ -90,27 +88,3 @@ export default class MyApp extends App {
         firebaseClient().auth.signOut();
     }
 }
-
-// addDbListener() {
-//     var db = firebase.firestore();
-//     let unsubscribe = db.collection("messages").onSnapshot(
-//         querySnapshot => {
-//             var messages = {};
-//             querySnapshot.forEach(function(doc) {
-//                 messages[doc.id] = doc.data();
-//             });
-//             if (messages) this.setState({ messages });
-//         },
-//         error => {
-//             console.error(error);
-//         },
-//     );
-//     this.setState({ unsubscribe });
-// }
-
-// removeDbListener() {
-//     // firebase.database().ref('messages').off()
-//     if (this.state.unsubscribe) {
-//         this.state.unsubscribe();
-//     }
-// }
