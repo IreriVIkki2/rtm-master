@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Input from "./forms/Input";
+import QuillForm from "./forms/QuillForm";
 
-const SalesForm = ({ sales }) => {
+const SalesForm = ({ sales, handleSubmit }) => {
     const [info, setInfo] = useState(null);
 
     useEffect(() => {
@@ -10,7 +11,6 @@ const SalesForm = ({ sales }) => {
         return () => {};
     }, [sales]);
 
-    console.log("SalesForm -> sales", typeof info);
     return (
         <div>
             <h1>Edit sales information</h1>
@@ -36,6 +36,15 @@ const SalesForm = ({ sales }) => {
                             }
                             minLength={3}
                         />
+                        <QuillForm
+                            initialValue={info.article}
+                            onInputChange={value =>
+                                setInfo({ ...sales, article: value })
+                            }
+                        />
+                        <button onClick={() => handleSubmit({ sales: info })}>
+                            save and continue
+                        </button>
                     </div>
                     <div>
                         <h3>Json Object</h3>
@@ -49,6 +58,7 @@ const SalesForm = ({ sales }) => {
 
 SalesForm.propTypes = {
     sales: PropTypes.object,
+    handleSubmit: PropTypes.func.isRequired,
 };
 
 export default SalesForm;

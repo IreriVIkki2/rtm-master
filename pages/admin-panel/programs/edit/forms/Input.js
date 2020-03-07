@@ -6,6 +6,8 @@ const Input = ({
     initialValue,
     maxLength,
     minLength,
+    type,
+    disabled,
 }) => {
     const handleInputChange = e => {
         e.preventDefault();
@@ -17,19 +19,22 @@ const Input = ({
             id={inputId}
             value={initialValue}
             onChange={handleInputChange}
-            type="text"
+            type={type || "text"}
             maxLength={maxLength}
             minLength={minLength}
+            disabled={disabled}
         />
     );
 };
 
 Input.propTypes = {
     inputId: PropTypes.string.isRequired,
-    initialValue: PropTypes.string.isRequired,
+    initialValue: PropTypes.any.isRequired,
     onInputChange: PropTypes.func.isRequired,
     maxLength: PropTypes.number,
     minLength: PropTypes.number,
+    type: PropTypes.string,
+    disabled: PropTypes.bool,
 };
 
 export default Input;

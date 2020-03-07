@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { firebaseClient } from "../../../../utils/firebaseClient";
 import AdminLayout from "../../AdminLayout";
 import MainInfo from "./MainInfo";
-import { firebaseClient } from "../../../../utils/firebaseClient";
 import UserContext from "../../../../context/UserContext";
 import Router from "next/router";
-import { newProgramObject } from "../../../../utils/initialObjects";
 import SalesForm from "./SalesForm";
+import PlansForm from "./PlansForm";
+import Exercise from "./Exercise";
 
 export default class extends Component {
     static contextType = UserContext;
@@ -15,17 +16,15 @@ export default class extends Component {
 
         this.state = {
             program: {},
-            currentForm: 0,
+            currentForm: 2,
         };
 
         this.programListener = this.programListener.bind(this);
-        this.updateMainInfo = this.updateMainInfo.bind(this);
+        this.updateInfo = this.updateInfo.bind(this);
     }
 
     componentDidMount() {
         if (this.context.isAdmin) {
-            // const pg = newProgramObject();
-            // this.setState({ program: pg });
             this.programListener();
             sessionStorage.setItem(
                 "program",
@@ -34,12 +33,13 @@ export default class extends Component {
         }
     }
 
-    updateMainInfo(res) {
+    updateInfo(res) {
+        console.log("extends -> updateInfo -> res", res);
         const newProg = {
             ...this.state.program,
             ...res,
         };
-        console.log("extends -> updateMainInfo -> newProg", newProg);
+        console.log("extends -> updateInfo -> newProg", newProg);
 
         firebaseClient()
             .db.collection("programs")
@@ -54,15 +54,22 @@ export default class extends Component {
 
     render() {
         const { program, currentForm } = this.state;
-        const { snippet, slug, sales } = program;
+        const { snippet, slug, sales, plans, status, contentDetails } = program;
 
         const forms = [
             <MainInfo
                 snippet={snippet}
                 slug={slug}
-                onMainInfoChange={this.updateMainInfo}
+                onMainInfoChange={this.updateInfo}
             />,
-            <SalesForm sales={sales} />,
+            <SalesForm sales={sales} handleSubmit={this.updateInfo} />,
+            <PlansForm
+                plans={plans}
+                status={status}
+                contentDetails={contentDetails}
+                handleSubmit={this.updateInfo}
+            />,
+            <Exercise />,
         ];
         return (
             <div>

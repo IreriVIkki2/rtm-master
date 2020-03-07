@@ -5,7 +5,7 @@ import { firebaseClient, firebase } from "../utils/firebaseClient";
 import Navbar from "../components/Navbar";
 import fetch from "isomorphic-unfetch";
 import baseUrl from "../baseUrl";
-// import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.snow.css";
 
 export default class MyApp extends App {
     static async getInitialProps({ AppTree, Component, router, ctx }) {
