@@ -11,6 +11,8 @@ const SalesForm = ({ sales, handleSubmit }) => {
         return () => {};
     }, [sales]);
 
+    if (!info) return null;
+
     return (
         <div>
             <h1>Edit sales information</h1>
@@ -21,13 +23,10 @@ const SalesForm = ({ sales, handleSubmit }) => {
 
             {info && (
                 <div>
-                    <p>the forms will come in here</p>
                     <div>
-                        <div>
-                            <label htmlFor="salesCallToAction">
-                                Call to action text
-                            </label>
-                        </div>
+                        <label htmlFor="salesCallToAction">
+                            Call to action text
+                        </label>
                         <Input
                             inputId="salesCallToAction"
                             initialValue={info.callToAction}
@@ -36,20 +35,16 @@ const SalesForm = ({ sales, handleSubmit }) => {
                             }
                             minLength={3}
                         />
-                        <QuillForm
-                            initialValue={info.article}
-                            onInputChange={value =>
-                                setInfo({ ...sales, article: value })
-                            }
-                        />
-                        <button onClick={() => handleSubmit({ sales: info })}>
-                            save and continue
-                        </button>
                     </div>
-                    <div>
-                        <h3>Json Object</h3>
-                        <pre>{JSON.stringify(info, undefined, 2)}</pre>
-                    </div>
+                    <QuillForm
+                        initialValue={info.article}
+                        onInputChange={value =>
+                            setInfo({ ...sales, article: value })
+                        }
+                    />
+                    <button onClick={() => handleSubmit({ sales: info })}>
+                        save and continue
+                    </button>
                 </div>
             )}
         </div>
@@ -57,7 +52,7 @@ const SalesForm = ({ sales, handleSubmit }) => {
 };
 
 SalesForm.propTypes = {
-    sales: PropTypes.object,
+    sales: PropTypes.any,
     handleSubmit: PropTypes.func.isRequired,
 };
 

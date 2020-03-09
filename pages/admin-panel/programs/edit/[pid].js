@@ -7,6 +7,7 @@ import Router from "next/router";
 import SalesForm from "./SalesForm";
 import PlansForm from "./PlansForm";
 import Exercise from "./Exercise";
+import querystring from "querystring";
 
 export default class extends Component {
     static contextType = UserContext;
@@ -16,16 +17,21 @@ export default class extends Component {
 
         this.state = {
             program: {},
-            currentForm: 2,
+            tab: 0,
+            exercise: null,
+            routine: null,
+            loaded: false,
         };
 
         this.programListener = this.programListener.bind(this);
         this.updateInfo = this.updateInfo.bind(this);
+        this.getNewUrl = this.getNewUrl.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if (this.context.isAdmin) {
-            this.programListener();
+            await this.programListener();
+
             sessionStorage.setItem(
                 "program",
                 JSON.stringify(this.state.program),
@@ -33,28 +39,65 @@ export default class extends Component {
         }
     }
 
+    componentDidUpdate() {
+        const { queryParams } = this.state.program;
+        if (queryParams && !this.state.loaded) {
+            const href = this.getNewUrl(queryParams);
+            Router.push(Router.pathname, href, { shallow: true });
+            this.setState({ ...this.state, loaded: true, ...queryParams });
+        }
+    }
+
     updateInfo(res) {
-        console.log("extends -> updateInfo -> res", res);
+        const { program, tab } = this.state;
         const newProg = {
-            ...this.state.program,
+            ...program,
             ...res,
+            queryParams: {
+                ...program.queryParams,
+                tab: tab + 1,
+                exercise: res.exercise ? res.exercise : null,
+                routine: res.routine ? res.routine : null,
+            },
         };
-        console.log("extends -> updateInfo -> newProg", newProg);
+
+        const newParams = {
+            tab: tab + 1,
+            exercise: res.exercise ? res.exercise : null,
+            routine: res.routine ? res.routine : null,
+        };
 
         firebaseClient()
             .db.collection("programs")
             .doc(Router.query.pid)
-            .set({
-                ...this.state.program,
-                ...res,
-            });
+            .set(newProg);
 
-        this.setState({ currentForm: this.state.currentForm + 1 });
+        this.setState({
+            ...this.state,
+            ...newParams,
+        });
+
+        const href = this.getNewUrl(newParams);
+        Router.push(Router.pathname, href, { shallow: true });
+    }
+
+    getNewUrl(params) {
+        const baseUrl = Router.pathname.replace("[pid]", Router.query.pid);
+        const queryString = querystring.stringify(params);
+        return `${baseUrl}?${queryString}`;
     }
 
     render() {
-        const { program, currentForm } = this.state;
-        const { snippet, slug, sales, plans, status, contentDetails } = program;
+        const { program, tab } = this.state;
+        const {
+            snippet,
+            slug,
+            sales,
+            plans,
+            status,
+            contentDetails,
+            queryParams,
+        } = program;
 
         const forms = [
             <MainInfo
@@ -99,11 +142,11 @@ export default class extends Component {
                                             name="progress"
                                             onChange={() =>
                                                 this.setState({
-                                                    currentForm: i,
+                                                    tab: i,
                                                 })
                                             }
                                             value={i}
-                                            checked={currentForm == i}
+                                            checked={tab == i}
                                         />
                                         <label htmlFor={i}>{i}</label>
                                         <br />
@@ -111,7 +154,8 @@ export default class extends Component {
                                 );
                             })}
                         </div>
-                        {forms[currentForm]}
+                        <br />
+                        {program && <div>{forms[tab]}</div>}
                         <hr />
                     </div>
                 </AdminLayout>

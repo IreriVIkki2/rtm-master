@@ -392,16 +392,6 @@ const PlansForm = ({ plans, status, contentDetails, handleSubmit }) => {
                     <div>
                         <button onClick={onSubmit}>save and continue</button>
                     </div>
-                    <div>
-                        <h3>Json Object</h3>
-                        <pre>
-                            {JSON.stringify(
-                                { newPlans, newContentDetails, newStatus },
-                                undefined,
-                                2,
-                            )}
-                        </pre>
-                    </div>
                 </div>
             )}
         </div>

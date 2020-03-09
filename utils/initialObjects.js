@@ -81,7 +81,7 @@ const newProgramObject = () => {
  *
  * @returns {Object} This returns an object with set defaults that is then used to create a new exercise/day in firestore
  */
-const newExerciseObject = pid => {
+const newDayObject = pid => {
     const eid = uuid().replace(/-/g, "");
     return {
         kind: "exercise/day",
@@ -121,6 +121,6 @@ const newRoutineObject = (pid, eid) => {
 
 module.exports = {
     newProgramObject,
-    newExerciseObject,
+    newDayObject,
     newRoutineObject,
 };

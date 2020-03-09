@@ -126,10 +126,6 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                         </div>
                     </div>
                     <button onClick={handleSubmit}>save and continue</button>
-                    <div>
-                        <h3>Json Object</h3>
-                        <pre>{JSON.stringify(info, undefined, 2)}</pre>
-                    </div>
                 </div>
             )}
         </Fragment>
