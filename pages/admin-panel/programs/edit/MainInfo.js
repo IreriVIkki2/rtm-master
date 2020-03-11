@@ -36,7 +36,12 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                 </div>
             )}
             <h1>Main Information</h1>
-            <p>This is the programs primary information</p>
+            <p>
+                This is the main information about this program including the
+                banner, title, message for the call to action button, a 140
+                character description for SEO and mobile preview
+            </p>
+            <hr />
             <hr />
             {info && info.newSlug && (
                 <div>
@@ -72,11 +77,13 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                         <div>
                             <SelectInput
                                 selectInputId="programCategory"
-                                initialValue={info.category || "weight loss"}
+                                initialValue={{
+                                    value: "weight loss",
+                                    label: "Weight Loss",
+                                }}
                                 selectValues={[
-                                    "weight loss",
-                                    "bulking",
-                                    "toning",
+                                    { value: "bulking", label: "Bulking" },
+                                    { value: "toning", label: "Toning" },
                                 ]}
                                 onInputChange={value =>
                                     setInfo({ ...info, category: value })
@@ -94,11 +101,16 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                         <div>
                             <SelectInput
                                 selectInputId="programDifficulty"
-                                initialValue={info.difficulty || "beginner"}
+                                initialValue={{
+                                    value: "beginner",
+                                    label: "Beginner",
+                                }}
                                 selectValues={[
-                                    "beginner",
-                                    "intermediate",
-                                    "advanced",
+                                    {
+                                        value: "intermediate",
+                                        label: "Intermediate",
+                                    },
+                                    { value: "advanced", label: "Advanced" },
                                 ]}
                                 onInputChange={value =>
                                     setInfo({ ...info, difficulty: value })

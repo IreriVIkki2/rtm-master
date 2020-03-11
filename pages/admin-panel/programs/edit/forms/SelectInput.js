@@ -13,11 +13,11 @@ const Input = ({
 
     return (
         <select id={selectInputId} onChange={handleInputChange}>
-            <option defaultValue={initialValue}>{initialValue}</option>
+            <option value={initialValue.value}>{initialValue.label}</option>
             {selectValues.map((item, index) => {
                 return (
-                    <option key={index} value={item}>
-                        {item}
+                    <option key={index} value={item.value}>
+                        {item.label}
                     </option>
                 );
             })}
@@ -27,7 +27,7 @@ const Input = ({
 
 Input.propTypes = {
     selectInputId: PropTypes.string.isRequired,
-    initialValue: PropTypes.string.isRequired,
+    initialValue: PropTypes.object.isRequired,
     onInputChange: PropTypes.func.isRequired,
     selectValues: PropTypes.array.isRequired,
 };

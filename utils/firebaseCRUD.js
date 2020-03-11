@@ -1,5 +1,9 @@
 const { firebaseClient } = require("../utils/firebaseClient");
-const { newProgramObject } = require("./initialObjects");
+const {
+    newProgramObject,
+    newDayObject,
+    newRoutineObject,
+} = require("./initialObjects");
 
 class FirebaseCrud {
     constructor() {
@@ -50,5 +54,62 @@ class FirebaseCrud {
                 });
         });
     }
+
+    /**
+     * @method
+     *
+     * @param {String} programId the id of the program to which this day belongs
+     * @param {Number} order this is the number of day.
+     *
+     * @returns {Promise} Returns a promise that resolves to a day id
+     */
+    createNewDay(programId, order) {
+        return new Promise(async (resolve, reject) => {
+            const newDay = newDayObject();
+
+            newDay.programId = programId;
+            newDay.order = order;
+
+            await firebaseClient()
+                .db.collection("days")
+                .doc(newDay._id)
+                .set(newDay)
+                .then(() => resolve(newDay._id))
+                .catch(err => {
+                    console.error(err);
+                    return reject(err);
+                });
+        });
+    }
+
+    /**
+     * @method
+     *
+     * @param {String} programId the id of the program to which this day belongs
+     * @param {String} programId the id of the program to which this day belongs
+     * @param {Number} order this is the number of day.
+     *
+     * @returns {Promise} Returns a promise that resolves to a day id
+     */
+    createNewRoutine(programId, dayId, order) {
+        return new Promise(async (resolve, reject) => {
+            const newRoutine = newRoutineObject();
+
+            newRoutine.programId = programId;
+            newRoutine.order = order;
+            newRoutine.dayId = dayId;
+
+            await firebaseClient()
+                .db.collection("routines")
+                .doc(newRoutine._id)
+                .set(newRoutine)
+                .then(() => resolve(newRoutine._id))
+                .catch(err => {
+                    console.error(err);
+                    return reject(err);
+                });
+        });
+    }
 }
+
 module.exports = new FirebaseCrud();

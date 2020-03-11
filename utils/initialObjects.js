@@ -82,10 +82,10 @@ const newProgramObject = () => {
  * @returns {Object} This returns an object with set defaults that is then used to create a new exercise/day in firestore
  */
 const newDayObject = pid => {
-    const eid = uuid().replace(/-/g, "");
+    const dayId = uuid().replace(/-/g, "");
     return {
         kind: "exercise/day",
-        _id: eid,
+        _id: dayId,
         order: 0,
         programId: pid,
         plan: "premium",
@@ -99,23 +99,35 @@ const newDayObject = pid => {
         routinesCount: 0,
     };
 };
-const newRoutineObject = (pid, eid) => {
+
+/**
+ * @function
+ *
+ * @param {programId} string Id of the associated routine
+ * @param {dayId} string Id of the day routine
+ *
+ * @returns {Object} This returns an object with set defaults that is then used to create a new exercise/day in firestore
+ */
+const newRoutineObject = (pid, dayId) => {
     const rid = uuid().replace(/-/g, "");
     return {
         kind: "routine",
         _id: rid,
         order: 0,
         programId: pid,
-        exerciseId: eid,
-        plan: "premium",
+        dayId: dayId,
+        plan: "all",
         isRestDay: false,
-        lengthInSecs: 12000,
+        lengthInSecs: 0,
+        repeatCount: "X 10",
         published: false,
         publishAt: Date.now(),
-        updatedAt: Date.now(),
         viewCount: 0,
         completionCount: 0,
         routinesCount: 0,
+        youtubeUrl: "",
+        description: "",
+        name: "",
     };
 };
 
