@@ -1,85 +1,85 @@
-.btn {
-    &,
-    &:visited,
-    &:link {
-        cursor: pointer;
-        outline: none;
-        text-transform: uppercase;
-        text-decoration: none;
-        display: inline-block;
-        color: $color-grey-dark;
-        line-height: 1;
-        font-weight: inherit;
-        position: relative;
-        padding: 1rem $rem-md;
-        border: none;
-        background-clip: padding-box;
-        border-radius: $rem-xl;
-        background-color: transparent;
-        transition: all 0.3s ease-out;
-        border: 2px solid $color-primary;
+// .btn {
+//     &,
+//     &:visited,
+//     &:link {
+//         cursor: pointer;
+//         outline: none;
+//         text-transform: uppercase;
+//         text-decoration: none;
+//         display: inline-block;
+//         color: $color-grey-dark;
+//         line-height: 1;
+//         font-weight: inherit;
+//         position: relative;
+//         padding: 1rem $rem-md;
+//         border: none;
+//         background-clip: padding-box;
+//         border-radius: $rem-xl;
+//         background-color: transparent;
+//         transition: all 0.3s ease-out;
+//         border: 2px solid $color-primary;
 
-        &::before {
-            content: "";
-            transition: all 0.3s ease-out;
-            position: absolute;
-            $initial: 0%;
-            top: $initial;
-            right: $initial;
-            bottom: $initial;
-            left: $initial;
-            border-radius: $rem-xl;
-            z-index: -1;
-            // background-color: $color-white;
-        }
+//         &::before {
+//             content: "";
+//             transition: all 0.3s ease-out;
+//             position: absolute;
+//             $initial: 0%;
+//             top: $initial;
+//             right: $initial;
+//             bottom: $initial;
+//             left: $initial;
+//             border-radius: $rem-xl;
+//             z-index: -1;
+//             // background-color: $color-white;
+//         }
 
-        &::after {
-            content: "";
-            position: absolute;
-            $initial: -0.2rem;
-            top: $initial;
-            right: $initial;
-            bottom: $initial;
-            left: $initial;
-            z-index: -2;
-            border-radius: $rem-xl;
-            // background: linear-gradient(
-            //     to bottom right,
-            //     $color-primary-light,
-            //     $color-primary-dark
-            // );
-        }
-    }
+//         &::after {
+//             content: "";
+//             position: absolute;
+//             $initial: -0.2rem;
+//             top: $initial;
+//             right: $initial;
+//             bottom: $initial;
+//             left: $initial;
+//             z-index: -2;
+//             border-radius: $rem-xl;
+//             // background: linear-gradient(
+//             //     to bottom right,
+//             //     $color-primary-light,
+//             //     $color-primary-dark
+//             // );
+//         }
+//     }
 
-    &:hover {
-        box-shadow: 0 0.3rem 1rem rgba($color-grey-dark, 0.3);
-        &::before {
-            left: 100%;
-        }
-    }
+//     &:hover {
+//         box-shadow: 0 0.3rem 1rem rgba($color-grey-dark, 0.3);
+//         &::before {
+//             left: 100%;
+//         }
+//     }
 
-    // &:active,
-    // &:focus {
-    //     outline: none;
-    //     transform: translateY(0.2rem);
-    //     box-shadow: 0 0.5rem 1rem rgba($color-grey-dark, 0.3);
-    // }
+//     // &:active,
+//     // &:focus {
+//     //     outline: none;
+//     //     transform: translateY(0.2rem);
+//     //     box-shadow: 0 0.5rem 1rem rgba($color-grey-dark, 0.3);
+//     // }
 
-    // &--primary,
-    // &--primary:visited,
-    // &--primary:link {
-    //     background-color: $color-primary-light;
-    // }
+//     // &--primary,
+//     // &--primary:visited,
+//     // &--primary:link {
+//     //     background-color: $color-primary-light;
+//     // }
 
-    // &--secondary,
-    // &--secondary:visited,
-    // &--secondary:link {
-    //     background-color: $color-secondary-light;
-    // }
+//     // &--secondary,
+//     // &--secondary:visited,
+//     // &--secondary:link {
+//     //     background-color: $color-secondary-light;
+//     // }
 
-    // &--tertiary,
-    // &--tertiary:visited,
-    // &--tertiary:link {
-    //     background-color: $color-tertiary-light;
-    // }
-}
+//     // &--tertiary,
+//     // &--tertiary:visited,
+//     // &--tertiary:link {
+//     //     background-color: $color-tertiary-light;
+//     // }
+// }

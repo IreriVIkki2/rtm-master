@@ -24,7 +24,20 @@ export default class extends Component {
         const { page } = this.props;
         return (
             <div>
-                <header className=""></header>
+                <header className="">
+                    <h1>
+                        <span>THE TRAINER</span>
+                        <span>MATTERS</span>
+                    </h1>
+
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Illum, doloribus, nesciunt consequuntur nihil corporis,
+                        eveniet ullam libero similique in aliquid facilis quasi
+                        ipsum molestias repudiandae. Expedita dolorem excepturi
+                        et enim!
+                    </p>
+                </header>
                 <section className=""></section>
                 <section className=""></section>
                 <section className=""></section>

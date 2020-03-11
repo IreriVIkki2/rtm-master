@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import fetch from "isomorphic-unfetch";
 import baseUrl from "../baseUrl";
 import "react-quill/dist/quill.snow.css";
+import "../public/main.css";
 
 export default class MyApp extends App {
     static async getInitialProps({ AppTree, Component, router, ctx }) {

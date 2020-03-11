@@ -1,14 +1,14 @@
 body {
-    font-weight: 300;
-    font-size: 1.6rem;
+    // letter-spacing: 0;
     text-transform: none;
     text-decoration: none;
-    letter-spacing: 0;
-    color: $color-grey-dark;
+    color: $color-text-light;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    font-family: $font-primary;
+    font-size: $font-size;
+    font-weight: 300;
+    font-family: $font-barlow;
 }
 
 // .text__background--gradient-primary {

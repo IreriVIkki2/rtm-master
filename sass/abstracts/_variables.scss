@@ -1,34 +1,20 @@
-$color-primary: #f07f7f;
-$color-primary-light: #f5adad;
-$color-primary-dark: #eb5151;
+$color-primary: #2c2d34;
+$color-secondary: #e94822;
+$color-tertiary: #f2910a;
+$color-tertiary-2: #efd510;
 
-$color-secondary: #948af7;
-$color-secondary-light: #776af5;
-$color-secondary-dark: #5a4af3;
-
-$color-tertiary: #b35ff1;
-$color-tertiary-light: #c98ef5;
-$color-tertiary-dark: #9d30ed;
-
-$color-light-100: #d7d7d7;
-$color-light-50: #e8e8e8;
-$color-light: #f9f9f9;
-
-$color-heading: #0c3c5f;
-
-$color-grey: #262626;
-$color-grey-dark: #0d0d0d;
-$color-grey-light: #484848;
+$color-text-bold: #141219;
+$color-text-light: #666666;
 
 $color-white: #fff;
 $color-black: #000;
+$color-light: #f8f8f8;
 
 // fonts
+$font-barlow: "Barlow", sans-serif;
+$font-condensed: "Barlow Condensed", sans-serif;
 
-$font-primary: "Open Sans", sans-serif;
-$font-secondary: "Quicksand", sans-serif;
-
-$font-size: 1.6rem;
+$font-size: 1.8rem;
 $font-size-sm: 1.4rem;
 $font-size-md: 2.4rem;
 $font-size-lg: 3.3rem;

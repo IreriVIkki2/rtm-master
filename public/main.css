@@ -1,0 +1,35 @@
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%; }
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+img,
+span,
+a {
+  display: inline-block; }
+
+section,
+header,
+footer {
+  width: 100%;
+  overflow-x: hidden; }
+
+body {
+  text-transform: none;
+  text-decoration: none;
+  color: #666666;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.8rem;
+  font-weight: 300;
+  font-family: "Barlow", sans-serif; }
