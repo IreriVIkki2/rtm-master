@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Link from "next/link";
+import Link from "./Link";
 
 import UserContext from "../context/UserContext";
 
@@ -7,6 +7,17 @@ const Navbar = ({}) => {
     const { user, signIn, signOut, profile, isAdmin } = useContext(UserContext);
     return (
         <nav style={{ display: "flex", alignItems: "center" }}>
+            <style jsx>{`
+                .active {
+                    color: red;
+                }
+                .nav-link {
+                    text-decoration: none;
+                    margin: 0 20px;
+                    padding: 10px;
+                    display: block;
+                }
+            `}</style>
             <div>
                 <Link href="/">
                     <h1>Rhotimmi</h1>
@@ -14,29 +25,29 @@ const Navbar = ({}) => {
             </div>
 
             <ul style={{ display: "flex", listStyle: "none" }}>
-                <li style={{ margin: "0 20px" }}>
-                    <Link href="/">
-                        <a>Home</a>
+                <li>
+                    <Link activeClassName="active" href="/">
+                        <a className="nav-link">Home</a>
                     </Link>
                 </li>
-                <li style={{ margin: "0 20px" }}>
-                    <Link href="/programs">
-                        <a>Programs</a>
+                <li>
+                    <Link activeClassName="active" href="/programs">
+                        <a className="nav-link">Programs</a>
                     </Link>
                 </li>
-                <li style={{ margin: "0 20px" }}>
-                    <Link href="/blog">
-                        <a>Blog</a>
+                <li>
+                    <Link activeClassName="active" href="/blog">
+                        <a className="nav-link">Blog</a>
                     </Link>
                 </li>
-                <li style={{ margin: "0 20px" }}>
-                    <Link href="/about">
-                        <a>About</a>
+                <li>
+                    <Link activeClassName="active" href="/about">
+                        <a className="nav-link">About</a>
                     </Link>
                 </li>
-                <li style={{ margin: "0 20px" }}>
-                    <Link href="/contact">
-                        <a>Contact</a>
+                <li>
+                    <Link activeClassName="active" href="/contact">
+                        <a className="nav-link">Contact</a>
                     </Link>
                 </li>
             </ul>

@@ -1,0 +1,31 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    // overflow: hidden;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+img,
+span,
+a {
+    display: inline-block;
+}
+
+section,
+header,
+footer {
+    width: 100%;
+    overflow-x: hidden;
+}

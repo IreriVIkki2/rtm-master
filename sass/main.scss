@@ -1,0 +1,24 @@
+// abstract imports
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+
+
+// Base sass files
+@import 'base/animations';
+@import 'base/base';
+@import 'base/typography';
+@import 'base/utilities';
+
+
+// components sass files
+@import 'components/button';
+
+
+// layout sass files
+@import 'layout/footer';
+@import 'layout/navbar';
+
+
+// pages sass fieles
+@import 'pages/home'

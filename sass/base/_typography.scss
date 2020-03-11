@@ -1,0 +1,33 @@
+body {
+    font-weight: 300;
+    font-size: 1.6rem;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0;
+    color: $color-grey-dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-family: $font-primary;
+}
+
+// .text__background--gradient-primary {
+//     color: transparent;
+//     background-image: linear-gradient(
+//         to bottom right,
+//         $color-primary-light,
+//         $color-primary-dark
+//     );
+//     -webkit-background-clip: text;
+//     display: inline-block;
+//     transition: all ease-out 500ms;
+//     font-size: 4rem;
+
+//     &:hover {
+//         background-image: linear-gradient(
+//             to top left,
+//             $color-primary-light,
+//             $color-primary-dark
+//         );
+//     }
+// }
