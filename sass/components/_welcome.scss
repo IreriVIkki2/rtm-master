@@ -6,9 +6,29 @@
     @include content-width-lg;
 
     &__info {
+        flex: 0 0 50%;
         margin-left: 6.5rem;
     }
 
     &__banners {
+        flex: 0 0 50%;
+
+        &--top {
+            width: 100%;
+            &-img {
+                width: 60%;
+            }
+        }
+
+        &--bottom {
+            width: 60%;
+            margin-left: -10rem;
+            margin-top: -10rem;
+            box-shadow: 1rem 0.7rem 2rem 0.3rem rgba($color-primary, 0.6);
+
+            &-img {
+                width: 100%;
+            }
+        }
     }
 }

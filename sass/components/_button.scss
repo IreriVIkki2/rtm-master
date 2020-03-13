@@ -12,17 +12,71 @@
         transition: all 0.3s ease-out;
         padding: 1rem 2rem;
         background-color: transparent;
-        border: 1px solid $color-text-light;
-        color: $color-light;
         font-family: $font-condensed;
         font-size: $font-size;
         letter-spacing: 0.2rem;
         font-weight: lighter;
+
+        border: 1px solid;
+    }
+
+    &--primary {
+        border-color: $color-primary;
+        color: $color-primary;
+    }
+
+    &--light {
+        border-color: $color-text-light;
+        color: $color-light;
     }
 
     &--secondary {
         border-color: $color-secondary;
         color: $color-secondary;
+    }
+
+    &--tertiary {
+        border-color: $color-tertiary;
+        color: $color-tertiary;
+    }
+
+    &__link {
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        position: relative !important;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0.1rem;
+        }
+
+        &::after,
+        &--secondary {
+            background-color: $color-secondary;
+            color: $color-secondary;
+        }
+
+        &--light,
+        &::after {
+            color: $color-light;
+            background-color: $color-light;
+        }
+
+        &--primary,
+        &::after {
+            color: $color-primary;
+            background-color: $color-primary;
+        }
+
+        &--tertiary,
+        &::after {
+            color: $color-tertiary;
+            background-color: $color-tertiary;
+        }
     }
 
     &:hover {

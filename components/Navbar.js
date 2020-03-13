@@ -75,7 +75,7 @@ const Navbar = ({}) => {
                     </li>
                 ) : (
                     <li>
-                        <button className="btn" onClick={signIn}>
+                        <button className="btn btn--light" onClick={signIn}>
                             Client Login
                         </button>
                     </li>

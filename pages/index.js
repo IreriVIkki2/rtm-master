@@ -67,16 +67,25 @@ export default class extends Component {
                             nihil!
                         </p>
                         <Link href="#">
-                            <a className="btn">Find out more</a>
+                            <a className="btn btn__link btn__link--secondary">
+                                Find out more
+                            </a>
                         </Link>
                     </div>
                     <div className="welcome__banners">
-                        <div className="">
-                            <img src="" alt="" />
+                        <div className="welcome__banners--top">
+                            <img
+                                className="welcome__banners--top-img"
+                                src="images/rph1.jpg"
+                                alt=""
+                            />
                         </div>
-
-                        <div>
-                            <img src="" alt="" className="" />
+                        <div className="welcome__banners--bottom">
+                            <img
+                                className="welcome__banners--bottom-img"
+                                src="images/rph5.jpg"
+                                alt=""
+                            />
                         </div>
                     </div>
                 </section>
