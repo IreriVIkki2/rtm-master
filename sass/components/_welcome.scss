@@ -1,13 +1,13 @@
 .welcome {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     @include content-width-lg;
+
+    min-height: 80vh;
+    margin: 15rem 0;
+    display: flex;
+    justify-content: center;
 
     &__info {
         flex: 0 0 50%;
-        margin-left: 6.5rem;
     }
 
     &__banners {
@@ -15,6 +15,8 @@
 
         &--top {
             width: 100%;
+            display: flex;
+            justify-content: center;
             &-img {
                 width: 60%;
             }
@@ -22,7 +24,6 @@
 
         &--bottom {
             width: 60%;
-            margin-left: -10rem;
             margin-top: -10rem;
             box-shadow: 1rem 0.7rem 2rem 0.3rem rgba($color-primary, 0.6);
 
