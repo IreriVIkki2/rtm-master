@@ -71,7 +71,7 @@ export default class MyApp extends App {
                     }}
                 >
                     <Navbar />
-                    <div style={{ width: "100%", overflow: "hidden" }}>
+                    <div>
                         <Component {...pageProps} {...childProps} />
                     </div>
                 </UserContext.Provider>

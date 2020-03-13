@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import baseUrl from "../baseUrl";
 import UserContext from "../context/UserContext";
@@ -21,31 +22,70 @@ export default class extends Component {
     }
 
     render() {
-        const { page } = this.props;
         return (
             <div>
-                <header className="">
-                    <h1>
-                        <span>THE TRAINER</span>
-                        <span>MATTERS</span>
-                    </h1>
+                <header className="home-header">
+                    <div className="home-header__top ml-7">
+                        <p className=" home-header__subtitle title title--sm title--sm-redline">
+                            Elite personal training services
+                        </p>
+                        <h1 className="home-header__title">
+                            <span className="title title--lg">THE TRAINER</span>
+                            <span className="title title--lg bolder">
+                                MATTERS
+                            </span>
+                        </h1>
 
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Illum, doloribus, nesciunt consequuntur nihil corporis,
-                        eveniet ullam libero similique in aliquid facilis quasi
-                        ipsum molestias repudiandae. Expedita dolorem excepturi
-                        et enim!
-                    </p>
+                        <div className="home-header__cta">
+                            <button className="btn btn--secondary">
+                                Contact Me
+                            </button>
+                            <Link href="/about">
+                                <a>Learn more</a>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="home-header__bottom">
+                        <div className="home-header__bottom-space"></div>
+                        <div className="home-header__bottom-scroller">
+                            <span>v v ------------</span>
+                        </div>
+                    </div>
                 </header>
-                <section className=""></section>
+                <section className="welcome">
+                    <div className="welcome__info">
+                        <p className="title title--sm title--sm-redline">
+                            Fit life with rhotimmi
+                        </p>
+                        <h1 className="title title--lg">Welcome</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Impedit consequatur veniam consequuntur id
+                            voluptates quas temporibus earum quaerat blanditiis
+                            suscipit. Minus veritatis suscipit voluptates
+                            temporibus autem architecto necessitatibus delectus
+                            nihil!
+                        </p>
+                        <Link href="#">
+                            <a className="btn">Find out more</a>
+                        </Link>
+                    </div>
+                    <div className="welcome__banners">
+                        <div className="">
+                            <img src="" alt="" />
+                        </div>
+
+                        <div>
+                            <img src="" alt="" className="" />
+                        </div>
+                    </div>
+                </section>
                 <section className=""></section>
                 <section className=""></section>
                 <section className=""></section>
                 <section className=""></section>
                 <section className=""></section>
                 <footer className=""></footer>
-                <pre>{JSON.stringify(page, undefined, 2)}</pre>
             </div>
         );
     }

@@ -1,0 +1,14 @@
+.welcome {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include content-width-lg;
+
+    &__info {
+        margin-left: 6.5rem;
+    }
+
+    &__banners {
+    }
+}

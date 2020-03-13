@@ -15,6 +15,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: inherit;
+    line-height: 1;
 }
 
 img,
@@ -28,4 +29,11 @@ header,
 footer {
     width: 100%;
     overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+    // all: unset;
+    font-weight: unset;
 }

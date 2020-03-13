@@ -1,0 +1,50 @@
+.home-header {
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-image: linear-gradient(
+            to right bottom,
+            rgba($color-primary, 0.8),
+            rgba($color-primary, 0.5)
+        ),
+        url("/images/bw-rph2.jpg");
+    background-position: center;
+    color: $color-light;
+    display: flex;
+    flex-direction: column;
+
+    &__subtitle {
+    }
+
+    &__title {
+        margin-bottom: 2rem;
+    }
+
+    &__cta {
+    }
+
+    &__top {
+        @include content-width-lg;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    &__bottom {
+        height: 5.6rem;
+
+        display: flex;
+        align-items: stretch;
+
+        &-space {
+            flex-grow: 5;
+            background-color: $color-light;
+        }
+
+        &-scroller {
+            flex-grow: 1;
+        }
+    }
+}

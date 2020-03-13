@@ -4,80 +4,83 @@ import Link from "./Link";
 import UserContext from "../context/UserContext";
 
 const Navbar = ({}) => {
-    const { user, signIn, signOut, profile, isAdmin } = useContext(UserContext);
+    const { user, signIn, signOut, isAdmin } = useContext(UserContext);
     return (
-        <nav style={{ display: "flex", alignItems: "center" }}>
-            <style jsx>{`
-                .active {
-                    color: red;
-                }
-                .nav-link {
-                    text-decoration: none;
-                    margin: 0 20px;
-                    padding: 10px;
-                    display: block;
-                }
-            `}</style>
-            <div>
+        <nav className="navbar">
+            <div className="navbar__toggler">
+                <div className="navbar__toggler--container">
+                    <div className="navbar__toggler--bars"></div>
+                </div>
+            </div>
+            <div className="navbar__brand">
                 <Link href="/">
-                    <h1>Rhotimmi</h1>
+                    <h1 className="navbar__brand--title">Rhotimmi</h1>
                 </Link>
             </div>
 
-            <ul style={{ display: "flex", listStyle: "none" }}>
-                <li>
-                    <Link activeClassName="active" href="/">
-                        <a className="nav-link">Home</a>
+            <ul className="navbar__nav">
+                <li className="navbar__nav--item">
+                    <Link activeClassName="navbar__nav--link-active" href="/">
+                        <a className="title-sm title navbar__nav--link">Home</a>
                     </Link>
                 </li>
-                <li>
-                    <Link activeClassName="active" href="/programs">
-                        <a className="nav-link">Programs</a>
+                <li className="navbar__nav--item">
+                    <Link
+                        activeClassName="navbar__nav--link-active"
+                        href="/programs"
+                    >
+                        <a className="title-sm title navbar__nav--link">
+                            Programs
+                        </a>
                     </Link>
                 </li>
-                <li>
-                    <Link activeClassName="active" href="/blog">
-                        <a className="nav-link">Blog</a>
+                <li className="navbar__nav--item">
+                    <Link
+                        activeClassName="navbar__nav--link-active"
+                        href="/contact"
+                    >
+                        <a className="title-sm title navbar__nav--link">
+                            Contact
+                        </a>
                     </Link>
                 </li>
-                <li>
-                    <Link activeClassName="active" href="/about">
-                        <a className="nav-link">About</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link activeClassName="active" href="/contact">
-                        <a className="nav-link">Contact</a>
-                    </Link>
-                </li>
-            </ul>
 
-            {user ? (
-                <div>
-                    <Link href="/user/username">
-                        <div>
-                            <img
-                                width="40px"
-                                height="40px"
-                                style={{ borderRadius: "50%" }}
-                                src={user.photoURL}
-                                alt=""
-                            />
-                            <p>{user.displayName}</p>
-                        </div>
+                <li className="navbar__nav--item">
+                    <Link
+                        activeClassName="navbar__nav--link-active"
+                        href="/about"
+                    >
+                        <a className="title-sm title navbar__nav--link">
+                            About
+                        </a>
                     </Link>
+                </li>
 
-                    {isAdmin && (
-                        <Link href="/admin-panel">
-                            <a>Admin panel</a>
+                {user ? (
+                    <li className="navbar__nav--item">
+                        <Link href="/user/username">
+                            <div>
+                                <img src={user.photoURL} alt="" />
+                                <p>{user.displayName}</p>
+                            </div>
                         </Link>
-                    )}
 
-                    <button onClick={signOut}>Logout</button>
-                </div>
-            ) : (
-                <button onClick={signIn}>Login</button>
-            )}
+                        {isAdmin && (
+                            <Link href="/admin-panel">
+                                <a>Admin panel</a>
+                            </Link>
+                        )}
+
+                        <button onClick={signOut}>Logout</button>
+                    </li>
+                ) : (
+                    <li>
+                        <button className="btn" onClick={signIn}>
+                            Client Login
+                        </button>
+                    </li>
+                )}
+            </ul>
         </nav>
     );
 };
