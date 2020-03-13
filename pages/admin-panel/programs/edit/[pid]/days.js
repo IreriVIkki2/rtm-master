@@ -109,7 +109,7 @@ export default class extends Component {
                 daysSnapshot.forEach(day => {
                     days.push(day.data());
                 });
-                this.setState({ days, dayId: days[0]._id });
+                this.setState({ days, dayId: days[0] ? days[0]._id : null });
             });
         this.setState({ unsubscribeDaysListener });
     }
