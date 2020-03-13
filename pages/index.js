@@ -54,12 +54,15 @@ export default class extends Component {
                         </div>
                     </div>
                 </header>
+
+                {/* ---------- */}
+
                 <section className="welcome">
-                    <div className="welcome__info ml-7">
-                        <p className="title title--sm title--sm-redline">
+                    <div className="welcome__info">
+                        <p className="title title--sm title--sm-redline ml-7">
                             Fit life with rhotimmi
                         </p>
-                        <h1 className="title title--lg mb-3">Welcome</h1>
+                        <h1 className="title title--lg mb-3 ml-7">Welcome</h1>
                         <p className="mb-3">
                             My name is Rhotimmi Peter and I am a Certified
                             Personal Trainer, Fitness model, Enthusiast and
@@ -74,7 +77,7 @@ export default class extends Component {
                             attainable and I just had to keep pushing.
                         </p>
                         <Link href="#">
-                            <a className="btn btn__link btn__link--secondary">
+                            <a className="btn btn__link btn__link--tertiary ml-7">
                                 Find out more
                             </a>
                         </Link>
@@ -96,12 +99,66 @@ export default class extends Component {
                         </div>
                     </div>
                 </section>
-                <section className=""></section>
-                <section className=""></section>
-                <section className=""></section>
-                <section className=""></section>
-                <section className=""></section>
-                <footer className=""></footer>
+
+                {/* ---------- */}
+
+                <section className="clients">
+                    <p className="title title--sm ml-7">Trusted by</p>
+                    <h2 className="title title--lg ml-7">Satisfied</h2>
+                    <div className="clients__container pl-7">
+                        <h2 className="title title--lg mb-7 text-white">
+                            clients
+                        </h2>
+
+                        <div className="clients__items mb-7">
+                            <div className="clients__item">
+                                <div className="clients__item--name title--md">
+                                    <p className="title--md">John Doe</p>
+                                </div>
+                            </div>
+                            <div className="clients__item">
+                                <div className="clients__item--name title--md">
+                                    <p className="title--md">John Doe</p>
+                                </div>
+                            </div>
+                            <div className="clients__item">
+                                <div className="clients__item--name title--md">
+                                    <p className="title--md">John Doe</p>
+                                </div>
+                            </div>
+                            <div className="clients__item">
+                                <div className="clients__item--name title--md">
+                                    <p className="title--md">John Doe</p>
+                                </div>
+                            </div>
+                            <div className="clients__item">
+                                <div className="clients__item--name title--md">
+                                    <p className="title--md">John Doe</p>
+                                </div>
+                            </div>
+                            <div className="clients__item">
+                                <div className="clients__item--name title--md">
+                                    <p className="title--md">John Doe</p>
+                                </div>
+                            </div>
+                            <div className="clients__item">
+                                <div className="clients__item--name title--md">
+                                    <p className="title--md">John Doe</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="clients__scrollbar mb-7"></div>
+                    </div>
+                </section>
+
+                {/* -------- */}
+
+                <section className="services"></section>
+                <section className="programmes"></section>
+                <section className="gallery"></section>
+                <section className="contact"></section>
+                <footer className="footer"></footer>
             </div>
         );
     }
