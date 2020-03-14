@@ -57,21 +57,55 @@ const Navbar = ({}) => {
                 </li>
 
                 {user ? (
-                    <li className="navbar__nav--item">
-                        <Link href="/user/username">
-                            <div>
-                                <img src={user.photoURL} alt="" />
-                                <p>{user.displayName}</p>
+                    <li className="navbar__nav--item navbar__account">
+                        <Link as={`/${user.displayName}`} href="/[username]">
+                            <div className="navbar__user">
+                                <img
+                                    className="navbar__user--icon"
+                                    src={user.photoURL}
+                                    alt=""
+                                />
                             </div>
                         </Link>
-
-                        {isAdmin && (
-                            <Link href="/admin-panel">
-                                <a>Admin panel</a>
-                            </Link>
-                        )}
-
-                        <button onClick={signOut}>Logout</button>
+                        <div className="navbar__account--dropdown">
+                            <ul className="navbar__userOptions">
+                                <li className="mb-1">
+                                    <Link
+                                        as={`/${user.displayName}`}
+                                        href="/[username]"
+                                    >
+                                        <a className="title text-secondary">
+                                            {user.displayName}
+                                        </a>
+                                    </Link>
+                                </li>
+                                <hr className="mb-1" />
+                                <li className="mb-1">
+                                    <Link href="/admin-panel">
+                                        <a className="title navbar__userOptions-link">
+                                            settings
+                                        </a>
+                                    </Link>
+                                </li>
+                                <li className="mb-3">
+                                    {isAdmin && (
+                                        <Link href="/admin-panel">
+                                            <a className="title navbar__userOptions-link">
+                                                Admin panel
+                                            </a>
+                                        </Link>
+                                    )}
+                                </li>
+                                <li className="mb-2">
+                                    <button
+                                        className="btn btn--light"
+                                        onClick={signOut}
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 ) : (
                     <li>

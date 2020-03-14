@@ -81,6 +81,57 @@
             }
         }
     }
+
+    &__user {
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
+        cursor: pointer;
+
+        &--icon {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__account {
+        position: relative;
+
+        &:not(:hover) &--dropdown {
+            display: none;
+        }
+
+        &:hover &--dropdown {
+            background-color: $color-primary;
+            padding: 1rem;
+            box-shadow: 0.1rem 0.2rem 1rem
+                rgba($color: $color-primary, $alpha: 0.4);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 25rem;
+            min-height: 5rem;
+            color: $color-white;
+        }
+    }
+
+    &__userOptions {
+        list-style: none;
+        color: $color-white;
+        display: flex;
+        flex-direction: column;
+
+        &-link {
+            color: $color-white;
+
+            &:hover {
+                color: $color-secondary;
+            }
+        }
+    }
 }
 
 .mt-56 {

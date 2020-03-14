@@ -69,6 +69,12 @@ p:not(.title) {
 .mb-2 {
   margin-bottom: 2rem !important; }
 
+.mr-1 {
+  margin-right: 1rem !important; }
+
+.mb-1 {
+  margin-bottom: 1rem !important; }
+
 .text-light {
   color: #f8f8f8 !important; }
 
@@ -346,6 +352,40 @@ p:not(.title) {
     .navbar__nav--link {
       color: #f8f8f8; }
       .navbar__nav--link-active {
+        color: #f2910a; }
+  .navbar__user {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer; }
+    .navbar__user--icon {
+      height: 100%;
+      width: 100%;
+      object-fit: cover; }
+  .navbar__account {
+    position: relative; }
+    .navbar__account:not(:hover) .navbar__account--dropdown {
+      display: none; }
+    .navbar__account:hover .navbar__account--dropdown {
+      background-color: #2c2d34;
+      padding: 1rem;
+      box-shadow: 0.1rem 0.2rem 1rem rgba(44, 45, 52, 0.4);
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 25rem;
+      min-height: 5rem;
+      color: #fff; }
+  .navbar__userOptions {
+    list-style: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column; }
+    .navbar__userOptions-link {
+      color: #fff; }
+      .navbar__userOptions-link:hover {
         color: #f2910a; }
 
 .mt-56 {
