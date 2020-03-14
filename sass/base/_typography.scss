@@ -11,7 +11,7 @@ body {
     font-family: $font-barlow;
 }
 
-p {
+p:not(.title) {
     line-height: 1.32;
 }
 

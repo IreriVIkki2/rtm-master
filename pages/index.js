@@ -56,14 +56,13 @@ export default class extends Component {
                 </header>
 
                 {/* ---------- */}
-
                 <section className="welcome">
                     <div className="welcome__info">
                         <p className="title title--sm title--sm-redline ml-7">
                             Fit life with rhotimmi
                         </p>
                         <h1 className="title title--lg mb-3 ml-7">Welcome</h1>
-                        <p className="mb-3">
+                        <p className="mb-3 ml-7">
                             My name is Rhotimmi Peter and I am a Certified
                             Personal Trainer, Fitness model, Enthusiast and
                             Content creator. I have always been a skinny boy
@@ -158,6 +157,7 @@ export default class extends Component {
                 <section className="programmes"></section>
                 <section className="gallery"></section>
                 <section className="contact"></section>
+
                 <footer className="footer"></footer>
             </div>
         );

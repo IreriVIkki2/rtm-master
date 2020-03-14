@@ -8,6 +8,7 @@
     height: 5.6rem;
     background-color: rgba($color-primary, 0.75);
     @include content-width-lg;
+    z-index: 100;
 
     &__toggler {
         margin-right: 2rem;

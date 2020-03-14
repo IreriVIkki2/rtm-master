@@ -22,10 +22,34 @@
     margin-bottom: 3rem !important;
 }
 
+.mr-2 {
+    margin-right: 2rem !important;
+}
+
+.mb-2 {
+    margin-bottom: 2rem !important;
+}
+
 .text-light {
     color: $color-light !important;
 }
 
+.text-black {
+    color: $color-black !important;
+}
+
 .text-white {
     color: $color-white !important;
+}
+
+.text-secondary {
+    color: $color-secondary !important;
+}
+
+.text-tertiary {
+    color: $color-tertiary !important;
+}
+
+.text-uppercase {
+    text-transform: uppercase !important;
 }
