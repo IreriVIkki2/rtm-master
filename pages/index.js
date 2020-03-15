@@ -7,18 +7,9 @@ import crud from "../utils/firebaseCRUD";
 
 export default class extends Component {
     static contextType = UserContext;
-    static async getInitialProps(ctx) {
-        const res = await fetch(`${baseUrl}/api/pages/home`);
-        const json = await res.json();
-        return { page: json.page };
-    }
 
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
-        crud.test(Date.now(), "this is the message I want to add.");
     }
 
     render() {

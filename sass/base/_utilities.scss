@@ -22,6 +22,14 @@
     margin-bottom: 3rem !important;
 }
 
+.mt-3 {
+    margin-top: 3rem !important;
+}
+
+.mt-7 {
+    margin-top: 7rem !important;
+}
+
 .mr-2 {
     margin-right: 2rem !important;
 }
@@ -36,6 +44,10 @@
 
 .mb-1 {
     margin-bottom: 1rem !important;
+}
+
+.mt-auto {
+    margin-top: auto;
 }
 
 .text-light {
@@ -56,6 +68,10 @@
 
 .text-tertiary {
     color: $color-tertiary !important;
+}
+
+.text-tertiary-2 {
+    color: $color-tertiary-2 !important;
 }
 
 .text-uppercase {

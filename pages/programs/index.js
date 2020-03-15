@@ -33,7 +33,10 @@ export default ({ allPrograms }) => {
                             {mainProgram.snippet.description}
                         </p>
 
-                        <Link href="" as="">
+                        <Link
+                            href="/programs/buy/[pid]"
+                            as={`/programs/buy/${mainProgram._id}`}
+                        >
                             <button className="btn btn--secondary">
                                 {mainProgram.sales.callToAction}
                             </button>
@@ -81,7 +84,10 @@ export default ({ allPrograms }) => {
                                         {title}
                                     </p>
                                     <p className="mb-2">{description}</p>
-                                    <Link href="" as="">
+                                    <Link
+                                        href="/programs/buy/[pid]"
+                                        as={`/programs/buy/${_id}`}
+                                    >
                                         <button className="btn btn--tertiary">
                                             {sales.callToAction}
                                         </button>

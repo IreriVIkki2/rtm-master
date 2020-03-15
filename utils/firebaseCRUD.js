@@ -23,6 +23,25 @@ class FirebaseCrud {
     }
 
     /**
+     * @method getALlPrograms This method fetches all the methods from a database and returns only the object that are useful
+     *
+     * @returns {Promise <[programs]>} This returns a promise which resolves an array of all programs
+     */
+    getALlPrograms() {
+        return new Promise((resolve, reject) => {
+            firebaseClient()
+                .db.collection("programs")
+                .get()
+                .then(snapshot => {
+                    let programs = [];
+                    snapshot.forEach(doc => programs.push(doc.data()));
+                    resolve(programs);
+                })
+                .catch(err => reject(err));
+        });
+    }
+
+    /**
      * @method
      *
      * @param {File} file A single file object

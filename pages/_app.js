@@ -9,16 +9,12 @@ import "react-quill/dist/quill.snow.css";
 import "../public/main.css";
 
 export default class MyApp extends App {
-    static async getInitialProps({ AppTree, Component, router, ctx }) {
+    static async getInitialProps({ ctx }) {
         const { req } = ctx;
         const user = req && req.session ? req.session.decodedToken : null;
         const res = user && (await fetch(`${baseUrl}/api/profile/${user.uid}`));
         const profile = res ? await res.json() : null;
-        let childProps = {};
-        if (Component.getInitialProps) {
-            childProps = await Component.getInitialProps(ctx);
-        }
-        return { user, ...profile, childProps };
+        return { user, ...profile };
     }
 
     constructor(props) {
@@ -57,7 +53,7 @@ export default class MyApp extends App {
     }
 
     render() {
-        const { Component, pageProps, childProps } = this.props;
+        const { Component, pageProps } = this.props;
         const { user, profile } = this.state;
         return (
             <Fragment>
@@ -72,7 +68,7 @@ export default class MyApp extends App {
                 >
                     <Navbar />
                     <div>
-                        <Component {...pageProps} {...childProps} />
+                        <Component {...pageProps} />
                     </div>
                 </UserContext.Provider>
             </Fragment>
