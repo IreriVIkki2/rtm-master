@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import AdminLayout from "./AdminLayout";
-import baseUrl from "../../baseUrl";
+import AdminLayout from "../AdminLayout";
 
 export default class extends Component {
     constructor(props) {
@@ -12,7 +11,6 @@ export default class extends Component {
     }
 
     render() {
-        console.log(this.props);
         const { mounted } = this.state;
         return (
             <AdminLayout>
@@ -24,17 +22,10 @@ export default class extends Component {
                     </div>
                 ) : (
                     <div className="">
-                        <h1>This will show stats about the programs</h1>
+                        <h1>Edit all draft programs here</h1>
                     </div>
                 )}
             </AdminLayout>
         );
     }
-}
-
-// This function gets called at build time
-export async function getStaticProps() {
-    const res = await fetch(`${baseUrl}/api/programs`);
-    const json = await res.json();
-    return { props: { allPrograms: json.programs } };
 }

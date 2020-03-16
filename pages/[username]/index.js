@@ -4,7 +4,7 @@ import crud from "../../utils/firebaseCRUD";
 import Link from "next/link";
 
 export default () => {
-    const { profile, isAdmin } = useContext(UserContext);
+    const { profile, isAdmin, user } = useContext(UserContext);
 
     const [programs, setPrograms] = useState(false);
 
@@ -53,7 +53,7 @@ export default () => {
                         {profile.purchases.programs.map(p => {
                             return (
                                 <div
-                                    key={p._id}
+                                    key={p.programId}
                                     className="profile__purchases--program p-program"
                                 >
                                     <div className="p-program__info">
@@ -80,7 +80,10 @@ export default () => {
                                             )}
                                         </div>
                                     </div>
-                                    <Link href="" as="">
+                                    <Link
+                                        href="/[username]/[pid]"
+                                        as={`/${user.displayName}/${p.programId}`}
+                                    >
                                         <button className="btn btn--primary text-black p-program__cta">
                                             Continue
                                         </button>

@@ -13,3 +13,10 @@ export default class extends Component {
         );
     }
 }
+
+// This function gets called at build time
+export async function getStaticProps() {
+    const res = await fetch(`${baseUrl}/api/programs`);
+    const json = await res.json();
+    return { props: { allPrograms: json.programs } };
+}

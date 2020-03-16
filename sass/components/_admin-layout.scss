@@ -1,0 +1,56 @@
+.al {
+    display: flex;
+    padding-top: 5.6rem;
+    min-height: 100vh;
+    width: 100%;
+
+    &-aside {
+        background-color: $color-primary;
+        transition: ease-out 0.3s width;
+        flex: 0 0 20rem;
+
+        &__hide {
+            &-input {
+                display: none;
+            }
+
+            &-label {
+                margin-left: auto;
+                height: 2rem;
+                width: 2rem;
+                position: relative;
+            }
+
+            &-label::after {
+                content: "\27A4";
+                @include absolute-cover;
+                color: $color-tertiary;
+            }
+        }
+    }
+
+    &__navbar {
+        &-link {
+            padding: 1rem 0;
+            color: $color-white;
+            padding-left: 1rem;
+            text-decoration: none;
+            width: 100%;
+
+            &-active {
+                background-color: $color-secondary;
+            }
+        }
+
+        &-dropdown {
+            background-color: rgba($color-white, 0.3);
+            & * .al__navbar-link {
+                padding-left: 3rem;
+            }
+        }
+    }
+
+    &-main {
+        flex: 0 0 100%;
+    }
+}

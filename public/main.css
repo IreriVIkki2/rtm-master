@@ -105,6 +105,45 @@ p:not(.title) {
 .text-uppercase {
   text-transform: uppercase !important; }
 
+.al {
+  display: flex;
+  padding-top: 5.6rem;
+  min-height: 100vh;
+  width: 100%; }
+  .al-aside {
+    background-color: #2c2d34;
+    transition: ease-out 0.3s width;
+    flex: 0 0 20rem; }
+    .al-aside__hide-input {
+      display: none; }
+    .al-aside__hide-label {
+      margin-left: auto;
+      height: 2rem;
+      width: 2rem;
+      position: relative; }
+    .al-aside__hide-label::after {
+      content: "\27A4";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: #e94822; }
+  .al__navbar-link {
+    padding: 1rem 0;
+    color: #fff;
+    padding-left: 1rem;
+    text-decoration: none;
+    width: 100%; }
+    .al__navbar-link-active {
+      background-color: #f2910a; }
+  .al__navbar-dropdown {
+    background-color: rgba(255, 255, 255, 0.3); }
+    .al__navbar-dropdown * .al__navbar-link {
+      padding-left: 3rem; }
+  .al-main {
+    flex: 0 0 100%; }
+
 .btn, .btn:visited, .btn:link {
   cursor: pointer;
   outline: none;
