@@ -29,7 +29,7 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
     };
 
     return (
-        <div className="form__container">
+        <Fragment>
             {error && (
                 <div>
                     <h4 style={{ color: "red" }}>Please fill out all fields</h4>
@@ -44,7 +44,7 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                 character description for SEO and mobile preview
             </p>
             {info && info.newSlug && (
-                <Fragment>
+                <div className="form__container">
                     <div className="form-group__two-part">
                         <div className="form-group__two-part--label-container">
                             <label htmlFor="programBanner">
@@ -92,7 +92,12 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
 
                     <div className="form-group__two-part">
                         <div className="form-group__two-part--label-container">
-                            <label htmlFor="programCategory">Category</label>
+                            <label
+                                htmlFor="programCategory"
+                                className="d-block text-black"
+                            >
+                                Category *
+                            </label>
                         </div>
                         <div className="form-group__two-part--input-container">
                             <SelectInput
@@ -114,8 +119,11 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                     </div>
                     <div className="form-group__two-part">
                         <div className="form-group__two-part--label-container">
-                            <label htmlFor="programDifficulty">
-                                Difficulty
+                            <label
+                                className="d-block text-black"
+                                htmlFor="programDifficulty"
+                            >
+                                Difficulty *
                             </label>
                         </div>
                         <div className="form-group__two-part--input-container">
@@ -141,9 +149,18 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                     </div>
                     <div className="form-group__two-part">
                         <div className="form-group__two-part--label-container">
-                            <label htmlFor="programDescription">
-                                Description
+                            <label
+                                className="d-block text-black"
+                                htmlFor="programDescription"
+                            >
+                                Description *
                             </label>
+                            <small className="font-smaller">
+                                This is a small description of 50 words or less.
+                                It will be used in areas where showing the
+                                entire sales article of the program is not
+                                viable and for seo
+                            </small>
                         </div>
                         <div className="form-group__two-part--input-container">
                             <TextArea
@@ -167,9 +184,9 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                             </button>
                         </div>
                     </div>
-                </Fragment>
+                </div>
             )}
-        </div>
+        </Fragment>
     );
 };
 

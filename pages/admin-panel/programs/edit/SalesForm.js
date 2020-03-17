@@ -14,7 +14,7 @@ const SalesForm = ({ sales, handleSubmit }) => {
     if (!info) return null;
 
     return (
-        <div className="form__container">
+        <Fragment>
             <p className="title title--md text-black mb-1">
                 Edit sales information
             </p>
@@ -26,7 +26,7 @@ const SalesForm = ({ sales, handleSubmit }) => {
             </p>
 
             {info && (
-                <Fragment>
+                <div className="form__container">
                     <div className="form-group__two-part">
                         <div className="form-group__two-part--label-container">
                             <label htmlFor="salesCallToAction">
@@ -87,9 +87,9 @@ const SalesForm = ({ sales, handleSubmit }) => {
                             </button>
                         </div>
                     </div>
-                </Fragment>
+                </div>
             )}
-        </div>
+        </Fragment>
     );
 };
 

@@ -192,7 +192,7 @@ const PlansForm = ({ plans, status, contentDetails, handleSubmit }) => {
                     <div className="form-group__two-part--label-container">
                         <label htmlFor="basicDiscounted">
                             <span className="mb-sm d-block text-secondary">
-                                Add offer to this plan *
+                                Add offer to this plan (Optional)
                             </span>
                         </label>
                     </div>
@@ -352,7 +352,7 @@ const PlansForm = ({ plans, status, contentDetails, handleSubmit }) => {
                 <div className="form-group__two-part--label-container">
                     <label htmlFor="premiumDiscounted">
                         <span className="mb-sm d-block text-secondary">
-                            Add offer to this plan *
+                            Add offer to this plan (Optional)
                         </span>
                     </label>
                 </div>
@@ -390,7 +390,8 @@ const PlansForm = ({ plans, status, contentDetails, handleSubmit }) => {
     const premiumPlan = (
         <Fragment>
             <p className="title title--md text-secondary mb-3">
-                Set Up Premium plan
+                Set Up Premium plan{" "}
+                <span className="text-tertiary">(Optional)</span>
             </p>
 
             <div className="form__container">
@@ -400,7 +401,7 @@ const PlansForm = ({ plans, status, contentDetails, handleSubmit }) => {
                             htmlFor="isFree"
                             className="mb-sm d-block text-black"
                         >
-                            Set up a premium plan
+                            Set up a premium plan (Optional)
                         </label>
                     </div>
                     <div className="form-group__two-part--input-container d-flex">
@@ -447,6 +448,19 @@ const PlansForm = ({ plans, status, contentDetails, handleSubmit }) => {
                     {premiumPlan}
                 </Fragment>
             )}
+
+            <div className="form__container">
+                <div className="form-group__two-part mb-7">
+                    <div className="form-group__two-part--input-container d-flex">
+                        <button
+                            className="btn btn--secondary"
+                            onClick={onSubmit}
+                        >
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
