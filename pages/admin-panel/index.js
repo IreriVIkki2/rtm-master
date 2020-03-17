@@ -6,27 +6,28 @@ export default class extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            mounted: false,
-        };
+        this.state = {};
     }
 
     render() {
         console.log(this.props);
-        const { mounted } = this.state;
+        const { programs } = this.props;
         return (
             <AdminLayout>
-                {!mounted ? (
-                    <div>
-                        <h1 className="title title--sm text-tertiary">
-                            Loading....
-                        </h1>
-                    </div>
-                ) : (
-                    <div className="">
-                        <h1>This will show stats about the programs</h1>
-                    </div>
-                )}
+                <div className="">
+                    {programs.map(p => {
+                        return (
+                            <div className="">
+                                <p className="title title--md">
+                                    {p.snippet.title}
+                                </p>
+                                <pre>
+                                    {JSON.stringify(p.statistics, undefined, 2)}
+                                </pre>
+                            </div>
+                        );
+                    })}
+                </div>
             </AdminLayout>
         );
     }
@@ -36,5 +37,5 @@ export default class extends Component {
 export async function getStaticProps() {
     const res = await fetch(`${baseUrl}/api/programs`);
     const json = await res.json();
-    return { props: { allPrograms: json.programs } };
+    return { props: { programs: json.programs } };
 }

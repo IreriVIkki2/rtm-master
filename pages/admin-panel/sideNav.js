@@ -69,6 +69,9 @@ export default () => {
                     <a className="al__navbar-link">Settings</a>
                 </Link>
             </li>
+            <li>
+                <small>make this fixed --ntm</small>
+            </li>
         </ul>
     );
 };

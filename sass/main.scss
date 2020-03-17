@@ -15,7 +15,9 @@
 @import 'components/admin-layout';
 @import 'components/button';
 @import 'components/clients';
+@import 'components/forms';
 @import 'components/home-header';
+@import 'components/multi-step-bar';
 @import 'components/title';
 @import 'components/welcome';
 
@@ -26,6 +28,8 @@
 
 
 // pages sass fieles
+@import 'pages/dashboard-allprograms';
+@import 'pages/edit-program';
 @import 'pages/home';
 @import 'pages/profile';
 @import 'pages/programs';

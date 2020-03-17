@@ -51,6 +51,6 @@
     }
 
     &-main {
-        flex: 0 0 100%;
+        flex: 1 0 calc(100% - 20rem);
     }
 }

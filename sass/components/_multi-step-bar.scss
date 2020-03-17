@@ -1,0 +1,30 @@
+.multi-step-bar {
+    display: flex;
+
+    &__container {
+        width: 80%;
+        margin: 1rem auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &::after {
+            @include absolute-cover;
+            height: 0.2rem;
+            top: 50%;
+            background-color: $color-primary;
+            z-index: -1;
+        }
+    }
+
+    &__item {
+        background-color: $color-text-light;
+        color: $color-white;
+
+        &--visited {
+            background-color: $color-tertiary;
+            color: $color-black;
+        }
+    }
+}

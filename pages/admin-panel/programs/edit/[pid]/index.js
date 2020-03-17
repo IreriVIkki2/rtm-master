@@ -23,6 +23,7 @@ export default class extends Component {
         this.programListener = this.programListener.bind(this);
         this.updateInfo = this.updateInfo.bind(this);
         this.getNewUrl = this.getNewUrl.bind(this);
+        this.onAddDaysClick = this.onAddDaysClick.bind(this);
     }
 
     async componentDidMount() {
@@ -39,10 +40,12 @@ export default class extends Component {
     componentDidUpdate() {
         const { tab } = this.state.program;
 
-        if (tab === 3) {
-            const href = this.getNewUrl();
-            Router.push(`${Router.pathname}/days`, href);
+        if (tab > 2 && !this.state.loaded) {
+            const href = this.getNewUrl({ tab: 0 });
+            Router.push(Router.pathname, href, { shallow: true });
+            this.setState({ ...this.state, loaded: true, tab: 0 });
         }
+
         if (tab >= 0 && !this.state.loaded) {
             const href = this.getNewUrl({ tab });
             Router.push(Router.pathname, href, { shallow: true });
@@ -50,9 +53,15 @@ export default class extends Component {
         }
     }
 
+    onAddDaysClick() {
+        const href = this.getNewUrl();
+        Router.push(`${Router.pathname}/days`, href);
+    }
+
     updateInfo(res) {
         const { program } = this.state;
-        const tab = this.state.tab + 1;
+        const stTab = this.state.tab;
+        const tab = stTab > 1 ? stTab : stTab + 1;
         const newProg = {
             ...program,
             ...res,
@@ -102,35 +111,51 @@ export default class extends Component {
         ];
         return (
             <AdminLayout>
-                <div>
-                    <p>
-                        a progress dot line to show creation of an new program
-                    </p>
-                    <div style={{ display: "flex" }}>
-                        {[0, 1, 2].map(i => {
-                            return (
-                                <div key={i} style={{ marginRight: "20px" }}>
-                                    <input
-                                        type="radio"
-                                        id={i}
-                                        name="progress"
-                                        onChange={() =>
-                                            this.setState({
-                                                tab: i,
-                                            })
-                                        }
-                                        value={i}
-                                        checked={tab == i}
-                                    />
-                                    <label htmlFor={i}>{i}</label>
-                                    <br />
-                                </div>
-                            );
-                        })}
+                <div className="program-edit">
+                    <div className="multi-step-bar">
+                        <div className="multi-step-bar__container">
+                            {[
+                                { index: 0, value: "basic info" },
+                                { index: 1, value: "sales info" },
+                                { index: 2, value: "pricing" },
+                            ].map(i => {
+                                return (
+                                    <div key={i.index} className="">
+                                        <input
+                                            type="radio"
+                                            id={i.index}
+                                            name="progress"
+                                            onChange={() =>
+                                                this.setState({
+                                                    tab: i.index,
+                                                })
+                                            }
+                                            value={i}
+                                            checked={tab == i.index}
+                                            className="d-none"
+                                        />
+                                        <label
+                                            className={`multi-step-bar__item btn ${i.index <=
+                                                this.state.tab &&
+                                                "multi-step-bar__item--visited"}`}
+                                            htmlFor={i.index}
+                                        >
+                                            {i.value}
+                                        </label>
+                                    </div>
+                                );
+                            })}
+                            <button
+                                onClick={this.onAddDaysClick}
+                                className="btn multi-step-bar__item"
+                            >
+                                add days
+                            </button>
+                        </div>
                     </div>
-                    <br />
-                    {program && <div>{forms[tab]}</div>}
-                    <hr />
+                    {program && (
+                        <div className="program-edit__form">{forms[tab]}</div>
+                    )}
                 </div>
             </AdminLayout>
         );
