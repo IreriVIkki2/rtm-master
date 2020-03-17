@@ -8,6 +8,7 @@ const Input = ({
     minLength,
     type,
     disabled,
+    placeholder,
 }) => {
     const handleInputChange = e => {
         e.preventDefault();
@@ -24,6 +25,7 @@ const Input = ({
             minLength={minLength}
             disabled={disabled}
             className="form__input form__reset"
+            placeholder={placeholder}
         />
     );
 };
@@ -36,6 +38,7 @@ Input.propTypes = {
     minLength: PropTypes.number,
     type: PropTypes.string,
     disabled: PropTypes.bool,
+    placeholder: PropTypes.string,
 };
 
 export default Input;

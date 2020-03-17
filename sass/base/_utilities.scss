@@ -51,6 +51,10 @@
     margin-right: 1rem !important;
 }
 
+.ml-1 {
+    margin-left: 1rem !important;
+}
+
 .mb-1 {
     margin-bottom: 1rem !important;
 }
@@ -97,4 +101,17 @@
 
 .d-block {
     display: block !important;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.w-auto {
+    width: auto !important;
 }

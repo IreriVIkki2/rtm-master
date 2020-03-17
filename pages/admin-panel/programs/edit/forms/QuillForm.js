@@ -144,18 +144,6 @@ export default class extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: this.state.newValue,
-                    }}
-                />
-                <br />
-                <hr />
-                <br />
-                {this.quill}
-            </div>
-        );
+        return <div className="form__quill form__reset">{this.quill}</div>;
     }
 }

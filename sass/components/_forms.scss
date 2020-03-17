@@ -18,6 +18,12 @@
 }
 
 .form {
+    &__container {
+        @include shadow-sm;
+        @include border-sm-eee;
+        background-color: $color-white;
+        padding: 3rem 2rem;
+    }
     &__reset {
         border: none;
         outline: none;
@@ -27,6 +33,7 @@
         padding: 0.7rem 1rem;
         @include border-sm-eee;
         @include shadow-sm;
+        display: inline-block;
 
         &:focus,
         &:active,
@@ -43,6 +50,19 @@
     &__select {
         padding: initial 3rem;
         background-color: white;
+    }
+
+    &__quill {
+        width: 100%;
+        text-align: start;
+
+        & > .quill > * {
+            border: none;
+
+            &:first-child {
+                border-bottom: 1px solid #ddd;
+            }
+        }
     }
 
     &__file {
@@ -102,7 +122,7 @@
             height: 100%;
             width: 100%;
             object-fit: cover;
-            transition: ease-out 0.3s all;
+            transition: ease-out 0.3s filter;
 
             &:focus,
             &:active,

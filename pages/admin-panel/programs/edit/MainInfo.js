@@ -29,7 +29,7 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
     };
 
     return (
-        <Fragment>
+        <div className="form__container">
             {error && (
                 <div>
                     <h4 style={{ color: "red" }}>Please fill out all fields</h4>
@@ -44,7 +44,7 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                 character description for SEO and mobile preview
             </p>
             {info && info.newSlug && (
-                <div className="program-edit__form">
+                <Fragment>
                     <div className="form-group__two-part">
                         <div className="form-group__two-part--label-container">
                             <label htmlFor="programBanner">
@@ -68,6 +68,7 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                             />
                         </div>
                     </div>
+
                     <div className="form-group__two-part">
                         <div className="form-group__two-part--label-container">
                             <label htmlFor="programTitle">
@@ -88,6 +89,7 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                             />
                         </div>
                     </div>
+
                     <div className="form-group__two-part">
                         <div className="form-group__two-part--label-container">
                             <label htmlFor="programCategory">Category</label>
@@ -165,9 +167,9 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                             </button>
                         </div>
                     </div>
-                </div>
+                </Fragment>
             )}
-        </Fragment>
+        </div>
     );
 };
 

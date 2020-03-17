@@ -85,6 +85,9 @@ p:not(.title) {
 .mr-1 {
   margin-right: 1rem !important; }
 
+.ml-1 {
+  margin-left: 1rem !important; }
+
 .mb-1 {
   margin-bottom: 1rem !important; }
 
@@ -121,6 +124,16 @@ p:not(.title) {
 .d-block {
   display: block !important; }
 
+.d-flex {
+  display: flex;
+  align-items: center; }
+
+.d-inline-block {
+  display: inline-block; }
+
+.w-auto {
+  width: auto !important; }
+
 .al {
   display: flex;
   padding-top: 5.6rem;
@@ -129,7 +142,10 @@ p:not(.title) {
   .al-aside {
     background-color: #2c2d34;
     transition: ease-out 0.3s width;
-    flex: 0 0 20rem; }
+    flex: 0 0 20rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5.6rem; }
     .al-aside__hide-input {
       display: none; }
     .al-aside__hide-label {
@@ -269,6 +285,12 @@ p:not(.title) {
       left: 0;
       background-color: #666666; }
 
+.features {
+  list-style: none;
+  padding-left: 3rem; }
+  .features__item {
+    padding: 1rem 0; }
+
 .form-group__two-part {
   display: grid;
   grid-template-areas: "item-1 item-2";
@@ -281,6 +303,14 @@ p:not(.title) {
   .form-group__two-part--input-container {
     grid-area: item-2; }
 
+.form__container {
+  box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.05);
+  border: solid 0.1rem #ddd;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 3rem 2rem; }
+
 .form__reset {
   border: none;
   outline: none;
@@ -291,7 +321,8 @@ p:not(.title) {
   border: solid 0.1rem #ddd;
   border-radius: 0.4rem;
   overflow: hidden;
-  box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.05); }
+  box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.05);
+  display: inline-block; }
   .form__reset:focus, .form__reset:active, .form__reset:hover {
     border-color: #bbb;
     color: #141219; }
@@ -302,6 +333,14 @@ p:not(.title) {
 .form__select {
   padding: initial 3rem;
   background-color: white; }
+
+.form__quill {
+  width: 100%;
+  text-align: start; }
+  .form__quill > .quill > * {
+    border: none; }
+    .form__quill > .quill > *:first-child {
+      border-bottom: 1px solid #ddd; }
 
 .form__file {
   border: solid 0.1rem #ddd;
@@ -350,7 +389,7 @@ p:not(.title) {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    transition: ease-out 0.3s all; }
+    transition: ease-out 0.3s filter; }
     .form__file--img:focus, .form__file--img:active, .form__file--img:hover {
       filter: blur(2px) brightness(50%); }
 
@@ -599,13 +638,7 @@ p:not(.title) {
   padding: 2rem 3rem;
   background-color: #f8f8f8; }
   .program-edit__forms {
-    box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.05);
-    border: solid 0.1rem #ddd;
-    border-radius: 0.4rem;
-    overflow: hidden;
-    margin: 4rem 0 7rem 0;
-    background-color: #fff;
-    padding: 3rem 2rem; }
+    margin: 4rem 0 7rem 0; }
   .program-edit__form {
     width: 100%; }
 

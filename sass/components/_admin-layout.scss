@@ -8,6 +8,9 @@
         background-color: $color-primary;
         transition: ease-out 0.3s width;
         flex: 0 0 20rem;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 5.6rem;
 
         &__hide {
             &-input {

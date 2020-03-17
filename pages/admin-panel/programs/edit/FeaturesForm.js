@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
+import Input from "./forms/Input";
 
 const FeaturesForm = ({ features, onNewFeature }) => {
     const [value, setValue] = useState("");
 
     return (
-        <div>
+        <Fragment>
             <form
                 onSubmit={e => {
                     e.preventDefault();
@@ -15,25 +16,44 @@ const FeaturesForm = ({ features, onNewFeature }) => {
                 }}
                 style={{ display: "flex" }}
             >
-                <div>
-                    <label htmlFor="newFeature">New feature</label>
-                    <input
-                        id="newFeature"
-                        value={value}
-                        onChange={e => setValue(e.target.value)}
-                        type="text"
-                    />
+                <div className="form-group__two-part">
+                    <div className="form-group__two-part--label-container">
+                        <label htmlFor="newFeature">
+                            <span className="mb-sm d-block text-black">
+                                Add new Features *
+                            </span>
+                            <small className="font-smaller">
+                                Add list of features associated with this price
+                                plan
+                            </small>
+                        </label>
+                    </div>
+                    <div className="form-group__two-part--input-container">
+                        <div className="d-flex">
+                            <Input
+                                inputId="newFeature"
+                                initialValue={value}
+                                onInputChange={value => setValue(value)}
+                                minLength={3}
+                                placeholder="new feature.."
+                            />
+                            <button className="btn ml-1" type="submit">
+                                add
+                            </button>
+                        </div>
+                        <ul className="features">
+                            {features.map((item, index) => {
+                                return (
+                                    <li className="features__item" key={index}>
+                                        {item}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
                 </div>
-
-                <button type="submit">add</button>
             </form>
-
-            <ul>
-                {features.map((item, index) => {
-                    return <li key={index}>{item}</li>;
-                })}
-            </ul>
-        </div>
+        </Fragment>
     );
 };
 
