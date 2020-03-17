@@ -23,6 +23,7 @@ const Input = ({
             maxLength={maxLength}
             minLength={minLength}
             disabled={disabled}
+            className="form__input form__reset"
         />
     );
 };

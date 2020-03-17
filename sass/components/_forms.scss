@@ -1,0 +1,114 @@
+.form-group {
+    &__two-part {
+        display: grid;
+        grid-template-areas: "item-1 item-2";
+        grid-template-columns: 2fr 5fr;
+        grid-gap: 2rem;
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+
+        &--label-container {
+            grid-area: item-1;
+        }
+
+        &--input-container {
+            grid-area: item-2;
+        }
+    }
+}
+
+.form {
+    &__reset {
+        border: none;
+        outline: none;
+        font-size: 1.6rem;
+        color: $color-text-light;
+        line-height: 1.5;
+        padding: 0.7rem 1rem;
+        @include border-sm-eee;
+        @include shadow-sm;
+
+        &:focus,
+        &:active,
+        &:hover {
+            border-color: #bbb;
+            color: $color-text-bold;
+        }
+    }
+
+    &__input {
+        width: 100%;
+    }
+
+    &__select {
+        padding: initial 3rem;
+        background-color: white;
+    }
+
+    &__file {
+        @include border-sm-eee;
+        @include shadow-sm;
+        height: 15rem;
+        width: 15rem;
+        display: inline-block;
+        transition: ease-out 0.3s all;
+        position: relative;
+
+        &--meta {
+            @include absolute-cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0.3rem 1rem;
+            z-index: 10;
+        }
+
+        &--progress {
+            height: 2px;
+            background-color: $color-text-light;
+            width: 100%;
+            margin-bottom: 0.5rem;
+
+            &-bar {
+                height: 100%;
+                background-color: $color-secondary;
+            }
+        }
+
+        &--controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            & > * {
+                cursor: pointer;
+            }
+        }
+
+        &:focus,
+        &:active,
+        &:hover {
+            border-color: #bbb;
+            color: $color-text-bold;
+        }
+
+        &--img-box {
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        &--img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: ease-out 0.3s all;
+
+            &:focus,
+            &:active,
+            &:hover {
+                filter: blur(2px) brightness(50%);
+            }
+        }
+    }
+}

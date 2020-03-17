@@ -12,11 +12,21 @@ const Input = ({
     };
 
     return (
-        <select id={selectInputId} onChange={handleInputChange}>
-            <option value={initialValue.value}>{initialValue.label}</option>
+        <select
+            className="form__reset form__select"
+            id={selectInputId}
+            onChange={handleInputChange}
+        >
+            <option className="form__reset" value={initialValue.value}>
+                {initialValue.label}
+            </option>
             {selectValues.map((item, index) => {
                 return (
-                    <option key={index} value={item.value}>
+                    <option
+                        className="form__reset"
+                        key={index}
+                        value={item.value}
+                    >
                         {item.label}
                     </option>
                 );

@@ -35,33 +35,51 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                     <h4 style={{ color: "red" }}>Please fill out all fields</h4>
                 </div>
             )}
-            <h1>Main Information</h1>
-            <p>
+            <p className="title title--md text-black mb-1">
+                Basic Program Information
+            </p>
+            <p className="mb-3">
                 This is the main information about this program including the
                 banner, title, message for the call to action button, a 140
                 character description for SEO and mobile preview
             </p>
-            <hr />
-            <hr />
             {info && info.newSlug && (
-                <div>
-                    <div>
-                        <div>
-                            <label htmlFor="programBanner">Banner</label>
+                <div className="program-edit__form">
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
+                            <label htmlFor="programBanner">
+                                <span className="mb-sm d-block text-black">
+                                    Banner *
+                                </span>
+                                <small className="font-smaller">
+                                    Upload a large image that will show at the
+                                    top of every program sales page
+                                </small>
+                            </label>
                         </div>
-                        <FileUpload
-                            inputId="programBanner"
-                            onUploadUrl={url =>
-                                setInfo({ ...info, banner: url })
-                            }
-                            showUploadControls={true}
-                        />
+                        <div className="form-group__two-part--input-container">
+                            <FileUpload
+                                inputId="programBanner"
+                                onUploadUrl={url =>
+                                    setInfo({ ...info, banner: url })
+                                }
+                                showUploadControls={true}
+                                initialFileUrl={info.banner}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <div>
-                            <label htmlFor="programTitle">Title</label>
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
+                            <label htmlFor="programTitle">
+                                <span className="mb-sm d-block text-black">
+                                    Title *
+                                </span>
+                                <small className="font-smaller">
+                                    Keep the title as short as possible
+                                </small>
+                            </label>
                         </div>
-                        <div>
+                        <div className="form-group__two-part--input-container">
                             <Input
                                 inputId="programTitle"
                                 initialValue={info.title}
@@ -70,11 +88,11 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                             />
                         </div>
                     </div>
-                    <div>
-                        <div>
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
                             <label htmlFor="programCategory">Category</label>
                         </div>
-                        <div>
+                        <div className="form-group__two-part--input-container">
                             <SelectInput
                                 selectInputId="programCategory"
                                 initialValue={{
@@ -92,13 +110,13 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                             />
                         </div>
                     </div>
-                    <div>
-                        <div>
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
                             <label htmlFor="programDifficulty">
                                 Difficulty
                             </label>
                         </div>
-                        <div>
+                        <div className="form-group__two-part--input-container">
                             <SelectInput
                                 selectInputId="programDifficulty"
                                 initialValue={{
@@ -119,13 +137,13 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                             />
                         </div>
                     </div>
-                    <div>
-                        <div>
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
                             <label htmlFor="programDescription">
                                 Description
                             </label>
                         </div>
-                        <div>
+                        <div className="form-group__two-part--input-container">
                             <TextArea
                                 textAreaId="programDescription"
                                 initialValue={info.description}
@@ -137,7 +155,16 @@ const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
                             />
                         </div>
                     </div>
-                    <button onClick={handleSubmit}>save and continue</button>
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--input-container">
+                            <button
+                                className="btn btn--tertiary"
+                                onClick={handleSubmit}
+                            >
+                                save and continue
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )}
         </Fragment>

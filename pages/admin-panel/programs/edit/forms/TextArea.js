@@ -14,11 +14,13 @@ const TextArea = ({
 
     return (
         <textarea
+            className="form__reset form__input"
             id={textAreaId}
             value={initialValue}
             onChange={handleInputChange}
             maxLength={maxLength}
             minLength={minLength}
+            rows="10"
         />
     );
 };

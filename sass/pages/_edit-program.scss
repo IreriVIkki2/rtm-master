@@ -1,7 +1,16 @@
 .program-edit {
     padding: 2rem 3rem;
+    background-color: $color-light;
+
+    &__forms {
+        @include shadow-sm;
+        @include border-sm-eee;
+        margin: 4rem 0 7rem 0;
+        background-color: $color-white;
+        padding: 3rem 2rem;
+    }
 
     &__form {
-        margin: 4rem 0 7rem 0;
+        width: 100%;
     }
 }

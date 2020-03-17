@@ -2,6 +2,15 @@
     font-weight: 400 !important;
 }
 
+.font-smaller {
+    font-size: 1.5rem;
+}
+
+.font-xsm {
+    font-size: 1rem !important;
+    line-height: 0.9 !important;
+}
+
 .ml-7 {
     margin-left: 6.5rem !important;
 }
@@ -46,6 +55,10 @@
     margin-bottom: 1rem !important;
 }
 
+.mb-sm {
+    margin-bottom: 0.5rem !important;
+}
+
 .mt-auto {
     margin-top: auto;
 }
@@ -80,4 +93,8 @@
 
 .d-none {
     display: none !important;
+}
+
+.d-block {
+    display: block !important;
 }

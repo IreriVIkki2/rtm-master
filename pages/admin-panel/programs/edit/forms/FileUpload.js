@@ -2,15 +2,22 @@ import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { firebaseClient, firebase } from "../../../../../utils/firebaseClient";
 
-const FileUpload = ({ inputId, onUploadUrl, showUploadControls }) => {
-    const [fileUploading, setFileUploading] = useState(false);
+const FileUpload = ({ inputId, onUploadUrl, initialFileUrl }) => {
     const [uploadTask, setUploadTask] = useState(false);
     const [progress, setProgress] = useState(0);
 
     const handleFileUpload = async e => {
-        setFileUploading(true);
-
         const file = e.target.files[0];
+
+        if (file) {
+            console.log("FileUpload -> file", file);
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(`img${inputId}`).src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
         const metadata = {
             contentType: "image/jpeg",
             name: `${Date.now()}-${file.name}`,
@@ -85,25 +92,52 @@ const FileUpload = ({ inputId, onUploadUrl, showUploadControls }) => {
 
         onUploadUrl(url);
         setUploadTask(false);
-        setFileUploading(false);
     };
 
     return (
         <Fragment>
-            <div>
-                <small>show progress inside the upload button</small>
-                <input type="file" onChange={handleFileUpload} id={inputId} />
-            </div>
-            {fileUploading && uploadTask && showUploadControls && (
-                <div>
-                    <div>
-                        <small>{progress}</small>
+            <div className="form__file">
+                <label className="form__file--img-box" htmlFor={inputId}>
+                    <img
+                        className="form__file--img"
+                        src={initialFileUrl ? initialFileUrl : "/camera.jpg"}
+                        alt=""
+                        id={`img${inputId}`}
+                    />
+                </label>
+                {uploadTask && (
+                    <div className="form__file--meta">
+                        <div className="form__file--progress">
+                            <div
+                                className="form__file--progress-bar"
+                                style={{ width: `${progress}%` }}
+                            />
+                        </div>
+                        <div className="form__file--controls">
+                            <span onClick={() => uploadTask.pause()}>
+                                <img src="/pause.png" alt="" />
+                            </span>
+                            <span onClick={() => uploadTask.resume()}>
+                                <img src="/play.png" alt="" />
+                            </span>
+                            <span
+                                onClick={() => {
+                                    uploadTask.cancel();
+                                    setUploadTask(false);
+                                }}
+                            >
+                                <img src="/stop.png" alt="" />
+                            </span>
+                        </div>
                     </div>
-                    <button onClick={() => uploadTask.pause()}>pause</button>
-                    <button onClick={() => uploadTask.resume()}>resume</button>
-                    <button onClick={() => uploadTask.cancel()}>cancel</button>
-                </div>
-            )}
+                )}
+            </div>
+            <input
+                className="d-none"
+                type="file"
+                onChange={handleFileUpload}
+                id={inputId}
+            />
         </Fragment>
     );
 };
@@ -112,6 +146,7 @@ FileUpload.propTypes = {
     inputId: PropTypes.string.isRequired,
     onUploadUrl: PropTypes.func.isRequired,
     showUploadControls: PropTypes.bool,
+    initialFileUrl: PropTypes.string,
 };
 
 export default FileUpload;

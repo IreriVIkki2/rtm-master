@@ -14,13 +14,14 @@
             height: 0.2rem;
             top: 50%;
             background-color: $color-primary;
-            z-index: -1;
+            z-index: 0;
         }
     }
 
     &__item {
         background-color: $color-text-light;
         color: $color-white;
+        z-index: 2;
 
         &--visited {
             background-color: $color-tertiary;

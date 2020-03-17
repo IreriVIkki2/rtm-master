@@ -154,7 +154,7 @@ export default class extends Component {
                         </div>
                     </div>
                     {program && (
-                        <div className="program-edit__form">{forms[tab]}</div>
+                        <div className="program-edit__forms">{forms[tab]}</div>
                     )}
                 </div>
             </AdminLayout>

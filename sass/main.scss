@@ -1,35 +1,31 @@
 // abstract imports
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-@import 'abstracts/variables';
-
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
 
 // Base sass files
-@import 'base/animations';
-@import 'base/base';
-@import 'base/typography';
-@import 'base/utilities';
-
+@import "base/animations";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
 
 // components sass files
-@import 'components/admin-layout';
-@import 'components/button';
-@import 'components/clients';
-@import 'components/forms';
-@import 'components/home-header';
-@import 'components/multi-step-bar';
-@import 'components/title';
-@import 'components/welcome';
-
+@import "components/admin-layout";
+@import "components/button";
+@import "components/clients";
+@import "components/forms";
+@import "components/home-header";
+@import "components/multi-step-bar";
+@import "components/title";
+@import "components/welcome";
 
 // layout sass files
-@import 'layout/footer';
-@import 'layout/navbar';
+@import "layout/footer";
+@import "layout/navbar";
 
-
-// pages sass fieles
-@import 'pages/dashboard-allprograms';
-@import 'pages/edit-program';
-@import 'pages/home';
-@import 'pages/profile';
-@import 'pages/programs';
+// pages sass files
+@import "pages/dashboard-allprograms";
+@import "pages/edit-program";
+@import "pages/home";
+@import "pages/profile";
+@import "pages/programs";
