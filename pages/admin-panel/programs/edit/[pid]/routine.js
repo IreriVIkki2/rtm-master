@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import SelectInput from "../forms/SelectInput";
 import Input from "../forms/Input";
 import TextArea from "../forms/TextArea";
@@ -13,10 +13,6 @@ export default class extends Component {
 
     handleLengthInSecsChange = lengthInSecs => {
         this.setState({ routine: { ...this.state.routine, lengthInSecs } });
-    };
-
-    handleOrderChange = order => {
-        this.setState({ routine: { ...this.state.routine, order } });
     };
 
     handleNameChange = name => {
@@ -55,99 +51,199 @@ export default class extends Component {
             name,
             description,
             youtubeUrl,
+            repeatCount,
         } = this.state.routine;
 
         return (
-            <div>
-                <div>
-                    <label htmlFor="name">Routine Name</label>
-                    <Input
-                        inputId="name"
-                        initialValue={name}
-                        onInputChange={this.handleNameChange}
-                        type="string"
-                    />
-                </div>
-                <br />
-                <div>
-                    <label htmlFor="description">Routine Description</label>
-                    <TextArea
-                        textAreaId="description"
-                        initialValue={description}
-                        onInputChange={this.handleDescriptionChange}
-                    />
-                </div>
-                <br />
-                <div>
-                    <label htmlFor="youtubeUrl">Youtube Video Url</label>
-                    <Input
-                        inputId="youtubeUrl"
-                        initialValue={youtubeUrl}
-                        onInputChange={this.handleYoutubeUrlChange}
-                        type="string"
-                    />
-                </div>
-                <br />
-                <div>
-                    <label htmlFor="order">Routine position</label>
-                    <Input
-                        inputId="order"
-                        initialValue={order}
-                        onInputChange={this.handleOrderChange}
-                        type="number"
-                    />
-                </div>
-                <br />
-                <div>
-                    <label htmlFor="plan">Availability for: </label>
-                    <SelectInput
-                        selectInputId="plan"
-                        initialValue={{ value: "all", label: "All plans" }}
-                        onInputChange={this.handlePlanChange}
-                        selectValues={[
-                            { value: "basic", label: "Basic plans only" },
-                            { value: "premium", label: "Premium plans only" },
-                        ]}
-                    />
-                </div>
-                <br />
-                <div>
-                    <div>
-                        <label htmlFor="lengthInSecs">
-                            Length of routine in seconds
-                        </label>
-                        <Input
-                            inputId="lengthInSecs"
-                            initialValue={lengthInSecs}
-                            onInputChange={this.handleLengthInSecsChange}
-                            type="number"
-                        />
+            <Fragment>
+                <p className="title title--md text-secondary mt-7">
+                    {name || `Routine ${order}`}
+                </p>
+                <div className="form__container mt-3">
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
+                            <label htmlFor="name">
+                                <span className="mb-sm d-block text-black">
+                                    Routine Name *
+                                </span>
+                                <small className="font-smaller">
+                                    Ideally less that 4 word title for the
+                                    routine
+                                </small>
+                            </label>
+                        </div>
+                        <div className="form-group__two-part--input-container">
+                            <Input
+                                inputId="name"
+                                initialValue={name}
+                                onInputChange={this.handleNameChange}
+                                type="string"
+                                placeholder="eg. Sit Ups, Push Ups ..."
+                            />
+                        </div>
                     </div>
-                    <br />
-                    <div>
-                        <label htmlFor="repeatCount">Rev count: </label>
-                        <SelectInput
-                            selectInputId="repeatCount"
-                            initialValue={{
-                                value: `X 10`,
-                                label: `X 10`,
-                            }}
-                            onInputChange={this.handleRepeatCountChange}
-                            selectValues={range(1, 100).map(num => {
-                                return {
-                                    value: `X ${num}`,
-                                    label: `X ${num}`,
-                                };
-                            })}
-                        />
+
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
+                            <label htmlFor="youtubeUrl">
+                                <span className="mb-sm d-block text-black">
+                                    Youtube Video Url *
+                                </span>
+                                <small className="font-smaller">
+                                    Youtube link to the video showing how to do
+                                    the current routine
+                                </small>
+                            </label>
+                        </div>
+                        <div className="form-group__two-part--input-container">
+                            <Input
+                                inputId="youtubeUrl"
+                                initialValue={youtubeUrl}
+                                onInputChange={this.handleYoutubeUrlChange}
+                                type="string"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
+                            <label htmlFor="description">
+                                <span className="mb-sm d-block text-black">
+                                    Routine Description *
+                                </span>
+                                <small className="font-smaller">
+                                    Brief but detailed description on how
+                                    exactly to do the routine in question. This
+                                    is important for users with poor internet
+                                    connectivity and cannot watch the attached
+                                    video
+                                </small>
+                            </label>
+                        </div>
+                        <div className="form-group__two-part--input-container">
+                            <TextArea
+                                textAreaId="description"
+                                initialValue={description}
+                                onInputChange={this.handleDescriptionChange}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
+                            <label htmlFor="plan">
+                                <span className="mb-sm d-block text-black">
+                                    Availability for: (Optional)
+                                </span>
+                                <small className="font-smaller">
+                                    Specify if this routine will be available
+                                    for owners of basic or premium plans.
+                                    <span className="d-block">
+                                        Default is basic
+                                    </span>
+                                </small>
+                            </label>
+                        </div>
+                        <div className="form-group__two-part--input-container">
+                            <SelectInput
+                                selectInputId="plan"
+                                initialValue={{
+                                    value: "all",
+                                    label: "All plans",
+                                }}
+                                onInputChange={this.handlePlanChange}
+                                selectValues={[
+                                    {
+                                        value: "basic",
+                                        label: "Basic plans only",
+                                    },
+                                    {
+                                        value: "premium",
+                                        label: "Premium plans only",
+                                    },
+                                ]}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
+                            <label htmlFor="lengthInSecs">
+                                <span className="mb-sm d-block text-black">
+                                    Length of routine in seconds *
+                                </span>
+                                <small className="font-smaller">
+                                    Specify the number of seconds one should do
+                                    this exercise for
+                                </small>
+                            </label>
+                        </div>
+                        <div className="form-group__two-part--input-container">
+                            <small className="d-block text-secondary mb-sm">
+                                Set 0 if routine is measured in repeats
+                            </small>
+                            <Input
+                                inputId="lengthInSecs"
+                                initialValue={lengthInSecs}
+                                onInputChange={this.handleLengthInSecsChange}
+                                type="number"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--label-container">
+                            <label htmlFor="repeatCount">
+                                <span className="mb-sm d-block text-black">
+                                    Repeat count *
+                                </span>
+                                <small className="font-smaller">
+                                    Specify the number of times a user should
+                                    repeat the routine.
+                                    <span className="d-block">
+                                        eg X 10 sit ups
+                                    </span>
+                                </small>
+                            </label>
+                        </div>
+                        <div className="form-group__two-part--input-container">
+                            <small className="d-block text-secondary mb-sm">
+                                Set 0 if routine is measured in seconds
+                            </small>
+                            <SelectInput
+                                selectInputId="repeatCount"
+                                initialValue={
+                                    {
+                                        value: repeatCount,
+                                        label: repeatCount,
+                                    } || {
+                                        value: `X 0`,
+                                        label: `X 0`,
+                                    }
+                                }
+                                onInputChange={this.handleRepeatCountChange}
+                                selectValues={range(0, 100).map(num => {
+                                    return {
+                                        value: `X ${num}`,
+                                        label: `X ${num}`,
+                                    };
+                                })}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group__two-part">
+                        <div className="form-group__two-part--input-container">
+                            <button
+                                className="btn btn--tertiary"
+                                onClick={this.handleSaveAndPublishRoutine}
+                            >
+                                save and publish
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <br />
-                <button onClick={this.handleSaveAndPublishRoutine}>
-                    save and publish
-                </button>
-                <pre>{JSON.stringify(this.state.routine, undefined, 2)}</pre>
-            </div>
+            </Fragment>
         );
     }
 

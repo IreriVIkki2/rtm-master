@@ -10,7 +10,12 @@ export default class extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { days: [], unsubscribeDaysListener: null, dayId: null };
+        this.state = {
+            days: [],
+            unsubscribeDaysListener: null,
+            dayId: null,
+            checked: "",
+        };
 
         this.handleCreateNewDay = this.handleCreateNewDay.bind(this);
         this.addDaysListener = this.addDaysListener.bind(this);
@@ -34,42 +39,49 @@ export default class extends Component {
         await firebaseCRUD
             .createNewDay(query.pid, days.length + 1)
             .then(dayId => {
-                this.setState({ dayId });
+                this.setState({ dayId, checked: dayId });
                 console.log(dayId);
             })
             .catch(err => console.error(err));
     }
 
     render() {
-        const { days, dayId } = this.state;
+        const { days, dayId, checked } = this.state;
         const currentDay = days.find(day => day._id === dayId);
         return (
-            <AdminLayout hidden>
-                <div style={{ display: "flex" }}>
-                    <aside
-                        style={{
-                            borderRight: "solid 1px #242424",
-                            paddingRight: "20px",
-                            marginRight: "20px",
-                        }}
-                    >
-                        <button onClick={this.handleCreateNewDay}>
+            <AdminLayout hidden={true}>
+                <div className="day-edit">
+                    <aside className="day-edit__aside">
+                        <button
+                            className="btn mb-2 w-100"
+                            onClick={this.handleCreateNewDay}
+                        >
                             Add Day
                         </button>
-                        <ul>
+                        <ul className="day-edit__days">
                             {days.map(day => {
                                 return (
                                     <li
                                         key={day._id}
-                                        style={{
-                                            backgroundColor:
-                                                dayId === day._id
-                                                    ? "turquoise"
-                                                    : "",
-                                        }}
+                                        className={`day-edit__day ${checked ===
+                                            day._id &&
+                                            "day-edit__day--checked"}`}
                                     >
-                                        <a
-                                            style={{ cursor: "pointer" }}
+                                        <input
+                                            type="checkbox"
+                                            id={day._id}
+                                            name="days"
+                                            value="Bike"
+                                            className="d-none"
+                                            onChange={() =>
+                                                this.setState({
+                                                    checked: day._id,
+                                                })
+                                            }
+                                        />
+                                        <label
+                                            className="day-edit__day-label"
+                                            htmlFor={day._id}
                                             onClick={() =>
                                                 this.setState({
                                                     dayId: day._id,
@@ -77,13 +89,13 @@ export default class extends Component {
                                             }
                                         >
                                             Day {day.order}
-                                        </a>
+                                        </label>
                                     </li>
                                 );
                             })}
                         </ul>
                     </aside>
-                    <main>
+                    <main className="day-edit__main">
                         {currentDay && (
                             <Routines day={currentDay} dayId={dayId}></Routines>
                         )}
@@ -109,7 +121,8 @@ export default class extends Component {
                 daysSnapshot.forEach(day => {
                     days.push(day.data());
                 });
-                this.setState({ days, dayId: days[0] ? days[0]._id : null });
+                const dayId = days[0] ? days[0]._id : null;
+                this.setState({ days, dayId, checked: dayId });
             });
         this.setState({ unsubscribeDaysListener });
     }

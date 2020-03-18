@@ -3,6 +3,7 @@ import firebaseCRUD from "../../../../../utils/firebaseCRUD";
 import { firebaseClient } from "../../../../../utils/firebaseClient";
 import Router from "next/router";
 import Routine from "./routine";
+import Link from "next/link";
 // import querystring from "querystring";
 
 export default class extends Component {
@@ -12,6 +13,7 @@ export default class extends Component {
             routines: [],
             routine: null,
             routineId: null,
+            checkedIndex: 1,
             unsubscribeRoutinesListener: null,
             updateRoutines: false,
             dayId: this.props.dayId,
@@ -19,10 +21,6 @@ export default class extends Component {
 
         this.handleNewRoutineCreate = this.handleNewRoutineCreate.bind(this);
         this.addRoutinesListener = this.addRoutinesListener.bind(this);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return true;
     }
 
     componentDidMount() {
@@ -56,68 +54,97 @@ export default class extends Component {
         await firebaseCRUD
             .createNewRoutine(query.pid, this.props.dayId, order)
             .then(routineId => {
-                this.setState({ routineId });
+                this.setState({ routineId, checkedIndex: order });
             })
             .catch(err => console.error(err));
     }
 
-    handleRoutineChange(routineId) {
+    handleRoutineChange(routineId, index) {
         this.updateCurrentRoutine(routineId);
-        this.setState({ routineId });
+        this.setState({ routineId, checkedIndex: index });
     }
 
     handleRoutinePublish(routine) {
-        console.log("extends -> handleRoutinePublish -> routine", routine);
         firebaseClient()
             .db.collection("routines")
             .doc(routine._id)
             .set(routine);
+
+        this.setState({ checkedIndex: checkedIndex + 1 });
     }
 
     render() {
-        const { routines, routineId, routine } = this.state;
+        const { routines, routine, checkedIndex } = this.state;
         const { day } = this.props;
+
+        let start = 0;
+        const rl = routines.length;
+
+        if (checkedIndex <= 3) {
+            start = start;
+        } else if (rl - checkedIndex <= 2) {
+            start = rl - 5;
+        } else {
+            start = checkedIndex - 3;
+        }
+
         return (
             <div>
-                <div>
-                    <h3>Day {day.order}</h3>
+                <div className="mb-3 d-flex">
+                    <Link
+                        href="/admin-panel/programs/edit/[pid]"
+                        as={`/admin-panel/programs/edit/${Router.query.pid}`}
+                    >
+                        <a className="title btn__link btn__link--secondary d-flex mr-3">
+                            <span className="mr-1">&#8592;</span>
+                            Edit Program
+                        </a>
+                    </Link>
+                    <p className="title title--md text-black mr-2">
+                        Day {day.order}:
+                    </p>
+
+                    <p className="title title--md text-secondary">
+                        {rl} Routines
+                    </p>
                 </div>
 
-                <ul style={{ display: "flex" }}>
-                    {routines.map(routine => {
+                <ul className="day-edit-routine-step__container mb-3">
+                    {routines.slice(start, start + 5).map(routine => {
                         return (
                             <li
                                 onClick={() =>
-                                    this.handleRoutineChange(routine._id)
+                                    this.handleRoutineChange(
+                                        routine._id,
+                                        routine.order,
+                                    )
                                 }
                                 key={routine._id}
-                                style={{
-                                    backgroundColor:
-                                        routineId === routine._id
-                                            ? "turquoise"
-                                            : "",
-                                }}
+                                className={`day-edit-routine-step__item btn ${checkedIndex ==
+                                    routine.order &&
+                                    "day-edit-routine-step__item--visited"}`}
                             >
-                                <p>Routine {routine.order}</p>
+                                <p className="mu">Routine {routine.order}</p>
                             </li>
                         );
                     })}
-                    <button onClick={this.handleNewRoutineCreate}>
+                    <button
+                        className="day-edit-routine-step__item btn day-edit-routine-step__add"
+                        onClick={this.handleNewRoutineCreate}
+                    >
                         Add Routine
                     </button>
                 </ul>
-
                 {routine ? (
                     <Routine
-                        routine={routine}
+                        routine={routines[checkedIndex - 1]}
                         onRoutinePublish={this.handleRoutinePublish}
                     />
                 ) : (
-                    <h4>No routines added yet</h4>
+                    <h4 className="title title--md text--secondary">
+                        No routines added yet
+                    </h4>
                 )}
-                <div>
-                    <pre>{JSON.stringify(day, undefined, 2)}</pre>
-                </div>
             </div>
         );
     }

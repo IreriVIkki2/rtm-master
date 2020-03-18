@@ -4,7 +4,7 @@ import SideNav from "./sideNav";
 const AdminLayout = ({ children, hidden }) => {
     return (
         <div className="al">
-            <SideNav></SideNav>
+            {!hidden && <SideNav />}
             <main className="al-main">{children}</main>
         </div>
     );
