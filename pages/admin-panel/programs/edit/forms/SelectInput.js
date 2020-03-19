@@ -5,6 +5,7 @@ const Input = ({
     selectInputId,
     initialValue,
     selectValues,
+    disabled,
 }) => {
     const handleInputChange = e => {
         e.preventDefault();
@@ -16,6 +17,7 @@ const Input = ({
             className="form__reset form__select"
             id={selectInputId}
             onChange={handleInputChange}
+            disabled={disabled || false}
         >
             <option className="form__reset" value={initialValue.value}>
                 {initialValue.label}

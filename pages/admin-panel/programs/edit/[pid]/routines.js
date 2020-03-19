@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import firebaseCRUD from "../../../../../utils/firebaseCRUD";
 import { firebaseClient } from "../../../../../utils/firebaseClient";
 import Router from "next/router";
@@ -10,6 +10,7 @@ export default class extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            day: this.props.day,
             routines: [],
             routine: null,
             routineId: null,
@@ -18,36 +19,39 @@ export default class extends Component {
             updateRoutines: false,
             dayId: this.props.dayId,
         };
-
-        this.handleNewRoutineCreate = this.handleNewRoutineCreate.bind(this);
-        this.addRoutinesListener = this.addRoutinesListener.bind(this);
     }
 
-    componentDidMount() {
-        const { dayId } = this.props;
-        this.setState({ dayId });
-        this.addRoutinesListener();
-    }
-
-    componentDidUpdate() {
-        const { unsubscribeRoutinesListener, dayId } = this.state;
-        if (dayId !== this.props.dayId) {
-            if (unsubscribeRoutinesListener) {
-                unsubscribeRoutinesListener();
-            }
-            this.addRoutinesListener();
+    static getDerivedStateFromProps(props, state) {
+        if (props.day._id !== state.day._id) {
+            return { day: props.day, dayId: props.dayId, refresh: true };
+        } else {
+            return null;
         }
     }
 
-    updateCurrentRoutine(routineId) {
+    componentDidMount() {
+        this.addRoutinesListener();
+        this.addDayListener();
+    }
+
+    componentDidUpdate() {
+        if (this.state.refresh) {
+            console.log("unequal ----");
+            this.addRoutinesListener();
+            this.addDayListener();
+            this.setState({ refresh: false });
+        }
+    }
+
+    updateCurrentRoutine = routineId => {
         const routine = this.state.routines.find(
             routine => routine._id === routineId,
         );
 
         this.setState({ routine });
-    }
+    };
 
-    async handleNewRoutineCreate() {
+    handleNewRoutineCreate = async () => {
         const { query } = Router;
         const { routines } = this.state;
         const order = routines.length + 1;
@@ -57,25 +61,45 @@ export default class extends Component {
                 this.setState({ routineId, checkedIndex: order });
             })
             .catch(err => console.error(err));
-    }
+    };
 
-    handleRoutineChange(routineId, index) {
+    handleRoutineChange = (routineId, index) => {
         this.updateCurrentRoutine(routineId);
         this.setState({ routineId, checkedIndex: index });
-    }
+    };
 
-    handleRoutinePublish(routine) {
+    toggleRestDay = () => {
+        const { day, dayId } = this.state;
+        firebaseClient()
+            .db.collection("days")
+            .doc(dayId)
+            .update({
+                ...day,
+                updatedAt: Date.now(),
+                isRestDay: !day.isRestDay,
+            });
+    };
+
+    handleRoutinePublish = routine => {
         firebaseClient()
             .db.collection("routines")
             .doc(routine._id)
             .set(routine);
 
-        this.setState({ checkedIndex: checkedIndex + 1 });
-    }
+        firebaseClient()
+            .db.collection("days")
+            .doc(this.state.dayId)
+            .update({
+                ...this.state.day,
+                updatedAt: Date.now(),
+                routinesCount: this.state.routines.length,
+            });
+
+        window.scrollTo(0, 0);
+    };
 
     render() {
-        const { routines, routine, checkedIndex } = this.state;
-        const { day } = this.props;
+        const { routines, routine, checkedIndex, day } = this.state;
 
         let start = 0;
         const rl = routines.length;
@@ -88,27 +112,8 @@ export default class extends Component {
             start = checkedIndex - 3;
         }
 
-        return (
-            <div>
-                <div className="mb-3 d-flex">
-                    <Link
-                        href="/admin-panel/programs/edit/[pid]"
-                        as={`/admin-panel/programs/edit/${Router.query.pid}`}
-                    >
-                        <a className="title btn__link btn__link--secondary d-flex mr-3">
-                            <span className="mr-1">&#8592;</span>
-                            Edit Program
-                        </a>
-                    </Link>
-                    <p className="title title--md text-black mr-2">
-                        Day {day.order}:
-                    </p>
-
-                    <p className="title title--md text-secondary">
-                        {rl} Routines
-                    </p>
-                </div>
-
+        const dayRoutines = (
+            <Fragment>
                 <ul className="day-edit-routine-step__container mb-3">
                     {routines.slice(start, start + 5).map(routine => {
                         return (
@@ -145,6 +150,55 @@ export default class extends Component {
                         No routines added yet
                     </h4>
                 )}
+            </Fragment>
+        );
+
+        return (
+            <div>
+                <div className="mb-3 d-flex">
+                    <Link
+                        href="/admin-panel/programs/edit/[pid]"
+                        as={`/admin-panel/programs/edit/${Router.query.pid}`}
+                    >
+                        <a className="title btn__link btn__link--secondary d-flex mr-3">
+                            <span className="mr-1">&#8592;</span>
+                            Edit Program
+                        </a>
+                    </Link>
+                    <p className="title title--md text-black mr-2">
+                        Day {day.order}:
+                    </p>
+
+                    <p className="title title--md text-secondary">
+                        {rl} Routines
+                    </p>
+
+                    <p
+                        onClick={this.toggleRestDay}
+                        className="ml-auto btn__link btn__link--secondary text-secondary"
+                    >
+                        {day.isRestDay
+                            ? "set this as Workout Day"
+                            : "Set this as RESTING DAY"}
+                    </p>
+                </div>
+
+                {day.isRestDay ? (
+                    <div>
+                        <h1 className="title title--md mt-7 text-secondary">
+                            You have set this day as a resting day
+                        </h1>
+
+                        <a
+                            className="btn__link btn__link--secondary mt-3"
+                            onClick={this.toggleRestDay}
+                        >
+                            Click here to set as working day
+                        </a>
+                    </div>
+                ) : (
+                    dayRoutines
+                )}
             </div>
         );
     }
@@ -155,7 +209,26 @@ export default class extends Component {
         }
     }
 
-    addRoutinesListener() {
+    addDayListener = () => {
+        console.log(this.state.day);
+        if (this.state.unsubscribeDayListener) {
+            this.state.unsubscribeDayListener();
+        }
+
+        const { dayId } = this.props;
+        let unsubscribeDayListener = firebaseClient()
+            .db.collection("days")
+            .doc(this.props.dayId)
+            .onSnapshot(doc => {
+                this.setState({ day: doc.data() });
+            });
+        this.setState({ unsubscribeDayListener, dayId });
+    };
+
+    addRoutinesListener = () => {
+        if (this.state.unsubscribeRoutinesListener) {
+            this.state.unsubscribeRoutinesListener();
+        }
         const { dayId } = this.props;
         let unsubscribeRoutinesListener = firebaseClient()
             .db.collection("routines")
@@ -173,5 +246,5 @@ export default class extends Component {
                 });
             });
         this.setState({ unsubscribeRoutinesListener, dayId });
-    }
+    };
 }

@@ -89,6 +89,11 @@ export default class extends Component {
                                             }
                                         >
                                             Day {day.order}
+                                            {day.isRestDay && (
+                                                <small className="ml-1">
+                                                    rest
+                                                </small>
+                                            )}
                                         </label>
                                     </li>
                                 );
@@ -122,7 +127,12 @@ export default class extends Component {
                     days.push(day.data());
                 });
                 const dayId = days[0] ? days[0]._id : null;
-                this.setState({ days, dayId, checked: dayId });
+
+                if (!this.state.dayId) {
+                    this.setState({ days, dayId, checked: dayId });
+                } else {
+                    this.setState({ days });
+                }
             });
         this.setState({ unsubscribeDaysListener });
     }

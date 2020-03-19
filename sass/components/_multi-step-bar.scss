@@ -22,9 +22,10 @@
         background-color: $color-text-light;
         color: $color-white;
         z-index: 2;
+        border: none;
 
         &--visited {
-            background-color: $color-tertiary;
+            background-color: $color-secondary;
             color: $color-black;
         }
     }

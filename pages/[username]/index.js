@@ -82,7 +82,7 @@ export default () => {
                                     </div>
                                     <Link
                                         href="/[username]/[pid]"
-                                        as={`/${user.displayName}/${p.programId}`}
+                                        as={`/${user.displayName}/${p.slug}`}
                                     >
                                         <button className="btn btn--primary text-black p-program__cta">
                                             Continue

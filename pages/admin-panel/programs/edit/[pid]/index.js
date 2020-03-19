@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { firebaseClient } from "../../../../../utils/firebaseClient";
 import AdminLayout from "../../../AdminLayout";
 import MainInfo from "../MainInfo";
@@ -109,6 +109,7 @@ export default class extends Component {
                 handleSubmit={this.updateInfo}
             />,
         ];
+
         return (
             <AdminLayout>
                 <div className="program-edit">
@@ -153,8 +154,16 @@ export default class extends Component {
                             </button>
                         </div>
                     </div>
-                    {program && (
-                        <div className="program-edit__forms">{forms[tab]}</div>
+                    {program && snippet && (
+                        <Fragment>
+                            <p className="title title--md text-tertiary mt-3 mb-3 bolder">
+                                {snippet.title}
+                            </p>
+                            <hr />
+                            <div className="program-edit__forms">
+                                {forms[tab]}
+                            </div>
+                        </Fragment>
                     )}
                 </div>
             </AdminLayout>

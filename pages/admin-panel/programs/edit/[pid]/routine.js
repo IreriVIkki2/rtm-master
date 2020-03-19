@@ -206,10 +206,14 @@ export default class extends Component {
                                 </small>
                             </label>
                         </div>
+
                         <div className="form-group__two-part--input-container">
-                            <small className="d-block text-secondary mb-sm">
-                                Set 0 if routine is measured in seconds
-                            </small>
+                            {lengthInSecs > 0 && (
+                                <small className="d-block text-secondary mb-sm">
+                                    Set length in seconds as 0 to edit this
+                                    field
+                                </small>
+                            )}
                             <SelectInput
                                 selectInputId="repeatCount"
                                 initialValue={
@@ -228,6 +232,7 @@ export default class extends Component {
                                         label: `X ${num}`,
                                     };
                                 })}
+                                disabled={lengthInSecs > 0}
                             />
                         </div>
                     </div>

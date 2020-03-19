@@ -137,6 +137,9 @@ p:not(.title) {
 .w-100 {
   width: 100%; }
 
+.ml-auto {
+  margin-left: auto; }
+
 .al {
   display: flex;
   padding-top: 5.6rem;
@@ -215,7 +218,8 @@ p:not(.title) {
   border: none !important;
   padding: 0.5rem 0 !important;
   position: relative !important;
-  color: currentColor; }
+  color: currentColor;
+  cursor: pointer; }
   .btn__link--secondary::after {
     content: "";
     position: absolute;
@@ -451,9 +455,10 @@ p:not(.title) {
   .multi-step-bar__item {
     background-color: #666666;
     color: #fff;
-    z-index: 2; }
+    z-index: 2;
+    border: none; }
     .multi-step-bar__item--visited {
-      background-color: #e94822;
+      background-color: #f2910a;
       color: #000; }
 
 .title {
@@ -771,7 +776,8 @@ p:not(.title) {
   .p-program:not(:last-child) {
     margin-bottom: 3rem; }
   .p-program__info {
-    flex-grow: 1; }
+    flex-grow: 1;
+    flex-shrink: 0; }
   .p-program__meta {
     display: flex;
     align-items: center; }
@@ -848,3 +854,29 @@ p:not(.title) {
     margin-left: 3rem; }
     .program__info > * {
       max-width: 45rem; }
+
+.user-workout {
+  display: flex;
+  padding-top: 5.6rem;
+  padding-left: calc((100% - 111.9rem) / 2);
+  padding-right: calc((100% - 111.9rem) / 2); }
+  @media screen and (max-width: 1118px) {
+    .user-workout {
+      padding: 0; } }
+  .user-workout__aside {
+    width: 20rem;
+    padding: 3rem 3rem 3rem 0; }
+  .user-workout__aside-banner {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.05); }
+  .user-workout__main {
+    padding: 3rem;
+    width: calc(100% -20rem);
+    overflow-x: hidden; }
+  .user-workout__routine {
+    display: flex; }
+    .user-workout__routine-video-container {
+      flex: 0 0 50%; }
+    .user-workout__routine-info {
+      flex: 0 0 50%; }

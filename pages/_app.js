@@ -12,23 +12,40 @@ export default class MyApp extends App {
     static async getInitialProps({ ctx }) {
         const { req } = ctx;
         const user = req && req.session ? req.session.decodedToken : null;
-        const res = user && (await fetch(`${baseUrl}/api/profile/${user.uid}`));
-        const profile = res ? await res.json() : null;
-        return { user, ...profile };
+        return { user };
     }
 
     constructor(props) {
         super(props);
         this.state = {
             user: this.props.user,
-            profile: this.props.profile,
+            profile: null,
+            mounted: false,
         };
 
         this.handleLogout = this.handleLogout.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
+        this.addProfileListener = this.addProfileListener.bind(this);
+    }
+
+    async addProfileListener(uid) {
+        let removeProfileListener = await firebaseClient()
+            .db.collection("profiles")
+            .doc(uid)
+            .onSnapshot(doc => {
+                console.log("addProfileListener -> doc", doc.data());
+
+                this.setState({
+                    removeProfileListener,
+                    profile: doc.data(),
+                    mounted: true,
+                });
+            });
     }
 
     componentDidMount() {
+        const { user } = this.state;
+        if (user) this.addProfileListener(user.uid);
         firebaseClient().auth.onAuthStateChanged(user => {
             if (user) {
                 this.setState({ user: user });
@@ -43,7 +60,7 @@ export default class MyApp extends App {
                     });
                 });
             } else {
-                this.setState({ user: null });
+                this.setState({ user: null, mounted: true });
                 fetch("/api/logout", {
                     method: "POST",
                     credentials: "same-origin",
@@ -54,7 +71,11 @@ export default class MyApp extends App {
 
     render() {
         const { Component, pageProps } = this.props;
-        const { user, profile } = this.state;
+        const { user, profile, mounted } = this.state;
+
+        if (!mounted)
+            return <h1 className="title mt-7 title--sm">loading...</h1>;
+
         return (
             <Fragment>
                 <UserContext.Provider
@@ -83,5 +104,11 @@ export default class MyApp extends App {
 
     handleLogout() {
         firebaseClient().auth.signOut();
+    }
+
+    componentWillUnmount() {
+        if (this.state.removeProfileListener) {
+            this.state.removeProfileListener();
+        }
     }
 }
