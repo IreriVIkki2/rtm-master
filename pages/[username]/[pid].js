@@ -46,6 +46,37 @@ export default class extends Component {
             .set({ ...this.context.profile, updatedAt: Date.now() });
     };
 
+    programProgressUpdate = update => {
+        console.log("extends -> update", update);
+        const { profile, user } = this.context;
+        const pid = Router.query.pid.split("_id")[1];
+        console.log("extends -> pid", pid);
+
+        const newPrograms = profile.purchases.programs.map(p => {
+            if (p.programId === pid) {
+                console.log("found");
+                return {
+                    ...p,
+                    ...update,
+                };
+            } else {
+                return p;
+            }
+        });
+        console.log("extends -> newPrograms", newPrograms);
+        firebaseClient()
+            .db.collection("profiles")
+            .doc(user.uid)
+            .set({
+                ...profile,
+                purchases: {
+                    ...profile.purchases,
+                    programs: newPrograms,
+                },
+                updatedAt: Date.now(),
+            });
+    };
+
     testDays = (did, day) => {
         firebaseClient()
             .db.collection("days")
@@ -69,62 +100,72 @@ export default class extends Component {
 
         return (
             <div className="user-workout">
-                <aside className="user-workout__aside">
-                    <div className="user-workout__aside-banner-container">
-                        <img
-                            src={progress.snippet.banner}
-                            alt=""
-                            className="user-workout__aside-banner-img"
-                        />
-                    </div>
-                    <div className="user-workout__days">
-                        {days.map(day => {
-                            return (
-                                <p
-                                    key={day._id}
-                                    className={`user-workout__day ${day.order <
-                                        progress.dayOrder &&
-                                        "user-workout__day--completed"}
+                <p className="title title--ms text-black">{progress.title}</p>
+                <div className="user-workout__container">
+                    <aside className="user-workout__aside">
+                        <div className="user-workout__aside-banner-container">
+                            <img
+                                src={progress.snippet.banner}
+                                alt=""
+                                className="user-workout__aside-banner-img"
+                            />
+                        </div>
+                        <div className="user-workout__days">
+                            {days.map(day => {
+                                return (
+                                    <p
+                                        key={day._id}
+                                        className={`user-workout__day ${day.order <
+                                            progress.dayOrder &&
+                                            "user-workout__day--completed"}
                                         
                                         ${day.order === currentDayOrder &&
                                             "user-workout__day--selected"}`}
-                                    onClick={() => {
-                                        this.addRoutinesListener(day._id);
-                                        this.setState({
-                                            currentDayOrder: day.order,
-                                            isRestDay: day.isRestDay,
-                                        });
-                                    }}
-                                >
-                                    <span className="title title--md">
-                                        Day {day.order}
-                                    </span>
-                                    {day.isRestDay && <span>rest</span>}
-                                    {day.order < progress.dayOrder && (
-                                        <span className="check-box check-box-25 mr-2">
-                                            <img
-                                                className="text-tertiary-2"
-                                                src="/success.svg"
-                                                alt=""
-                                            />
+                                        onClick={() => {
+                                            this.addRoutinesListener(day._id);
+                                            this.setState({
+                                                currentDayOrder: day.order,
+                                                isRestDay: day.isRestDay,
+                                            });
+                                        }}
+                                    >
+                                        <span className="title title--md">
+                                            Day {day.order}
                                         </span>
-                                    )}
-                                </p>
-                            );
-                        })}
-                    </div>
-                </aside>
-                <main className="user-workout__main">
-                    {isRestDay ? (
-                        <div>
-                            <p className="title title--sm text-secondary">
-                                Your body and muscles need to get some rest
-                            </p>
+                                        {day.isRestDay && <span>rest</span>}
+                                        {day.order < progress.dayOrder && (
+                                            <span className="check-box check-box-25 mr-2">
+                                                <img
+                                                    className="text-tertiary-2"
+                                                    src="/success.svg"
+                                                    alt=""
+                                                />
+                                            </span>
+                                        )}
+                                    </p>
+                                );
+                            })}
                         </div>
-                    ) : (
-                        <Routines routines={routines} />
-                    )}
-                </main>
+                    </aside>
+                    <main className="user-workout__main">
+                        {isRestDay ? (
+                            <div>
+                                <p className="title title--sm text-secondary">
+                                    Your body and muscles need to get some rest
+                                </p>
+                            </div>
+                        ) : (
+                            <Routines
+                                routines={routines}
+                                onNext={this.programProgressUpdate}
+                                routineProgress={{
+                                    _id: progress.routineId,
+                                    order: progress.routineOrder,
+                                }}
+                            />
+                        )}
+                    </main>
+                </div>
             </div>
         );
     }
@@ -195,3 +236,44 @@ export default class extends Component {
         }
     }
 }
+
+/**
+ * 
+(map)
+completion
+0
+dayId
+"a4e06c95090c43bfb50bb32e3ec304ce"
+dayOrder
+2
+isRestDay
+false
+plan
+"premium"
+programId
+"0a667d0e906c45a3bb10b4c2e3a4c72d"
+purchasedAt
+""
+routine
+"thisisroutineid"
+routineId
+""
+slug
+"clean-bulking-program-for-him_id0a667d0e906c45a3bb10b4c2e3a4c72d"
+snippet
+banner
+"http://localhost:3000/images/bw-rph2.jpg"
+category
+"bulking"
+description
+"You eat like a madman, inhaling McDonalds and candy to beef-up your weekly calories on Saturdays because a trainer at the gym told you that"
+difficulty
+"advanced"
+publishedAt
+""
+tags
+title
+"Clean bulking Program for him"
+visitations
+0
+ */

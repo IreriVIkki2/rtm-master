@@ -67,6 +67,10 @@
     margin-top: auto;
 }
 
+.mx-auto {
+    margin: initial auto !important;
+}
+
 .text-light {
     color: $color-light !important;
 }
@@ -110,6 +114,10 @@
 
 .d-inline-block {
     display: inline-block;
+}
+
+.d-inline-flex {
+    display: inline-flex;
 }
 
 .w-auto {

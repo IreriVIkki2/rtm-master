@@ -97,6 +97,9 @@ p:not(.title) {
 .mt-auto {
   margin-top: auto; }
 
+.mx-auto {
+  margin: initial auto !important; }
+
 .text-light {
   color: #f8f8f8 !important; }
 
@@ -130,6 +133,9 @@ p:not(.title) {
 
 .d-inline-block {
   display: inline-block; }
+
+.d-inline-flex {
+  display: inline-flex; }
 
 .w-auto {
   width: auto !important; }
@@ -527,6 +533,26 @@ p:not(.title) {
       .welcome__banners--bottom-img {
         width: 100%; }
 
+.footer {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2c2d34;
+  color: #fff; }
+  .footer__main {
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+  .footer__meta {
+    width: 100%;
+    border-top: solid 0.1rem #666666;
+    text-align: center;
+    padding: 2rem 0; }
+
 .navbar {
   display: flex;
   position: fixed;
@@ -743,38 +769,37 @@ p:not(.title) {
   .program-edit__form {
     width: 100%; }
 
-.profile__purchases--title {
-  padding-top: 7rem;
-  background-color: #141219;
-  padding-left: calc((100% - 111.9rem) / 2);
-  padding-right: calc((100% - 111.9rem) / 2);
-  margin-bottom: 3rem; }
-  @media screen and (max-width: 1118px) {
-    .profile__purchases--title {
-      padding: 0; } }
-  .profile__purchases--title-item {
-    padding: 3rem 0; }
-
-.profile__purchases--programs {
-  padding-left: calc((100% - 111.9rem) / 2);
-  padding-right: calc((100% - 111.9rem) / 2); }
-  @media screen and (max-width: 1118px) {
-    .profile__purchases--programs {
-      padding: 0; } }
-
-.profile--none {
-  padding-top: 7rem;
-  padding-left: calc((100% - 111.9rem) / 2);
-  padding-right: calc((100% - 111.9rem) / 2); }
-  @media screen and (max-width: 1118px) {
-    .profile--none {
-      padding: 0; } }
-
-.profile__programs {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap; }
+.profile {
+  min-height: 100vh; }
+  .profile__purchases--title {
+    padding-top: 7rem;
+    background-color: #141219;
+    padding-left: calc((100% - 111.9rem) / 2);
+    padding-right: calc((100% - 111.9rem) / 2);
+    margin-bottom: 3rem; }
+    @media screen and (max-width: 1118px) {
+      .profile__purchases--title {
+        padding: 0; } }
+    .profile__purchases--title-item {
+      padding: 3rem 0; }
+  .profile__purchases--programs {
+    padding-left: calc((100% - 111.9rem) / 2);
+    padding-right: calc((100% - 111.9rem) / 2); }
+    @media screen and (max-width: 1118px) {
+      .profile__purchases--programs {
+        padding: 0; } }
+  .profile--none {
+    padding-top: 7rem;
+    padding-left: calc((100% - 111.9rem) / 2);
+    padding-right: calc((100% - 111.9rem) / 2); }
+    @media screen and (max-width: 1118px) {
+      .profile--none {
+        padding: 0; } }
+  .profile__programs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap; }
 
 .small-program {
   width: 41rem;
@@ -896,13 +921,15 @@ p:not(.title) {
       max-width: 45rem; }
 
 .user-workout {
-  display: flex;
-  padding-top: 5.6rem;
   padding-left: calc((100% - 111.9rem) / 2);
-  padding-right: calc((100% - 111.9rem) / 2); }
+  padding-right: calc((100% - 111.9rem) / 2);
+  padding-top: 7rem;
+  min-height: 100vh; }
   @media screen and (max-width: 1118px) {
     .user-workout {
       padding: 0; } }
+  .user-workout__container {
+    display: flex; }
   .user-workout__aside {
     flex: 0 0 20rem;
     padding: 3rem 0; }

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const Routine = ({ routine }) => {
-    console.log("Routine -> routine", routine);
+const Routine = ({ routine, onNext, showNext }) => {
     if (!routine) {
         return (
             <h1 className="mt-7 title title--sm text-secondary">Loading...</h1>
@@ -68,7 +67,19 @@ const Routine = ({ routine }) => {
                     >
                         start
                     </button>
-                    <button className="btn btn--secondary">next</button>
+                    <button
+                        onClick={() => {
+                            onNext({
+                                routineId: routine._id,
+                                routine: routine.name,
+                                routineOrder: routine.order,
+                            });
+                            showNext();
+                        }}
+                        className="btn btn--secondary"
+                    >
+                        next
+                    </button>
                 </div>
             </div>
         </div>

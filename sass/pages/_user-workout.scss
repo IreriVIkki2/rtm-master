@@ -1,7 +1,11 @@
 .user-workout {
-    display: flex;
-    padding-top: 5.6rem;
     @include content-width-lg;
+    padding-top: 7rem;
+    min-height: 100vh;
+
+    &__container {
+        display: flex;
+    }
 
     &__aside {
         flex: 0 0 20rem;

@@ -32,7 +32,7 @@ const Contact = () => {
                         inputId="contactName"
                         initialValue={name}
                         onInputChange={name => setName(name)}
-                        minLength="3"
+                        minLength={3}
                         type="text"
                     />
                 </div>
@@ -48,7 +48,7 @@ const Contact = () => {
                         inputId="contactEmail"
                         initialValue={email}
                         onInputChange={email => setEmail(email)}
-                        minLength="3"
+                        minLength={3}
                         type="email"
                     />
                 </div>
@@ -64,7 +64,7 @@ const Contact = () => {
                     inputId="contactSubject"
                     initialValue={subject}
                     onInputChange={subject => setSubject(subject)}
-                    minLength="3"
+                    minLength={3}
                 />
             </div>
 
