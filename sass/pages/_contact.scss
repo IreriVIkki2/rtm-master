@@ -1,0 +1,25 @@
+.contact {
+    @include content-width-lg;
+    min-height: 100vh;
+    padding-top: 7rem;
+
+    & > :not(:first-child) {
+        padding-left: 5rem;
+    }
+
+    &__name-email {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__subject {
+    }
+
+    &__message {
+    }
+}
+
+.max-70 {
+    max-width: 70rem;
+    margin: auto;
+}

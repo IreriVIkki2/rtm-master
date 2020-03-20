@@ -1,9 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import FileUpload from "./forms/FileUpload";
-import Input from "./forms/Input";
-import TextArea from "./forms/TextArea";
-import SelectInput from "./forms/SelectInput";
+import FileUpload from "../../../../components/forms/FileUpload";
+import Input from "../../../../components/forms/Input";
+import TextArea from "../../../../components/forms/TextArea";
+import SelectInput from "../../../../components/forms/SelectInput";
 
 const MainInfo = ({ onMainInfoChange, slug, snippet }) => {
     const [info, setInfo] = useState(null);

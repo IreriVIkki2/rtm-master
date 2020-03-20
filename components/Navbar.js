@@ -34,16 +34,6 @@ const Navbar = ({}) => {
                         </a>
                     </Link>
                 </li>
-                <li className="navbar__nav--item">
-                    <Link
-                        activeClassName="navbar__nav--link-active"
-                        href="/contact"
-                    >
-                        <a className="title-sm title navbar__nav--link">
-                            Contact
-                        </a>
-                    </Link>
-                </li>
 
                 <li className="navbar__nav--item">
                     <Link
@@ -52,6 +42,17 @@ const Navbar = ({}) => {
                     >
                         <a className="title-sm title navbar__nav--link">
                             About
+                        </a>
+                    </Link>
+                </li>
+
+                <li className="navbar__nav--item">
+                    <Link
+                        activeClassName="navbar__nav--link-active"
+                        href="/contact"
+                    >
+                        <a className="title-sm title navbar__nav--link">
+                            Contact
                         </a>
                     </Link>
                 </li>

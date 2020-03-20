@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
-import Input from "./forms/Input";
-import QuillForm from "./forms/QuillForm";
+import Input from "../../../../components/forms/Input";
+import QuillForm from "../../../../components/forms/QuillForm";
 
 const SalesForm = ({ sales, handleSubmit }) => {
     const [info, setInfo] = useState(null);

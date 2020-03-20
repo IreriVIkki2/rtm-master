@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import SelectInput from "../forms/SelectInput";
-import Input from "../forms/Input";
-import TextArea from "../forms/TextArea";
+import SelectInput from "../../../../../components/forms/SelectInput";
+import Input from "../../../../../components/forms/Input";
+import TextArea from "../../../../../components/forms/TextArea";
 
 export default class extends Component {
     constructor(props) {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { firebaseClient } from "../../../../../utils/firebaseClient";
+import { firebaseClient } from "../../utils/firebaseClient";
 import PropTypes from "prop-types";
 
 export default class extends Component {

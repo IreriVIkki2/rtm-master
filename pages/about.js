@@ -15,7 +15,7 @@ export default class extends Component {
 
     render() {
         return (
-            <div>
+            <div className="about mt-7">
                 <h1 className="title title--lg">About Rhotimmi</h1>
             </div>
         );

@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const Routine = ({ routine }) => {
-    if (!routine._id)
+    console.log("Routine -> routine", routine);
+    if (!routine) {
         return (
-            <h1 className="mt-7 title title--lg text-secondary">No routine</h1>
+            <h1 className="mt-7 title title--sm text-secondary">Loading...</h1>
         );
+    }
+
+    if (typeof routine === "string") {
+        return (
+            <h1 className="mt-7 title title--sm text-secondary">{routine}</h1>
+        );
+    }
 
     const [seconds, setSeconds] = useState(routine.lengthInSecs);
     const [videoWidth, setVideoWidth] = useState("100%");
@@ -22,16 +30,13 @@ const Routine = ({ routine }) => {
         }, 1000);
     };
 
-    console.log(routine.youtubeUrl);
     const url = routine.youtubeUrl.replace("watch?v=", "embed/");
-    console.log("Routine -> url", url);
 
     const setVideoDimensions = () => {
         const width = document.getElementById(routine._id).clientWidth;
         const height = Math.floor(width / 1.8);
         setVideoWidth(`${width}px`);
         setVideoHeight(`${height}px`);
-        console.log("setVideoDimensions -> width", width, height);
     };
 
     return (
@@ -43,9 +48,9 @@ const Routine = ({ routine }) => {
                     width={videoWidth}
                     height={videoHeight}
                     src={url}
-                    frameborder="0"
+                    frameBorder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen={true}
+                    allowFullScreen={true}
                 ></iframe>
             </div>
             <div className="user-workout__routine-info">

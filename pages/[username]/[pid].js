@@ -19,6 +19,15 @@ export default class extends Component {
     }
 
     componentDidMount() {
+        const progress = this.context.profile.purchases.programs.find(
+            p => p.programId === Router.query.pid.split("_id")[1],
+        );
+
+        this.setState({
+            progress,
+            currentDayOrder: progress.dayOrder,
+            isRestDay: progress.isRestDay,
+        });
         this.subscribeDaysListener();
     }
 
@@ -38,7 +47,6 @@ export default class extends Component {
     };
 
     testDays = (did, day) => {
-        console.log("object");
         firebaseClient()
             .db.collection("days")
             .doc(did)
@@ -47,48 +55,88 @@ export default class extends Component {
     };
 
     render() {
-        const { mounted, routines, days } = this.state;
+        const {
+            mounted,
+            routines,
+            days,
+            progress,
+            currentDayOrder,
+            isRestDay,
+        } = this.state;
+
         if (!mounted)
             return <h1 className="title title--sm mt-7">loading...</h1>;
 
         return (
             <div className="user-workout">
                 <aside className="user-workout__aside">
-                    <div className="user-workout__aside-banner">
-                        <img src="" alt="" className="" />
+                    <div className="user-workout__aside-banner-container">
+                        <img
+                            src={progress.snippet.banner}
+                            alt=""
+                            className="user-workout__aside-banner-img"
+                        />
                     </div>
-                    {days.map(day => {
-                        return (
-                            <div key={day._id} className="">
+                    <div className="user-workout__days">
+                        {days.map(day => {
+                            return (
                                 <p
+                                    key={day._id}
+                                    className={`user-workout__day ${day.order <
+                                        progress.dayOrder &&
+                                        "user-workout__day--completed"}
+                                        
+                                        ${day.order === currentDayOrder &&
+                                            "user-workout__day--selected"}`}
                                     onClick={() => {
                                         this.addRoutinesListener(day._id);
-                                        this.setState({ routines: false });
+                                        this.setState({
+                                            currentDayOrder: day.order,
+                                            isRestDay: day.isRestDay,
+                                        });
                                     }}
-                                    className="title title--md"
                                 >
-                                    Day {day.order}
+                                    <span className="title title--md">
+                                        Day {day.order}
+                                    </span>
+                                    {day.isRestDay && <span>rest</span>}
+                                    {day.order < progress.dayOrder && (
+                                        <span className="check-box check-box-25 mr-2">
+                                            <img
+                                                className="text-tertiary-2"
+                                                src="/success.svg"
+                                                alt=""
+                                            />
+                                        </span>
+                                    )}
                                 </p>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
                 </aside>
                 <main className="user-workout__main">
-                    <Routines routines={routines} />
+                    {isRestDay ? (
+                        <div>
+                            <p className="title title--sm text-secondary">
+                                Your body and muscles need to get some rest
+                            </p>
+                        </div>
+                    ) : (
+                        <Routines routines={routines} />
+                    )}
                 </main>
             </div>
         );
     }
 
-    async addRoutinesListener(currentDayId) {
-        console.log("extends -> addRoutinesListener -> addRoutinesListener");
+    async addRoutinesListener(dayId) {
         if (this.state.removeRoutinesListener) {
             this.state.removeRoutinesListener();
         }
 
         let removeRoutinesListener = await firebaseClient()
             .db.collection("routines")
-            .where("dayId", "==", currentDayId)
+            .where("dayId", "==", dayId)
             // .where("published", "==", true)
             .orderBy("order")
             .onSnapshot(docs => {
@@ -96,14 +144,19 @@ export default class extends Component {
                 docs.forEach(doc => {
                     newRoutines.push(doc.data());
                 });
-                console.log(
-                    "extends -> addRoutinesListener -> newRoutines",
-                    newRoutines,
-                );
-                this.setState({
-                    removeRoutinesListener,
-                    routines: newRoutines,
-                });
+
+                if (newRoutines.length > 0) {
+                    this.setState({
+                        removeRoutinesListener,
+                        routines: newRoutines,
+                    });
+                } else {
+                    removeRoutinesListener();
+                    this.setState({
+                        removeRoutinesListener: false,
+                        routines: null,
+                    });
+                }
             });
     }
 
@@ -124,7 +177,9 @@ export default class extends Component {
                 });
 
                 if (newDays.length > 0) {
-                    this.addRoutinesListener(newDays[0]._id);
+                    this.addRoutinesListener(
+                        this.state.progress.dayId || newDays[0]._id,
+                    );
                 }
                 this.setState({
                     unsubscribeDaysListener,

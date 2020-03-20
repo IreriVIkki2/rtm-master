@@ -1,9 +1,9 @@
 import { useState, useEffect, Fragment } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
-import Input from "./forms/Input";
+import Input from "../../../../components/forms/Input";
 import FeaturesForm from "./FeaturesForm";
-import CheckBoxForm from "./forms/CheckBoxForm";
+import CheckBoxForm from "../../../../components/forms/CheckBoxForm";
 
 const PlansForm = ({ plans, status, contentDetails, handleSubmit }) => {
     const [newPlans, setNewPlans] = useState(null);

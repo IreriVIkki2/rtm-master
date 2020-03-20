@@ -3,8 +3,8 @@ import App from "next/app";
 import UserContext from "../context/UserContext";
 import { firebaseClient, firebase } from "../utils/firebaseClient";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import fetch from "isomorphic-unfetch";
-import baseUrl from "../baseUrl";
 import "react-quill/dist/quill.snow.css";
 import "../public/main.css";
 
@@ -91,6 +91,7 @@ export default class MyApp extends App {
                     <div>
                         <Component {...pageProps} />
                     </div>
+                    <Footer />
                 </UserContext.Provider>
             </Fragment>
         );
