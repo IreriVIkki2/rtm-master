@@ -1,4 +1,7 @@
-import React from "react";
+import { IoLogoFacebook } from "react-icons/io";
+import { IoLogoTwitter } from "react-icons/io";
+import { IoLogoInstagram } from "react-icons/io";
+import { IoLogoYoutube } from "react-icons/io";
 
 const Footer = () => {
     return (
@@ -10,19 +13,35 @@ const Footer = () => {
                 </p>
                 <p className="title mb-1">Nairobi, Kenya. Smart Gyms</p>
                 <p className="mb-1">+254 704 81261</p>
-                <p className="title mb-3">
-                    <a href="#">rhotimmi.com</a>
+                <p className="title mb-7">
+                    <a
+                        href="/"
+                        className="ml-1 btn btn__link btn__link--secondary"
+                    >
+                        rhotimmi.com
+                    </a>
                 </p>
 
-                <div className="">
-                    <div className="">
-                        <img src="" alt="" className="img-cover" />
+                <div className="footer__socials">
+                    <div className="footer__socials--item">
+                        <a href="#" className="footer__socials--item-icon">
+                            <IoLogoFacebook />
+                        </a>
                     </div>
-                    <div className="">
-                        <img src="" alt="" className="img-cover" />
+                    <div className="footer__socials--item">
+                        <a href="#" className="footer__socials--item-icon">
+                            <IoLogoTwitter />
+                        </a>
                     </div>
-                    <div className="">
-                        <img src="" alt="" className="img-cover" />
+                    <div className="footer__socials--item">
+                        <a href="#" className="footer__socials--item-icon">
+                            <IoLogoInstagram />
+                        </a>
+                    </div>
+                    <div className="footer__socials--item">
+                        <a href="#" className="footer__socials--item-icon">
+                            <IoLogoYoutube />
+                        </a>
                     </div>
                 </div>
             </div>
@@ -50,12 +69,15 @@ const Footer = () => {
                         cookie policy
                     </a>
                 </p>
-                <p>
-                    <span>Designed and build by </span>
-                    <a href="https://irerivictor.com" className="ml-1">
+                <small className="text-white title">
+                    <span>Designed and built by </span>
+                    <a
+                        href="https://irerivictor.com"
+                        className="ml-1 btn btn__link btn__link--secondary font-smaller"
+                    >
                         Ireri Victor
                     </a>
-                </p>
+                </small>
             </div>
         </footer>
     );

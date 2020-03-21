@@ -42,6 +42,30 @@ class FirebaseCrud {
     }
 
     /**
+     * @method getProgram This method fetches only on e program
+     *
+     * @param {String} programId id of the program to be fetched
+     *
+     * @returns {Promise <[programs]>} This returns a promise which resolves to a program object
+     */
+    getProgram(pid) {
+        return new Promise((resolve, reject) => {
+            firebaseClient()
+                .db.collection("programs")
+                .doc(pid)
+                .get()
+                .then(doc => {
+                    if (!doc.exists) {
+                        reject(new Error("No such program found"));
+                    } else {
+                        resolve(doc.data());
+                    }
+                })
+                .catch(err => reject(err));
+        });
+    }
+
+    /**
      * @method
      *
      * @param {File} file A single file object

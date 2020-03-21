@@ -8,14 +8,14 @@ export default ({ allPrograms }) => {
     return (
         <div>
             <header
-                className="header"
+                className="program-header"
                 style={{
-                    backgroundImage: `linear-gradient(to right bottom, rgba(44, 45, 52, 0.8), rgba(44, 45, 52, 0.5)),url("${mainProgram.snippet.banner}")`,
+                    backgroundImage: `linear-gradient(to right bottom, rgba(44, 45, 52, 0.8), rgba(44, 45, 52, 0.5)), url("${mainProgram.snippet.banner}")`,
                 }}
             >
-                <div className="header__content">
-                    <div className="header__content--inner"></div>
-                    <div className="header__content--inner">
+                <div className="program-header__content">
+                    <div className="program-header__content--inner"></div>
+                    <div className="program-header__content--inner">
                         <small className="title title--sm mb-3">
                             <span className="">
                                 {mainProgram.snippet.category}
@@ -34,11 +34,11 @@ export default ({ allPrograms }) => {
 
                         <Link
                             href="/programs/buy/[pid]"
-                            as={`/programs/buy/${mainProgram._id}`}
+                            as={`/programs/buy/${mainProgram.slug}`}
                         >
-                            <button className="btn btn--secondary">
+                            <a className="btn btn--secondary">
                                 {mainProgram.sales.callToAction}
-                            </button>
+                            </a>
                         </Link>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ export default ({ allPrograms }) => {
             <section className="">
                 <div>
                     {programs.map(program => {
-                        const { snippet, _id, sales } = program;
+                        const { snippet, _id, sales, slug } = program;
                         const {
                             difficulty,
                             category,
@@ -85,11 +85,11 @@ export default ({ allPrograms }) => {
                                     <p className="mb-2">{description}</p>
                                     <Link
                                         href="/programs/buy/[pid]"
-                                        as={`/programs/buy/${_id}`}
+                                        as={`/programs/buy/${slug}`}
                                     >
-                                        <button className="btn btn--tertiary">
+                                        <a className="btn btn--tertiary">
                                             {sales.callToAction}
-                                        </button>
+                                        </a>
                                     </Link>
                                 </div>
                             </div>

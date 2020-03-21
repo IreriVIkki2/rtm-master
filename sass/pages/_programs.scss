@@ -1,4 +1,4 @@
-.header {
+.program-header {
     @include content-width-lg;
     height: 100vh;
     background-size: cover;
@@ -92,5 +92,13 @@
         & > * {
             max-width: 45rem;
         }
+    }
+}
+
+.program-sales {
+    @include content-width-lg;
+
+    &-article {
+        padding: 5rem 2rem;
     }
 }

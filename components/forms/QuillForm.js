@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { firebaseClient } from "../../utils/firebaseClient";
 import PropTypes from "prop-types";
 
@@ -18,6 +18,10 @@ export default class extends Component {
     }
 
     handleChange = value => {
+        const updatedValue = value.replace(
+            /<a hre/g,
+            `<a class="btn btn__link btn__link--secondary" hre`,
+        );
         this.setState({ newValue: value });
         this.props.onInputChange(value);
     };
@@ -66,7 +70,7 @@ export default class extends Component {
                 },
                 // on completion resolve the url
                 () => {
-                    uploadTask.snapshot.ref
+                    task.snapshot.ref
                         .getDownloadURL()
                         .then(downloadURL => resolve(downloadURL));
                 },
@@ -97,10 +101,6 @@ export default class extends Component {
                     <ReactQuill
                         value={this.state.newValue}
                         onChange={this.handleChange}
-                        onBlur={() =>
-                            // updateValue(page, id, this.state.newValue)
-                            console.log(this.state.newValue)
-                        }
                         modules={{
                             toolbar: [
                                 [{ header: [1, 2, 3, false] }],
@@ -114,10 +114,26 @@ export default class extends Component {
                                 ],
                                 [
                                     {
-                                        color: ["#2B56FE"],
+                                        color: [
+                                            "#2B56FE",
+                                            "#2c2d34",
+                                            "#f2910a",
+                                            "#e94822",
+                                            "#efd510",
+                                            "#ffffff",
+                                            "#000000",
+                                        ],
                                     },
                                     {
-                                        background: ["#FAD08E"],
+                                        background: [
+                                            "#2B56FE",
+                                            "#2c2d34",
+                                            "#f2910a",
+                                            "#e94822",
+                                            "#efd510",
+                                            "#ffffff",
+                                            "#000000",
+                                        ],
                                     },
                                 ],
                                 [
@@ -144,6 +160,17 @@ export default class extends Component {
     }
 
     render() {
-        return <div className="form__quill form__reset">{this.quill}</div>;
+        return (
+            <Fragment>
+                <div className="form__quill form__reset">{this.quill}</div>
+                <p className="mt-3 mb-7 pl-7 title title--sm">
+                    Preview of final article
+                </p>
+                <div
+                    dangerouslySetInnerHTML={{ __html: this.state.newValue }}
+                    className="mt-3"
+                ></div>
+            </Fragment>
+        );
     }
 }

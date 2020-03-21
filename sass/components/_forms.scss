@@ -132,3 +132,24 @@
         }
     }
 }
+
+.quill__addons {
+    & *h1,
+    h2,
+    h3 {
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        display: block !important;
+        font-family: $font-condensed !important;
+        letter-spacing: 0.2rem !important;
+        font-weight: 200 !important;
+    }
+    & *h1 {
+        font-size: 9rem !important;
+        color: $color-secondary;
+    }
+
+    & * h2 {
+        font-size: 2.8rem !important;
+    }
+}
