@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer__main">
-                <p className="title title--md mb-3">
+                <p className="title title--md mb-2">
                     <span className="mr-1">Rhotimmi</span>
                     <span className="bolder">Fitness</span>
                 </p>
@@ -52,7 +52,7 @@ const Footer = () => {
                 </p>
                 <p>
                     <span>Designed and build by </span>
-                    <a href="irerivictor.com" className="ml-1">
+                    <a href="https://irerivictor.com" className="ml-1">
                         Ireri Victor
                     </a>
                 </p>

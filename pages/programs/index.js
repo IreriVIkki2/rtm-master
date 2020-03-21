@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import Link from "next/link";
-import fetch from "isomorphic-unfetch";
-import baseUrl from "../../baseUrl";
+import crud from "../../utils/firebaseCRUD";
 
 export default ({ allPrograms }) => {
     const mainProgram = allPrograms[0];
@@ -103,10 +102,16 @@ export default ({ allPrograms }) => {
 };
 
 // This function gets called at build time
-export async function getStaticProps(ctx) {
-    // Call an external API endpoint to get posts
-    console.log("Programs -> getStaticProps -> ctx", typeof ctx, ctx);
-    const res = await fetch(`${baseUrl}/api/programs`);
-    const json = await res.json();
-    return { props: { allPrograms: json.programs } };
+export async function getStaticProps() {
+    let programs = null;
+    await crud
+        .getALlPrograms()
+        .then(docs => {
+            programs = docs;
+        })
+        .catch(err => {
+            console.error(err);
+            return { props: {} };
+        });
+    return { props: { allPrograms: programs } };
 }

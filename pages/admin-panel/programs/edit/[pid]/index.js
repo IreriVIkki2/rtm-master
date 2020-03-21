@@ -85,10 +85,10 @@ export default class extends Component {
     }
 
     getNewUrl(params) {
-        const baseUrl = Router.pathname.replace("[pid]", Router.query.pid);
-        if (!params) return `${baseUrl}/days`;
+        const url = Router.pathname.replace("[pid]", Router.query.pid);
+        if (!params) return `${url}/days`;
         const queryString = querystring.stringify(params);
-        return `${baseUrl}?${queryString}`;
+        return `${url}?${queryString}`;
     }
 
     render() {

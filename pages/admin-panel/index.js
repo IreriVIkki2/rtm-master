@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AdminLayout from "./AdminLayout";
-import baseUrl from "../../baseUrl";
+import crud from "../../utils/firebaseCRUD";
 
 export default class extends Component {
     constructor(props) {
@@ -35,7 +35,15 @@ export default class extends Component {
 
 // This function gets called at build time
 export async function getStaticProps() {
-    const res = await fetch(`${baseUrl}/api/programs`);
-    const json = await res.json();
-    return { props: { programs: json.programs } };
+    let programs = null;
+    await crud
+        .getALlPrograms()
+        .then(docs => {
+            programs = docs;
+        })
+        .catch(err => {
+            console.error(err);
+            return { props: {} };
+        });
+    return { props: { programs } };
 }

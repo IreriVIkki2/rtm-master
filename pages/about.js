@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import fetch from "isomorphic-unfetch";
-import baseUrl from "../baseUrl";
 import UserContext from "../context/UserContext";
-import crud from "../utils/firebaseCRUD";
 
 export default class extends Component {
     static contextType = UserContext;

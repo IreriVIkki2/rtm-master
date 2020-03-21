@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
-import { firebaseClient, firebase } from "../../../../../utils/firebaseClient";
+import { firebaseClient, firebase } from "../../utils/firebaseClient";
 
 const FileUpload = ({ inputId, onUploadUrl, initialFileUrl }) => {
     const [uploadTask, setUploadTask] = useState(false);

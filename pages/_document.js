@@ -13,7 +13,7 @@ export default class Document extends NextDocument {
                     <link
                         href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200;300;400&family=Barlow:wght@300;400&display=swap"
                         rel="stylesheet"
-                    ></link>
+                    />
                 </Head>
                 <body>
                     <Main />

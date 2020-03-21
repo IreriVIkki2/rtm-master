@@ -98,6 +98,7 @@ export default class MyApp extends App {
     }
 
     handleLogin() {
+        console.log("login");
         firebaseClient().auth.signInWithPopup(
             new firebase.auth.GoogleAuthProvider(),
         );
