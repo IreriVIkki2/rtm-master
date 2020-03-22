@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Router from "next/router";
-import crud from "../../../utils/firebaseCRUD";
+import crud from "../../utils/firebaseCRUD";
 import Link from "next/link";
 
-export class BuyProgram extends Component {
+export default class extends Component {
     constructor(props) {
         super(props);
 
@@ -87,5 +87,3 @@ export class BuyProgram extends Component {
         );
     }
 }
-
-export default BuyProgram;
