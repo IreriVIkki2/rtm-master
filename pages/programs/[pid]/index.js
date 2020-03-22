@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Router from "next/router";
-import crud from "../../utils/firebaseCRUD";
+import crud from "../../../utils/firebaseCRUD";
 import Link from "next/link";
 
 export default class extends Component {
@@ -65,8 +65,8 @@ export default class extends Component {
                             </p>
 
                             <Link
-                                href="/programs/buy/[pid]"
-                                as={`/programs/buy/${program.slug}`}
+                                href="/programs/[pid]/buy"
+                                as={`/programs/${program.slug}/buy`}
                             >
                                 <a className="btn btn--secondary">
                                     {program.sales.callToAction}

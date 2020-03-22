@@ -82,7 +82,7 @@ const Navbar = ({}) => {
                                 </li>
                                 <hr className="mb-1" />
                                 <li className="mb-1">
-                                    <Link href="/admin-panel">
+                                    <Link href="/admin-panel/programs">
                                         <a className="title navbar__userOptions-link">
                                             settings
                                         </a>
@@ -90,7 +90,7 @@ const Navbar = ({}) => {
                                 </li>
                                 <li className="mb-3">
                                     {isAdmin && (
-                                        <Link href="/admin-panel">
+                                        <Link href="/admin-panel/programs">
                                             <a className="title navbar__userOptions-link">
                                                 Admin panel
                                             </a>

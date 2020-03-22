@@ -32,6 +32,17 @@
 
         &-action {
             margin-right: 1rem;
+            cursor: pointer;
+
+            &:hover {
+                color: $color-secondary;
+            }
+
+            &:last-child {
+                &:hover {
+                    color: $color-tertiary;
+                }
+            }
         }
     }
 }

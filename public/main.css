@@ -711,7 +711,12 @@ code {
     .dashall__item-actions {
       grid-area: actions; }
     .dashall__item-action {
-      margin-right: 1rem; }
+      margin-right: 1rem;
+      cursor: pointer; }
+      .dashall__item-action:hover {
+        color: #f2910a; }
+      .dashall__item-action:last-child:hover {
+        color: #e94822; }
 
 .day-edit {
   display: flex;

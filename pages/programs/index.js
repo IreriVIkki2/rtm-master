@@ -33,8 +33,8 @@ export default ({ allPrograms }) => {
                         </p>
 
                         <Link
-                            href="/programs/buy/[pid]"
-                            as={`/programs/buy/${mainProgram.slug}`}
+                            href="/programs/[pid]/buy"
+                            as={`/programs/${mainProgram.slug}/buy`}
                         >
                             <a className="btn btn--secondary">
                                 {mainProgram.sales.callToAction}
@@ -84,8 +84,8 @@ export default ({ allPrograms }) => {
                                     </p>
                                     <p className="mb-2">{description}</p>
                                     <Link
-                                        href="/programs/[pid]"
-                                        as={`/programs/${slug}`}
+                                        href="/programs/[pid]/buy"
+                                        as={`/programs/${slug}/buy`}
                                     >
                                         <a className="btn btn--tertiary">
                                             {sales.callToAction}

@@ -33,8 +33,6 @@ export default class MyApp extends App {
             .db.collection("profiles")
             .doc(uid)
             .onSnapshot(doc => {
-                console.log("addProfileListener -> doc", doc.data());
-
                 this.setState({
                     removeProfileListener,
                     profile: doc.data(),
@@ -72,9 +70,6 @@ export default class MyApp extends App {
     render() {
         const { Component, pageProps } = this.props;
         const { user, profile, mounted } = this.state;
-
-        if (!mounted)
-            return <h1 className="title mt-7 title--sm">loading...</h1>;
 
         return (
             <Fragment>
