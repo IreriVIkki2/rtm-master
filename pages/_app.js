@@ -84,7 +84,7 @@ export default class MyApp extends App {
                 >
                     <Navbar />
                     <Component {...pageProps} />
-                    {/* <Footer /> */}
+                    <Footer />
                 </UserContext.Provider>
             </Fragment>
         );
