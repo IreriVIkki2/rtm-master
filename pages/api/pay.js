@@ -1,13 +1,13 @@
 const Axios = require("axios");
+import { firebaseClient } from "../../utils/firebaseClient";
 const qs = require("qs");
-import { sandboxKeys } from "../../config/paypal";
 
 export default (req, res) => {
     return new Promise(async resolve => {
         const returnUrl = `${req.protocol}://${req.get("host")}/programs/${
             req.query.pid
         }/buy/approve`;
-        const token = await getAccessToken(sandboxKeys);
+        const token = await getAccessToken();
         const orderUrl = "https://www.sandbox.paypal.com/v2/checkout/orders";
         const data = {
             intent: "CAPTURE",
@@ -59,7 +59,20 @@ export default (req, res) => {
     });
 };
 
-const getAccessToken = keys => {
+const getAccessToken = async () => {
+    let keys = null;
+    await firebaseClient()
+        .db.collection("paypal")
+        .doc("keys")
+        .get()
+        .then(doc => {
+            keys = doc.data();
+        })
+        .catch(err => {
+            throw err;
+        });
+
+    if (!keys) throw new Error("Keys not retrieved");
     const url = "https://www.sandbox.paypal.com/v1/oauth2/token";
 
     const data = {

@@ -1,5 +1,6 @@
 const clientCredentials = require("../config/client");
 const firebase = require("firebase/app");
+const FieldValue = require("firebase-admin").firestore.FieldValue;
 require("firebase/auth");
 require("firebase/firestore");
 require("firebase/storage");
@@ -21,4 +22,5 @@ module.exports = {
         };
     },
     firebase,
+    FieldValue,
 };
