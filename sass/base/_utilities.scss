@@ -17,6 +17,9 @@
 
 .ml-7 {
     margin-left: 6.5rem !important;
+    @include respond(phone) {
+        margin-left: 4rem !important;
+    }
 }
 
 .mb-7 {
@@ -160,4 +163,10 @@
         object-fit: contain;
         opacity: 0.8;
     }
+}
+
+.img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

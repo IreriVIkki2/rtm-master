@@ -14,7 +14,7 @@ const Contact = () => {
     return (
         <div className="contact mt-7 mb-7">
             <div className="max-70">
-                <p className="title title--sm text-black mt-3 mb-3 ">
+                <p className="title title--sm text-black mt-3 mb-3 contact__title--sm">
                     Have any questions
                 </p>
                 <p className="title title--lg mb-3 text-black">get in touch</p>

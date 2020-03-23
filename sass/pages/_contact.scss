@@ -3,13 +3,32 @@
     min-height: 100vh;
     padding-top: 7rem;
 
+    @include respond(tab-port) {
+        padding: 3rem;
+        &__title--sm {
+            margin-left: 7rem;
+        }
+    }
+
     & > :not(:first-child) {
         padding-left: 5rem;
+
+        @include respond(tab-port) {
+            padding-left: 0;
+        }
     }
 
     &__name-email {
         display: flex;
         justify-content: space-between;
+
+        @include respond(tab-port) {
+            flex-direction: column;
+
+            & :first-child {
+                margin-bottom: 3rem;
+            }
+        }
     }
 
     &__subject {

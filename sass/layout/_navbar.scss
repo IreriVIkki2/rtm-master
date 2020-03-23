@@ -1,4 +1,5 @@
 .navbar {
+    @include content-width-lg;
     display: flex;
     position: fixed;
     align-items: center;
@@ -7,12 +8,16 @@
     width: 100%;
     height: 5.6rem;
     background-color: rgba($color-primary, 0.75);
-    @include content-width-lg;
     z-index: 100;
 
     &__toggler {
         margin-right: 2rem;
         cursor: pointer;
+        display: none;
+
+        @include respond(tab-port) {
+            display: inline-block;
+        }
 
         &--container {
             height: 3.5rem;
@@ -70,6 +75,12 @@
         &--item {
             &:not(:last-child) {
                 margin-right: 4rem;
+            }
+
+            @include respond(tab-port) {
+                &:not(:last-child) {
+                    display: none;
+                }
             }
         }
 
