@@ -9,6 +9,8 @@
         grid-template-areas: "title published days routines actions";
         grid-template-columns: 3fr 0.5fr 0.5fr 0.5fr 2fr;
         grid-gap: 1rem;
+        border-bottom: solid 1px $color-light;
+        margin-bottom: 1rem;
 
         &-title {
             grid-area: title;
@@ -28,10 +30,21 @@
 
         &-actions {
             grid-area: actions;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &:last-child {
+                margin-right: auto;
+            }
         }
 
         &-action {
             margin-right: 1rem;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
 
             &:hover {

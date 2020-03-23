@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { firebaseClient } from "../../../utils/firebaseClient";
 import { Router } from "next/router";
 import AdminLayout from "../AdminLayout";
@@ -7,6 +7,7 @@ import Link from "next/link";
 import { IoMdTrash } from "react-icons/io";
 import { IoMdCreate } from "react-icons/io";
 import { IoMdCheckmark } from "react-icons/io";
+import { AiOutlineRollback } from "react-icons/ai";
 
 export default class extends Component {
     constructor(props) {
@@ -31,9 +32,9 @@ export default class extends Component {
             ...program,
             status: {
                 ...program.status,
-                isComplete: true,
+                isComplete: !program.status.isComplete,
                 publishAt: Date.now(),
-                published: true,
+                published: !program.status.published,
                 updatedAt: Date.now(),
             },
         };
@@ -103,6 +104,9 @@ export default class extends Component {
                                         >
                                             <span className="dashall__item-action">
                                                 <IoMdCreate />
+                                                <small className="font-smaller d-block mr-1">
+                                                    edit
+                                                </small>
                                             </span>
                                         </Link>
                                         <span
@@ -111,7 +115,21 @@ export default class extends Component {
                                             }
                                             className="dashall__item-action"
                                         >
-                                            <IoMdCheckmark />
+                                            {p.status.published ? (
+                                                <Fragment>
+                                                    <AiOutlineRollback />
+                                                    <small className="font-smaller d-block mr-1">
+                                                        un-publish
+                                                    </small>
+                                                </Fragment>
+                                            ) : (
+                                                <Fragment>
+                                                    <IoMdCheckmark />
+                                                    <small className="font-smaller d-block ml-1 mr-2">
+                                                        publish
+                                                    </small>
+                                                </Fragment>
+                                            )}
                                         </span>
                                         <span
                                             onClick={() =>
@@ -120,6 +138,9 @@ export default class extends Component {
                                             className="dashall__item-action"
                                         >
                                             <IoMdTrash />
+                                            <small className="font-smaller d-block">
+                                                delete
+                                            </small>
                                         </span>
                                     </div>
                                 </li>

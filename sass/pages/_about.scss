@@ -1,3 +1,183 @@
 .about {
+}
+
+.about-header {
+    position: relative;
+    min-height: 100vh;
+    overflow: unset;
+    width: 100%;
+    color: $color-black;
+    // background-image: linear-gradient(
+    //     to right bottom,
+    //     rgba($color-primary, 0.8),
+    //     rgba($color-primary, 0.5)
+    // );
+    // color: $color-white;
+
+    &__content {
+        @include content-width-lg;
+        @include absolute-cover;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        &--title {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            & :nth-child(2) {
+                margin-left: 3rem;
+            }
+            & :nth-child(3) {
+                margin-left: 7rem;
+            }
+            & :nth-child(4) {
+                margin-left: 6rem;
+            }
+            & :nth-child(5) {
+                margin-left: 14rem;
+            }
+        }
+    }
+
+    &__bg {
+        @include content-width-lg;
+        height: 100vh;
+
+        &--img {
+            object-fit: contain !important;
+        }
+    }
+}
+
+.about-me {
     @include content-width-lg;
+    min-height: 120vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: unset;
+
+    &__title {
+        margin-left: 7rem;
+        margin-bottom: 3rem;
+    }
+
+    &__meta {
+        margin-left: 7rem;
+        display: flex;
+
+        & p {
+            flex-grow: 1;
+        }
+    }
+}
+
+.about-certs {
+    @include content-width-lg;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+
+    &__container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    &__item {
+        @include shadow-md;
+        color: $color-white;
+        border-radius: 0.4rem;
+        padding: 2rem;
+        flex: 0 0 45%;
+
+        &:first-child {
+            background-color: $color-primary;
+        }
+
+        &:last-child {
+            background-color: $color-tertiary;
+        }
+    }
+}
+
+.about-imgs {
+    @include content-width-lg;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+
+    &__item {
+        flex: 0 0 35rem;
+
+        &:first-child {
+            z-index: 1;
+        }
+
+        &:last-child {
+            z-index: 3;
+        }
+    }
+}
+
+.about-know {
+    overflow-x: unset;
+    background-size: cover;
+    background-position: top center;
+    background-image: linear-gradient(
+            to right bottom,
+            rgba($color-primary, 1),
+            rgba($color-primary, 0.9)
+        ),
+        url("/images/bw-rph2.jpg");
+    color: $color-white;
+    min-height: 120vh;
+    display: flex;
+    align-items: center;
+    margin-top: -10rem;
+    padding-top: 20rem;
+    padding-bottom: 20rem;
+    z-index: 2;
+    position: relative;
+
+    &__inner {
+        @include content-width-lg;
+    }
+
+    &__item {
+        &-counter {
+            display: flex;
+            align-items: center;
+
+            &--number {
+                color: $color-secondary;
+                margin-right: 1rem;
+            }
+
+            &--small-line {
+                width: 7rem;
+                height: 0.1rem;
+                background-color: $color-secondary;
+                margin-right: 1rem;
+            }
+
+            &--long-line {
+                flex-grow: 1;
+                height: 0.1rem;
+                background-color: $color-text-light;
+            }
+        }
+    }
+
+    &__content {
+        display: flex;
+        padding: 7rem 0;
+
+        & > div {
+            flex: 0 0 50%;
+        }
+    }
 }

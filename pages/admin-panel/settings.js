@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { firebaseClient } from "../../utils/firebaseClient";
 import AdminLayout from "./AdminLayout";
 import Input from "../../components/forms/Input";
@@ -45,15 +45,7 @@ export default class extends Component {
     render() {
         const { client, secret } = this.state;
         const paypalForm = (
-            <Fragment>
-                <p className="title title--md text-black mb-1">
-                    Set up Paypal credentials
-                </p>
-                <p className="mb-3">
-                    Login to your Paypal account and get your client Id and
-                    Secret Id to start receiving payments
-                </p>
-
+            <div className="form__container">
                 <div className="form-group__two-part">
                     <div className="form-group__two-part--label-container">
                         <label htmlFor="clientId">
@@ -78,6 +70,13 @@ export default class extends Component {
                             <span className="mb-sm d-block text-black">
                                 Secret Id *
                             </span>
+                            <small className="font-smaller">
+                                keep this key secret and never share it with
+                                anyone.
+                                <span className="text-secondary">
+                                    Pin yako siri Yako.
+                                </span>
+                            </small>
                         </label>
                     </div>
                     <div className="form-group__two-part--input-container">
@@ -94,17 +93,24 @@ export default class extends Component {
                     <div className="form-group__two-part--input-container">
                         <button
                             className="btn btn--tertiary"
-                            onClick={handleSaveCredentials}
+                            onClick={this.handleSaveCredentials}
                         >
                             save paypal credentials
                         </button>
                     </div>
                 </div>
-            </Fragment>
+            </div>
         );
         return (
             <AdminLayout>
-                <div>
+                <div className="dash-settings">
+                    <p className="title title--md text-black mb-1">
+                        Set up Paypal credentials
+                    </p>
+                    <p className="mb-3">
+                        Login to your Paypal account and get your client Id and
+                        Secret Id to start receiving payments
+                    </p>
                     {paypalForm}
 
                     <ul>
