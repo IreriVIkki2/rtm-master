@@ -6,6 +6,9 @@ import Link from "next/link";
 export default () => {
     const { profile, isAdmin, user } = useContext(UserContext);
 
+    if (!profile) return <h1 className="title title--sm">loading</h1>;
+    console.log("profile", profile);
+
     const [programs, setPrograms] = useState(false);
 
     useEffect(() => {
