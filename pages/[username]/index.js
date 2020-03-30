@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect, Fragment } from "react";
-import UserContext from "../../context/UserContext";
+import AppContext from "../../context/AppContext";
 import crud from "../../utils/firebaseCRUD";
 import Link from "next/link";
 
 export default () => {
-    const { profile, isAdmin, user } = useContext(UserContext);
+    const { profile, isAdmin, user } = useContext(AppContext);
 
     if (!profile) return <h1 className="title title--sm">loading</h1>;
     console.log("profile", profile);
@@ -68,6 +68,7 @@ export default () => {
                                                 <p className="mr-1 text-tertiary">
                                                     {p.completion}% completed
                                                 </p>
+
                                                 {!p.isRestDay ? (
                                                     <Fragment>
                                                         <p className="mr-1 text-secondary">
@@ -84,6 +85,7 @@ export default () => {
                                                 )}
                                             </div>
                                         </div>
+
                                         <Link
                                             href="/[username]/[pid]"
                                             as={`/${user.displayName}/${p.slug}`}

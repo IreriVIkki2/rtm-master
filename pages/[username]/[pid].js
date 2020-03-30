@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import UserContext from "../../context/UserContext";
+import AppContext from "../../context/AppContext";
 import { firebaseClient } from "../../utils/firebaseClient";
 import Router from "next/router";
 import Routines from "./routines";
 
 export default class extends Component {
-    static contextType = UserContext;
+    static contextType = AppContext;
 
     constructor(props) {
         super(props);

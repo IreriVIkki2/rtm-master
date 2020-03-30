@@ -1,12 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import App from "next/app";
-import UserContext from "../context/UserContext";
 import { firebaseClient, firebase } from "../utils/firebaseClient";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import fetch from "isomorphic-unfetch";
 import "react-quill/dist/quill.snow.css";
 import "../public/main.css";
+import Layout from "../components/Layout";
 
 export default class MyApp extends App {
     static async getInitialProps({ ctx }) {
@@ -68,25 +66,21 @@ export default class MyApp extends App {
     }
 
     render() {
-        const { Component, pageProps } = this.props;
+        const { Component } = this.props;
         const { user, profile, mounted } = this.state;
 
         return (
-            <Fragment>
-                <UserContext.Provider
-                    value={{
-                        user,
-                        profile: user && profile,
-                        isAdmin: true,
-                        signIn: this.handleLogin,
-                        signOut: this.handleLogout,
-                    }}
-                >
-                    <Navbar />
-                    <Component {...pageProps} />
-                    <Footer />
-                </UserContext.Provider>
-            </Fragment>
+            <Layout
+                context={{
+                    user,
+                    profile: user && profile,
+                    isAdmin: true,
+                    signIn: this.handleLogin,
+                    signOut: this.handleLogout,
+                }}
+            >
+                <Component />
+            </Layout>
         );
     }
 

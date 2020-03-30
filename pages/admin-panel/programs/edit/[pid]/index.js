@@ -2,14 +2,14 @@ import React, { Component, Fragment } from "react";
 import { firebaseClient } from "../../../../../utils/firebaseClient";
 import AdminLayout from "../../../AdminLayout";
 import MainInfo from "../MainInfo";
-import UserContext from "../../../../../context/UserContext";
+import AppContext from "../../../../../context/AppContext";
 import Router from "next/router";
 import SalesForm from "../SalesForm";
 import PlansForm from "../PlansForm";
 import querystring from "querystring";
 
 export default class extends Component {
-    static contextType = UserContext;
+    static contextType = AppContext;
 
     constructor(props) {
         super(props);

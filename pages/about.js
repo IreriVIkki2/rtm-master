@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import UserContext from "../context/UserContext";
+import AppContext from "../context/AppContext";
 
 export default class extends Component {
-    static contextType = UserContext;
+    static contextType = AppContext;
 
     constructor(props) {
         super(props);

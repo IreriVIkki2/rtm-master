@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import Link from "./Link";
 
-import UserContext from "../context/UserContext";
+import AppContext from "../context/AppContext";
 
 const Navbar = ({}) => {
-    const { user, signIn, signOut, isAdmin } = useContext(UserContext);
+    const { user, signIn, signOut, isAdmin } = useContext(AppContext);
     return (
         <nav className="navbar">
             <div className="navbar__toggler">
