@@ -46,8 +46,6 @@ export default class extends Component {
                     var progress = Math.ceil(
                         (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
                     );
-                    console.log("Upload is " + progress + "% done");
-                    // pass
                 },
                 error => {
                     switch (error.code) {

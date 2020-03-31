@@ -9,8 +9,9 @@ const Contact = () => {
     const [message, setMessage] = useState("");
 
     const submitForm = () => {
-        console.log({ name, email, subject, message });
+        return;
     };
+
     return (
         <div className="contact mt-7 mb-7">
             <div className="max-70">

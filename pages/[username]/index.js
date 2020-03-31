@@ -7,7 +7,6 @@ export default () => {
     const { profile, isAdmin, user } = useContext(AppContext);
 
     if (!profile) return <h1 className="title title--sm">loading</h1>;
-    console.log("profile", profile);
 
     const [programs, setPrograms] = useState(false);
 

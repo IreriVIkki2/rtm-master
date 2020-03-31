@@ -36,7 +36,6 @@ export default class extends Component {
 
     componentDidUpdate() {
         if (this.state.refresh) {
-            console.log("unequal ----");
             this.addRoutinesListener();
             this.addDayListener();
             this.setState({ refresh: false });
@@ -210,7 +209,6 @@ export default class extends Component {
     }
 
     addDayListener = () => {
-        console.log(this.state.day);
         if (this.state.unsubscribeDayListener) {
             this.state.unsubscribeDayListener();
         }

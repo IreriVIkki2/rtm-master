@@ -47,14 +47,11 @@ export default class extends Component {
     };
 
     programProgressUpdate = update => {
-        console.log("extends -> update", update);
         const { profile, user } = this.context;
         const pid = Router.query.pid.split("_id")[1];
-        console.log("extends -> pid", pid);
 
         const newPrograms = profile.purchases.programs.map(p => {
             if (p.programId === pid) {
-                console.log("found");
                 return {
                     ...p,
                     ...update,
@@ -63,7 +60,6 @@ export default class extends Component {
                 return p;
             }
         });
-        console.log("extends -> newPrograms", newPrograms);
         firebaseClient()
             .db.collection("profiles")
             .doc(user.uid)

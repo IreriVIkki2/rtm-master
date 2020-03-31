@@ -1,8 +1,9 @@
 @mixin content-width-lg {
     padding-left: calc((100% - #{$width-lg}) / 2);
     padding-right: calc((100% - #{$width-lg}) / 2);
+
     @media screen and (max-width: 1118px) {
-        padding: 0 1rem;
+        padding: 0 10rem;
     }
 }
 

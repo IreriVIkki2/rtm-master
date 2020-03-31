@@ -22,19 +22,12 @@ export default class extends Component {
         }
 
         crud.getProgram(pid)
-            .then(program => {
-                console.log(
-                    "BuyProgram -> componentDidMount -> program",
-                    program,
-                );
-                this.setState({ program });
-            })
+            .then(program => this.setState({ program }))
             .catch(err => console.error(err));
     }
 
     render() {
         const { mounted, program } = this.state;
-        console.log("BuyProgram -> render -> program", program);
 
         if (!program) return null;
         return (

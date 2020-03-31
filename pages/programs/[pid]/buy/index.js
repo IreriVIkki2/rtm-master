@@ -23,19 +23,12 @@ export default class extends Component {
         }
 
         crud.getProgram(pid)
-            .then(program => {
-                console.log(
-                    "BuyProgram -> componentDidMount -> program",
-                    program,
-                );
-                this.setState({ program });
-            })
+            .then(program => this.setState({ program }))
             .catch(err => console.error(err));
     }
 
     handlePay = () => {
         document.getElementById("pay-button").innerText = "paying";
-        console.log("paying");
         axios
             .get("/api/pay", {
                 params: {
@@ -51,8 +44,7 @@ export default class extends Component {
     };
 
     render() {
-        const { mounted, program } = this.state;
-        console.log("BuyProgram -> render -> program", program);
+        const { program } = this.state;
 
         if (!program) return null;
         return (

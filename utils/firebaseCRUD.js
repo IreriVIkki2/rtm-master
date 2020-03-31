@@ -19,7 +19,7 @@ class FirebaseCrud {
      * @returns {string} this returns a string of your message concatenated with a predefined string
      */
     test(myDate, message) {
-        return console.log(this.state.message + " --- " + message);
+        return;
     }
 
     /**
@@ -63,18 +63,6 @@ class FirebaseCrud {
                 })
                 .catch(err => reject(err));
         });
-    }
-
-    /**
-     * @method
-     *
-     * @param {File} file A single file object
-     *
-     * @returns {string} This returns a downloadable url for the image that you can save to the database as an image url
-     */
-    uploadFile(file) {
-        console.log(file);
-        return "image url";
     }
 
     /**

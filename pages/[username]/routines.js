@@ -30,7 +30,6 @@ export default class extends Component {
     }
 
     showNext = () => {
-        console.log("next");
         const { routineIndex, routines } = this.state;
 
         if (routineIndex + 1 > routines.length) {

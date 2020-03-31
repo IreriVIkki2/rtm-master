@@ -29,19 +29,12 @@ export default class extends Component {
         this.addDaysListener();
     }
 
-    componentDidUpdate() {
-        // console.log(this.state);
-    }
-
     async handleCreateNewDay() {
         const { query } = Router;
         const { days } = this.state;
         await firebaseCRUD
             .createNewDay(query.pid, days.length + 1)
-            .then(dayId => {
-                this.setState({ dayId, checked: dayId });
-                console.log(dayId);
-            })
+            .then(dayId => this.setState({ dayId, checked: dayId }))
             .catch(err => console.error(err));
     }
 
