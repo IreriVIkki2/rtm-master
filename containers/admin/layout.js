@@ -1,11 +1,65 @@
 import React from "react";
+import Link from "../../components/Link";
 
-const AdminLayout = () => {
+const DashLayout = ({ children }) => {
     return (
-        <div>
-            <h1 className="title">This is the admin layout</h1>
+        <div className="dashboard">
+            <aside className="">
+                <div className="navbar__brand">
+                    <Link href="/">
+                        <h1 className="text-black">Return to site</h1>
+                    </Link>
+                </div>
+                <ul className="">
+                    <li>
+                        <p className="">Programs</p>
+                        <ul className="ml-1">
+                            <li>
+                                <Link
+                                    activeClassName=""
+                                    href="/admin-panel/programs/all"
+                                >
+                                    <a className="">All</a>
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link
+                                    activeClassName=""
+                                    href="/admin-panel/programs/drafts"
+                                >
+                                    <a className="">Drafts</a>
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link
+                                    activeClassName=""
+                                    href="/admin-panel/programs/published"
+                                >
+                                    <a className="">Published</a>
+                                </Link>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <Link activeClassName="" href="/admin-panel/stats">
+                            <a className="">Stats</a>
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link activeClassName="" href="/admin-panel/settings">
+                            <a className="">Settings</a>
+                        </Link>
+                    </li>
+                </ul>
+            </aside>
+
+            <main>{children}</main>
         </div>
     );
 };
 
-export default AdminLayout;
+export default DashLayout;

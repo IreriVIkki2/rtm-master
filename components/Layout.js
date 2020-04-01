@@ -26,16 +26,18 @@ const Layout = ({ children, context }) => {
         setTimer(null);
     };
 
-    const showEvent = content => {
+    const showEvent = (content, timeless) => {
         if (timer) {
             clearTimeout(timer);
         }
         setEvent(content);
         document.getElementById("eventCheckBox").checked = true;
-        const eventTimer = setTimeout(() => {
-            closeEvent();
-        }, 15000);
-        setTimer(eventTimer);
+        if (!timeless) {
+            const eventTimer = setTimeout(() => {
+                closeEvent();
+            }, 7000);
+            setTimer(eventTimer);
+        }
     };
 
     const router = useRouter();
@@ -48,10 +50,16 @@ const Layout = ({ children, context }) => {
                 showModal,
                 closeModal,
                 showEvent,
+                closeEvent,
             }}
         >
             {!admin && <Navbar />}
-            <div className="modal">
+            <div
+                className="modal"
+                style={{
+                    zIndex: `${modalContent ? "2000" : "-2"}`,
+                }}
+            >
                 <input
                     className="modal__checkbox"
                     type="checkbox"

@@ -485,6 +485,9 @@ p:not(.title) {
       height: 0.1rem;
       background-color: #e94822; }
 
+.dashboard {
+  display: flex; }
+
 .footer {
   min-height: 90vh;
   display: flex;
@@ -529,6 +532,9 @@ p:not(.title) {
         transform: rotate(45deg);
         color: #f2910a; }
 
+.waste {
+  display: block; }
+
 .modal {
   position: fixed;
   top: 0%;
@@ -536,8 +542,7 @@ p:not(.title) {
   height: 100vh;
   width: 100vw;
   padding-left: calc((100% - 111.9rem) / 2);
-  padding-right: calc((100% - 111.9rem) / 2);
-  z-index: -2; }
+  padding-right: calc((100% - 111.9rem) / 2); }
   @media screen and (max-width: 1118px) {
     .modal {
       padding: 0 10rem; } }
