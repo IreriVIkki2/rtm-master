@@ -1,3 +1,3 @@
-import AdminLayout from "../../admin-panel/AdminLayout";
+import AdminLayout from "../asdf/AdminLayout";
 
 export default () => <AdminLayout />;
