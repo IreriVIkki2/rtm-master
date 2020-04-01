@@ -59,7 +59,10 @@ const Navbar = ({}) => {
 
                 {user ? (
                     <li className="navbar__nav--item navbar__account">
-                        <Link as={`/${user.displayName}`} href="/[username]">
+                        <Link
+                            as={`/u/${user.displayName}`}
+                            href="/u/[username]"
+                        >
                             <div className="navbar__user">
                                 <img
                                     className="navbar__user--icon"
@@ -72,8 +75,8 @@ const Navbar = ({}) => {
                             <ul className="navbar__userOptions">
                                 <li className="mb-1">
                                     <Link
-                                        as={`/${user.displayName}`}
-                                        href="/[username]"
+                                        as={`/u/${user.displayName}`}
+                                        href="/u/[username]"
                                     >
                                         <a className="title text-secondary">
                                             {user.displayName}

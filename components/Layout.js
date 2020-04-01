@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import AppContext from "../context/AppContext";
 import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 const Layout = ({ children, context }) => {
     const [modalContent, setModalContent] = useState(null);
@@ -37,6 +38,9 @@ const Layout = ({ children, context }) => {
         setTimer(eventTimer);
     };
 
+    const router = useRouter();
+    const admin = router.asPath.startsWith("/admin");
+
     return (
         <AppContext.Provider
             value={{
@@ -46,7 +50,7 @@ const Layout = ({ children, context }) => {
                 showEvent,
             }}
         >
-            <Navbar />
+            {!admin && <Navbar />}
             <div className="modal">
                 <input
                     className="modal__checkbox"
@@ -75,7 +79,7 @@ const Layout = ({ children, context }) => {
                 </label>
             </div>
             {children}
-            <Footer />
+            {!admin && <Footer />}
         </AppContext.Provider>
     );
 };

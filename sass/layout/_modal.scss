@@ -11,6 +11,7 @@
     position: fixed;
     @include current-cover;
     @include content-width-lg;
+    z-index: -2;
 
     &__checkbox {
         display: none;
