@@ -1,8 +1,6 @@
 @mixin current-cover {
     top: 0%;
     left: 0%;
-    // bottom: 0%;
-    // right: 0%;
     height: 100vh;
     width: 100vw;
 }
@@ -43,13 +41,17 @@
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+.event {
+    position: fixed;
+    bottom: 4vw;
+    left: 4vh;
+    z-index: 2000;
 
     &__event {
         @include shadow-md;
-        position: absolute;
-        bottom: 4vw;
-        left: 4vw;
-        z-index: 2000;
+
         transform: translateX(-100vw);
         transition: transform cubic-bezier(0.51, 0.92, 0.24, 1.15) 1s;
 
@@ -62,6 +64,7 @@
         overflow: hidden;
 
         &--content {
+            position: relative;
             padding: 1rem;
         }
 

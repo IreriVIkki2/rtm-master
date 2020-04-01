@@ -1,4 +1,8 @@
-import React from "react";
-export default () => {
-    return <div>Editing program</div>;
-};
+import EditProgram from "../../../../containers/admin/programs/edit";
+import DashLayout from "../../../../components/admin/layout";
+
+export default () => (
+    <DashLayout>
+        <EditProgram />
+    </DashLayout>
+);

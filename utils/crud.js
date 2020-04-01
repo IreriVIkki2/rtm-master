@@ -74,7 +74,7 @@ class FirebaseCrud {
                 .db.collection("program")
                 .doc(newProgram._id)
                 .set(newProgram)
-                .then(() => resolve(newProgram._id))
+                .then(() => resolve(newProgram.slug))
                 .catch(err => {
                     console.error(err);
                     return reject(err);

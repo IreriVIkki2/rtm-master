@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { firebaseClient } from "../../../utils/firebaseClient";
 import NewProgram from "./new";
 import AllPrograms from "../../../components/admin/programs/all";
@@ -14,6 +14,12 @@ export default class extends Component {
 
     componentDidMount() {
         this.addProgramsListener();
+    }
+
+    componentWillUnmount() {
+        if (this.state.removeProgramsListener) {
+            this.state.removeProgramsListener();
+        }
     }
 
     addProgramsListener = async () => {
@@ -53,6 +59,28 @@ export default class extends Component {
         );
     };
 
+    publish = async (id, published) => {
+        const { showEvent } = this.context;
+        const update = { published, updatedAt: Date.now() };
+        published ? (update["publishedAt"] = Date.now()) : null;
+
+        await firebaseClient()
+            .db.collection("program")
+            .doc(id)
+            .update(update)
+            .then(() =>
+                published
+                    ? showEvent(<p>Program published</p>)
+                    : showEvent(<p>Program reverted to draft</p>),
+            )
+            .catch(err => {
+                console.log("extends -> publish -> err", err);
+                published
+                    ? showEvent(<p>Error publishing program</p>)
+                    : showEvent(<p>Error reverting to draft</p>);
+            });
+    };
+
     deleteProgram = async id => {
         const { showEvent, closeModal } = this.context;
 
@@ -80,14 +108,15 @@ export default class extends Component {
     render() {
         const { programs } = this.state;
         return (
-            <div>
+            <Fragment>
                 <NewProgram />
                 <AllPrograms
                     programs={programs}
                     del={this.confirmDelete}
                     edit={this.editProgram}
+                    publish={this.publish}
                 />
-            </div>
+            </Fragment>
         );
     }
 }

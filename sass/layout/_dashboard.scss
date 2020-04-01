@@ -1,3 +1,13 @@
 .dashboard {
-    display: flex;
+    max-width: 100%;
+    $aside-width: 20rem;
+
+    &__aside {
+        width: $aside-width;
+        position: fixed;
+    }
+
+    &__main {
+        padding-left: $aside-width;
+    }
 }

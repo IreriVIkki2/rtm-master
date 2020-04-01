@@ -1,4 +1,4 @@
-import DashLayout from "../../containers/admin/layout";
+import DashLayout from "../../../components/admin/layout";
 import Stats from "./stats";
 
 export default () => (

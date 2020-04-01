@@ -23,7 +23,10 @@ body {
   box-sizing: border-box;
   background-color: #ffffff;
   width: 100vw;
-  overflow-x: hidden; }
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+  position: relative; }
 
 *,
 *::before,
@@ -83,6 +86,9 @@ p:not(.title) {
 
 .pt-7 {
   padding-top: 6.5rem !important; }
+
+.pr-2 {
+  padding-right: 2rem !important; }
 
 .mr-3 {
   margin-right: 3rem !important; }
@@ -486,7 +492,12 @@ p:not(.title) {
       background-color: #e94822; }
 
 .dashboard {
-  display: flex; }
+  max-width: 100%; }
+  .dashboard__aside {
+    width: 20rem;
+    position: fixed; }
+  .dashboard__main {
+    padding-left: 20rem; }
 
 .footer {
   min-height: 90vh;
@@ -571,12 +582,14 @@ p:not(.title) {
   #modalCheckBox:checked ~ .modal__content {
     transform: translateY(0);
     opacity: 1; }
-  .modal__event {
+
+.event {
+  position: fixed;
+  bottom: 4vw;
+  left: 4vh;
+  z-index: 2000; }
+  .event__event {
     box-shadow: 0 4px 6px -1px rgba(44, 45, 52, 0.6), 0 2px 4px -1px rgba(44, 45, 52, 0.6);
-    position: absolute;
-    bottom: 4vw;
-    left: 4vw;
-    z-index: 2000;
     transform: translateX(-100vw);
     transition: transform cubic-bezier(0.51, 0.92, 0.24, 1.15) 1s;
     display: flex;
@@ -586,14 +599,15 @@ p:not(.title) {
     border-radius: 0.4rem;
     color: white;
     overflow: hidden; }
-    .modal__event--content {
+    .event__event--content {
+      position: relative;
       padding: 1rem; }
-    .modal__event--close {
+    .event__event--close {
       height: 1.8rem !important;
       width: 1.8rem !important;
       margin-right: 2rem;
       color: #ffffff; }
-  #eventCheckBox:checked ~ .modal__event {
+  #eventCheckBox:checked ~ .event__event {
     transform: translateY(0); }
 
 .navbar {

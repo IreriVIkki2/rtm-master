@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import moment from "moment";
 
-const AllPrograms = ({ programs, edit, del }) => {
+const AllPrograms = ({ programs, edit, del, publish }) => {
     if (programs === undefined) {
         return (
             <div>
@@ -19,6 +19,17 @@ const AllPrograms = ({ programs, edit, del }) => {
                                 <span>{p.title}</span>
                                 <span>{!p.published && "draft"}</span>
                             </p>
+                            <div>
+                                {p.published ? (
+                                    <a onClick={() => publish(p._id, false)}>
+                                        revert to draft
+                                    </a>
+                                ) : (
+                                    <a onClick={() => publish(p._id, true)}>
+                                        publish
+                                    </a>
+                                )}
+                            </div>
                             <p className="">{p.isFree ? "free" : "paid"}</p>
                             <p className="">{p.daysCount} days</p>
                             <p className="">{p.routinesCount} routines</p>
@@ -51,6 +62,7 @@ AllPrograms.propTypes = {
     programs: PropTypes.any,
     edit: PropTypes.func.isRequired,
     del: PropTypes.func.isRequired,
+    publish: PropTypes.func.isRequired,
 };
 
 export default AllPrograms;

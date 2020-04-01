@@ -27,6 +27,9 @@ const Layout = ({ children, context }) => {
     };
 
     const showEvent = (content, timeless) => {
+        if (event !== null) {
+            closeEvent();
+        }
         if (timer) {
             clearTimeout(timer);
         }
@@ -57,7 +60,7 @@ const Layout = ({ children, context }) => {
             <div
                 className="modal"
                 style={{
-                    zIndex: `${modalContent ? "2000" : "-2"}`,
+                    zIndex: `${modalContent ? "1000" : "-2"}`,
                 }}
             >
                 <input
@@ -73,15 +76,17 @@ const Layout = ({ children, context }) => {
                     htmlFor="modalCheckBox"
                     onClick={() => setModalContent(null)}
                 />
+            </div>
+            <div className="event">
                 <input
                     className="modal__checkbox"
                     type="checkbox"
                     name=""
                     id="eventCheckBox"
                 />
-                <label htmlFor="eventCheckBox" className="modal__event">
-                    <div className="modal__event--content">{event}</div>
-                    <span className="check-box check-box-25 mr-2 modal__event--close">
+                <label htmlFor="eventCheckBox" className="event__event">
+                    <div className="event__event--content">{event}</div>
+                    <span className="check-box check-box-25 mr-2 event__event--close">
                         <AiOutlineCloseCircle />
                     </span>
                 </label>

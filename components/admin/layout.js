@@ -1,10 +1,10 @@
 import React from "react";
-import Link from "../../components/Link";
+import Link from "../Link";
 
 const DashLayout = ({ children }) => {
     return (
         <div className="dashboard">
-            <aside className="">
+            <aside className="dashboard__aside">
                 <div className="navbar__brand">
                     <Link href="/">
                         <h1 className="text-black">Return to site</h1>
@@ -57,7 +57,9 @@ const DashLayout = ({ children }) => {
                 </ul>
             </aside>
 
-            <main>{children}</main>
+            <main className="dashboard__main">
+                <div className="pr-2">{children}</div>
+            </main>
         </div>
     );
 };
