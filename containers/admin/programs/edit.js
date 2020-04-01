@@ -28,6 +28,9 @@ export default class extends Component {
 
     render() {
         const { tab, program, title, sales, plans } = this.state;
+        const { push, asPath, route } = Router;
+
+        console.log(Router);
 
         const getForm = () => {
             const forms = [
@@ -57,7 +60,9 @@ export default class extends Component {
                         { index: 2, value: "pricing" },
                     ]}
                     tab={tab}
-                    onAddDaysClick={() => {}}
+                    onAddDaysClick={() =>
+                        push(`${route}/days`, `${asPath}/days`)
+                    }
                     setTab={tab => this.setState({ tab })}
                 />
                 {!program ? (

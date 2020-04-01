@@ -33,7 +33,7 @@ const MultiStepBar = ({ onAddDaysClick, steps, tab, setTab }) => {
                         onClick={onAddDaysClick}
                         className="btn multi-step-bar__item"
                     >
-                        add days
+                        Add Routines
                     </button>
                 </div>
             </div>
