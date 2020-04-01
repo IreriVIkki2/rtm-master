@@ -74,7 +74,7 @@ export default class extends Component {
                     : showEvent(<p>Program reverted to draft</p>),
             )
             .catch(err => {
-                console.log("extends -> publish -> err", err);
+                console.error(err);
                 published
                     ? showEvent(<p>Error publishing program</p>)
                     : showEvent(<p>Error reverting to draft</p>);
@@ -83,11 +83,17 @@ export default class extends Component {
 
     deleteProgram = async id => {
         const { showEvent, closeModal } = this.context;
-
-        firebaseClient()
+        const pRef = firebaseClient()
             .db.collection("program")
-            .doc(id)
-            .delete()
+            .doc(id);
+
+        pRef.delete()
+            .then(() =>
+                pRef
+                    .collection("sales")
+                    .doc("salesDoc")
+                    .delete(),
+            )
             .then(() => {
                 showEvent(<p>program deleted</p>);
                 closeModal();

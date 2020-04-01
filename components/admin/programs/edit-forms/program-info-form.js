@@ -7,7 +7,6 @@ import SelectInput from "../../../forms/SelectInput";
 import CheckBoxForm from "../../../forms/CheckBoxForm";
 
 const ProgramInfoForm = ({ onMainInfoChange, program, onTitle }) => {
-    console.log("ProgramInfoForm -> program", program);
     const [info, setInfo] = useState(program);
 
     const handleTitleChange = title => {

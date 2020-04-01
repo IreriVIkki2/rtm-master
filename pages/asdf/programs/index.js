@@ -28,7 +28,6 @@ export default class extends Component {
     };
 
     publishProgram = async program => {
-        console.log("object");
         const doc = {
             ...program,
             status: {
