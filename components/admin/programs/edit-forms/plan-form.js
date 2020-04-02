@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Input from "../../../forms/Input";
-import FeaturesForm from "../../../../pages/asdf/programs/edit/FeaturesForm";
+import FeaturesForm from "./features-form";
 import CheckBoxForm from "../../../forms/CheckBoxForm";
 
 const PlanForm = ({ onChange, plan }) => {

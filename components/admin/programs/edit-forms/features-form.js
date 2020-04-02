@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
-import Input from "../../../../components/forms/Input";
+import Input from "../../../forms/Input";
 
 const FeaturesForm = ({ features, onNewFeature }) => {
     const [value, setValue] = useState("");
