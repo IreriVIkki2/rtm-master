@@ -1,7 +1,4 @@
 import DashLayout from "../../../../../components/admin/layout";
+import Days from "../../../../../containers/admin/programs/days";
 
-export default () => (
-    <DashLayout>
-        <p>Days</p>
-    </DashLayout>
-);
+export default () => <Days />;

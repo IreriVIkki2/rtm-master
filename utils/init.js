@@ -42,21 +42,16 @@ const newProgramObject = () => {
  *
  * @returns {Object} This returns an object with set defaults that is then used to create a new exercise/day in firestore
  */
-const newDayObject = pid => {
+const dayInit = order => {
     const dayId = uuid().replace(/-/g, "");
     return {
-        kind: "exercise/day",
         _id: dayId,
-        order: 0,
-        programId: pid,
+        order,
         plan: "premium",
         isRestDay: false,
-        lengthInSecs: 12000,
-        published: false,
-        publishAt: Date.now(),
-        updatedAt: Date.now(),
+        lengthInSecs: 0,
         viewCount: 0,
-        completionCount: 0,
+        completionCount: "X 0",
         routinesCount: 0,
     };
 };
@@ -69,16 +64,11 @@ const newDayObject = pid => {
  *
  * @returns {Object} This returns an object with set defaults that is then used to create a new exercise/day in firestore
  */
-const newRoutineObject = (pid, dayId) => {
-    const rid = uuid().replace(/-/g, "");
+const routineInit = order => {
+    const _id = uuid().replace(/-/g, "");
     return {
-        kind: "routine",
-        _id: rid,
-        order: 0,
-        programId: pid,
-        dayId: dayId,
-        plan: "all",
-        isRestDay: false,
+        _id,
+        order,
         lengthInSecs: 0,
         repeatCount: "X 10",
         published: false,
@@ -94,6 +84,6 @@ const newRoutineObject = (pid, dayId) => {
 
 module.exports = {
     newProgramObject,
-    newDayObject,
-    newRoutineObject,
+    dayInit,
+    routineInit,
 };

@@ -1,78 +1,14 @@
-.day-edit {
-    display: flex;
-    background-color: $color-light;
-    min-height: 100vh;
+.days {
+    width: 100%;
+    position: relative;
+    height: 100%;
 
     &__aside {
-        padding: 3rem 2rem;
-        width: 20rem;
-        padding-right: 2rem;
-        background-color: $color-primary;
-    }
-
-    &__days {
-        list-style: none;
-    }
-
-    &__day {
-        display: flex;
-        align-items: center;
-        padding: 1rem;
-        cursor: pointer;
-
-        &-label {
-            cursor: pointer;
-        }
-
-        &--checked,
-        &:hover {
-            background-color: $color-secondary;
-            color: $color-black;
-        }
+        width: 15rem;
+        position: fixed;
     }
 
     &__main {
-        padding: 3rem 2rem;
-        width: calc(100% - 20rem);
-    }
-
-    &-routine-step {
-        &__container {
-            display: flex;
-            list-style: none;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0 3%;
-            position: relative;
-            z-index: 1;
-
-            &::before {
-                content: "";
-                position: absolute;
-                top: 50%;
-                height: 0.2rem;
-                left: 3%;
-                right: 3%;
-                background-color: $color-primary;
-                z-index: 0;
-            }
-        }
-
-        &__item {
-            z-index: 2;
-            background-color: $color-primary;
-            color: $color-white;
-            border: none;
-
-            &--visited {
-                background-color: $color-secondary;
-                color: $color-black;
-            }
-        }
-
-        &__add {
-            background-color: $color-tertiary;
-            color: $color-black;
-        }
+        margin-left: 17rem;
     }
 }

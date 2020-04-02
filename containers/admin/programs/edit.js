@@ -30,8 +30,6 @@ export default class extends Component {
         const { tab, program, title, sales, plans } = this.state;
         const { push, asPath, route } = Router;
 
-        console.log(Router);
-
         const getForm = () => {
             const forms = [
                 <ProgramInfoForm

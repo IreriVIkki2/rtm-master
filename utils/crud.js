@@ -86,33 +86,6 @@ class FirebaseCrud {
      * @method
      *
      * @param {String} programId the id of the program to which this day belongs
-     * @param {Number} order this is the number of day.
-     *
-     * @returns {Promise} Returns a promise that resolves to a day id
-     */
-    createNewDay(programId, order) {
-        return new Promise(async (resolve, reject) => {
-            const newDay = newDayObject();
-
-            newDay.programId = programId;
-            newDay.order = order;
-
-            await firebaseClient()
-                .db.collection("days")
-                .doc(newDay._id)
-                .set(newDay)
-                .then(() => resolve(newDay._id))
-                .catch(err => {
-                    console.error(err);
-                    return reject(err);
-                });
-        });
-    }
-
-    /**
-     * @method
-     *
-     * @param {String} programId the id of the program to which this day belongs
      * @param {String} programId the id of the program to which this day belongs
      * @param {Number} order this is the number of day.
      *

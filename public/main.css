@@ -943,58 +943,15 @@ p:not(.title) {
       .dashall__item-action:last-child:hover {
         color: #e94822; }
 
-.day-edit {
-  display: flex;
-  background-color: #f8f8f8;
-  min-height: 100vh; }
-  .day-edit__aside {
-    padding: 3rem 2rem;
-    width: 20rem;
-    padding-right: 2rem;
-    background-color: #2c2d34; }
-  .day-edit__days {
-    list-style: none; }
-  .day-edit__day {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    cursor: pointer; }
-    .day-edit__day-label {
-      cursor: pointer; }
-    .day-edit__day--checked, .day-edit__day:hover {
-      background-color: #f2910a;
-      color: #000000; }
-  .day-edit__main {
-    padding: 3rem 2rem;
-    width: calc(100% - 20rem); }
-  .day-edit-routine-step__container {
-    display: flex;
-    list-style: none;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 3%;
-    position: relative;
-    z-index: 1; }
-    .day-edit-routine-step__container::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      height: 0.2rem;
-      left: 3%;
-      right: 3%;
-      background-color: #2c2d34;
-      z-index: 0; }
-  .day-edit-routine-step__item {
-    z-index: 2;
-    background-color: #2c2d34;
-    color: #ffffff;
-    border: none; }
-    .day-edit-routine-step__item--visited {
-      background-color: #f2910a;
-      color: #000000; }
-  .day-edit-routine-step__add {
-    background-color: #e94822;
-    color: #000000; }
+.days {
+  width: 100%;
+  position: relative;
+  height: 100%; }
+  .days__aside {
+    width: 15rem;
+    position: fixed; }
+  .days__main {
+    margin-left: 17rem; }
 
 .program-edit {
   padding: 2rem 3rem;
