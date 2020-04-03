@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 
 export default ({ main, sales, plans, handlePay }) => {
-    console.log("main, sales", main, sales);
     const { basic, premium, hasPremium } = plans;
     return (
         <div className="sales">

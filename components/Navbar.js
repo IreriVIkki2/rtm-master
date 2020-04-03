@@ -5,7 +5,6 @@ import AppContext from "../context/AppContext";
 
 const Navbar = ({}) => {
     const { googleLogin, signOut, profile, auth } = useContext(AppContext);
-    console.log("Navbar -> profile", profile);
     return (
         <nav className="navbar">
             <div className="navbar__toggler">

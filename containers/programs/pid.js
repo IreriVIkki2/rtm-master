@@ -56,6 +56,7 @@ export default class extends Component {
                 <p>Please hold while we redirect you to payment page...</p>
             </div>,
         );
+
         axios
             .get("/api/pay", {
                 params: {
@@ -66,6 +67,10 @@ export default class extends Component {
             })
             .then(res => {
                 if (res.data.link) {
+                    console.log(
+                        "extends -> handlePay -> res.data.link",
+                        res.data.link,
+                    );
                     closeModal();
                     window.open(res.data.link, "_blank");
                 }
