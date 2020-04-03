@@ -3,24 +3,32 @@ import { firebaseClient } from "../../utils/firebaseClient";
 const qs = require("qs");
 
 export default (req, res) => {
+    console.log("req", req);
     return new Promise(async resolve => {
-        const returnUrl = `${req.protocol}://${req.get("host")}/programs/${
-            req.query.pid
-        }/buy/approve`;
+        const { pid, amount, product } = req.query;
+        console.log("amount", amount);
+        // await Axios.get(
+        //     "https://free.currconv.com/api/v7/convert?apiKey=770ee1263ff9693b440f&q=USD_KES&compact=y",
+        // )
+        const returnUrl = `${req.protocol}://${req.get(
+            "host",
+        )}/programs/${pid}/buy/approve`;
         const token = await getAccessToken();
-        const orderUrl = "https://www.sandbox.paypal.com/v2/checkout/orders";
+        const orderUrl = "https://www.paypal.com/v2/checkout/orders";
         const data = {
             intent: "CAPTURE",
             purchase_units: [
                 {
                     amount: {
                         currency_code: "USD",
-                        value: req.query.amount,
+                        value: Math.floor(parseInt(amount) / 100),
                     },
                 },
             ],
             application_context: {
-                brand_name: "Rhotimmi Fitness",
+                brand_name: `Rhotimmi Fitness ${
+                    product ? " - " + product : null
+                }`,
                 landing_page: "BILLING",
                 shipping_preference: "NO_SHIPPING",
                 user_action: "PAY_NOW",
@@ -73,7 +81,7 @@ const getAccessToken = async () => {
         });
 
     if (!keys) throw new Error("Keys not retrieved");
-    const url = "https://www.sandbox.paypal.com/v1/oauth2/token";
+    const url = "https://www.paypal.com/v1/oauth2/token";
 
     const data = {
         grant_type: "client_credentials",

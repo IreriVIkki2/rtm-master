@@ -1,9 +1,16 @@
 html {
     font-size: 62.5%;
 
+    @include respond(tab-land) {
+        font-size: 58%;
+    }
+
+    @include respond(tab-port) {
+        font-size: 54%;
+    }
+
     @include respond(phone) {
         font-size: 50%;
-        background-color: turquoise;
     }
 }
 

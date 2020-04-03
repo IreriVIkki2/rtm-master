@@ -1,5 +1,5 @@
 const { firebaseClient } = require("./firebaseClient");
-const { newProgramObject, newDayObject, newRoutineObject } = require("./init");
+const { newProgramObject, profile, newRoutineObject } = require("./init");
 
 class FirebaseCrud {
     constructor() {
@@ -16,6 +16,30 @@ class FirebaseCrud {
      */
     test(myDate, message) {
         return;
+    }
+
+    /**
+     * @method createUserProfile This method creates a new user profile upon registration
+     *
+     * @param {String} uid id of the user
+     *
+     * @returns {Promise <{profile}>} This returns a promise which resolves to a profile object
+     */
+
+    createUserProfile(user) {
+        return new Promise(async (resolve, reject) => {
+            const newProfile = profile(user);
+
+            await firebaseClient()
+                .db.collection("profiles")
+                .doc(newProfile._id)
+                .set(newProfile)
+                .then(() => resolve(newProfile))
+                .catch(err => {
+                    console.error(err);
+                    return reject(err);
+                });
+        });
     }
 
     /**

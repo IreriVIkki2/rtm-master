@@ -4,7 +4,8 @@ import Link from "./Link";
 import AppContext from "../context/AppContext";
 
 const Navbar = ({}) => {
-    const { user, signIn, signOut, isAdmin } = useContext(AppContext);
+    const { googleLogin, signOut, profile, auth } = useContext(AppContext);
+    console.log("Navbar -> profile", profile);
     return (
         <nav className="navbar">
             <div className="navbar__toggler">
@@ -57,16 +58,16 @@ const Navbar = ({}) => {
                     </Link>
                 </li>
 
-                {user ? (
+                {auth ? (
                     <li className="navbar__nav--item navbar__account">
                         <Link
-                            as={`/u/${user.displayName}`}
+                            as={`/u/${profile.displayName}`}
                             href="/u/[username]"
                         >
                             <div className="navbar__user">
                                 <img
                                     className="navbar__user--icon"
-                                    src={user.photoURL}
+                                    src={profile.photoUrl}
                                     alt=""
                                 />
                             </div>
@@ -75,11 +76,11 @@ const Navbar = ({}) => {
                             <ul className="navbar__userOptions">
                                 <li className="mb-1">
                                     <Link
-                                        as={`/u/${user.displayName}`}
+                                        as={`/u/${profile.displayName}`}
                                         href="/u/[username]"
                                     >
                                         <a className="title text-secondary">
-                                            {user.displayName}
+                                            {profile.displayName}
                                         </a>
                                     </Link>
                                 </li>
@@ -92,7 +93,7 @@ const Navbar = ({}) => {
                                     </Link>
                                 </li>
                                 <li className="mb-3">
-                                    {isAdmin && (
+                                    {profile.isAdmin && (
                                         <Link href="/admin-panel/programs">
                                             <a className="title navbar__userOptions-link">
                                                 Admin panel
@@ -113,8 +114,11 @@ const Navbar = ({}) => {
                     </li>
                 ) : (
                     <li>
-                        <button className="btn btn--light" onClick={signIn}>
-                            Client Login
+                        <button
+                            className="btn btn--light"
+                            onClick={googleLogin}
+                        >
+                            Login
                         </button>
                     </li>
                 )}

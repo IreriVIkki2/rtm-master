@@ -27,6 +27,14 @@
             width: 15rem;
             height: 0.1rem;
             background-color: $color-tertiary;
+
+            @include respond(tab-port) {
+                left: -3rem;
+            }
+
+            @include respond(phone) {
+                left: -1rem;
+            }
         }
     }
 }

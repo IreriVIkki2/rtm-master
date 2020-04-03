@@ -40,6 +40,10 @@
             transform: rotate(45deg);
             cursor: pointer;
 
+            @include respond(phone) {
+                padding: 2rem;
+            }
+
             &-icon {
                 transition: ease-in-out all 0.3s;
                 transform-origin: 50% 50%;

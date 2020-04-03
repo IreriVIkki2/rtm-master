@@ -25,12 +25,20 @@
 
     &__content {
         position: absolute;
+        right: 0;
+        left: 0;
+        margin: auto;
         margin-top: 8rem;
-        z-index: 2000;
         transform: translateY(-300%);
         opacity: 0;
-        color: white;
         transition: transform ease-in-out 0.35s, opacity ease-in-out 0.25s 0.1s;
+        z-index: 2000;
+
+        &--inner {
+            @include content-width-lg;
+            margin: auto;
+            width: fit-content;
+        }
     }
 
     #modalCheckBox:checked ~ &__backdrop {

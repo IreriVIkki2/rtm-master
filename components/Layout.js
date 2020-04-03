@@ -70,7 +70,9 @@ const Layout = ({ children, context }) => {
                     id="modalCheckBox"
                 />
 
-                <div className="modal__content">{modalContent}</div>
+                <div className="modal__content">
+                    <div className="modal__content--inner">{modalContent}</div>
+                </div>
                 <label
                     className="modal__backdrop"
                     htmlFor="modalCheckBox"

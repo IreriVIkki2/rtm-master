@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AppContext from "../../../context/AppContext";
 import { firebaseClient } from "../../../utils/firebaseClient";
+
 import Router from "next/router";
 import Routines from "./routines";
 

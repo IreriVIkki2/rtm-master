@@ -3,6 +3,33 @@ const { v4: uuid } = require("uuid");
 /**
  * @function
  *
+ * @param {uid} string Id of the user
+ *
+ * @returns {Object} This returns a new user profile object
+ */
+const profile = user => {
+    return {
+        _id: user.uid,
+
+        isAdmin: false,
+
+        displayName: user.displayName,
+        photoUrl: user.photoURL,
+        fullName: null,
+        firstName: null,
+        lastName: null,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        isAnonymous: user.isAnonymous,
+
+        registeredAt: Date.now(),
+        updatedAt: Date.now(),
+    };
+};
+
+/**
+ * @function
+ *
  * @returns {Object} This returns an object with set defaults that is then used to create a new program in firestore
  */
 const newProgramObject = () => {
@@ -86,4 +113,5 @@ module.exports = {
     newProgramObject,
     dayInit,
     routineInit,
+    profile,
 };

@@ -24,7 +24,8 @@
     display: flex;
     align-items: center;
     min-height: 70vh;
-    margin: 7rem 0;
+    padding: 7rem 0;
+    color: $color-white;
     overflow: hidden;
 
     &__banner {
