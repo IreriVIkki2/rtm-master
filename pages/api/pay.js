@@ -3,8 +3,7 @@ const paypal = require("paypal-rest-sdk");
 
 export default (req, res) => {
     return new Promise(async resolve => {
-        const { pid, product } = req.query;
-        const amount = "1.00";
+        const { pid, product, amount } = req.query;
         const host = req.get("host");
         const return_url = `${req.protocol}://${host}/programs/${pid}/buy/approve?total=${amount}`;
         const cancel_url = `${req.protocol}://${host}/programs/${pid}/buy/cancel`;
@@ -40,7 +39,7 @@ export default (req, res) => {
                             {
                                 name: "Rhotimmi Fitness",
                                 sku: "item",
-                                price: amount,
+                                price: parseFloat(amount / 100),
                                 currency: "USD",
                                 quantity: 1,
                             },
@@ -48,7 +47,7 @@ export default (req, res) => {
                     },
                     amount: {
                         currency: "USD",
-                        total: amount,
+                        total: parseFloat(amount / 100),
                     },
                     description: product ? product : null,
                 },

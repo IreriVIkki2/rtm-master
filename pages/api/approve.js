@@ -3,7 +3,7 @@ const paypal = require("paypal-rest-sdk");
 
 export default (req, res) => {
     return new Promise(async resolve => {
-        const { paymentId, token, PayerID, total } = req.query;
+        const { paymentId, PayerID, total } = req.query;
         console.log("req.query", req.query);
         let keys = null;
         await firebaseClient()
@@ -29,7 +29,7 @@ export default (req, res) => {
                 {
                     amount: {
                         currency: "USD",
-                        total,
+                        total: parseFloat(total / 100),
                     },
                 },
             ],

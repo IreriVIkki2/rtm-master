@@ -58,6 +58,10 @@
     margin-right: 2rem !important;
 }
 
+.mx-3 {
+    margin: 0 3rem !important;
+}
+
 .mb-2 {
     margin-bottom: 2rem !important;
 }
@@ -98,6 +102,10 @@
     color: $color-black !important;
 }
 
+.text-primary {
+    color: $color-text-bold !important;
+}
+
 .text-white {
     color: $color-white !important;
 }
@@ -116,6 +124,10 @@
 
 .text-uppercase {
     text-transform: uppercase !important;
+}
+
+.text-center {
+    text-align: center !important;
 }
 
 .d-none {

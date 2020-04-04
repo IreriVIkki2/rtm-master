@@ -110,6 +110,9 @@ p:not(.title) {
 .mr-2 {
   margin-right: 2rem !important; }
 
+.mx-3 {
+  margin: 0 3rem !important; }
+
 .mb-2 {
   margin-bottom: 2rem !important; }
 
@@ -137,6 +140,9 @@ p:not(.title) {
 .text-black {
   color: #000000 !important; }
 
+.text-primary {
+  color: #141219 !important; }
+
 .text-white {
   color: #ffffff !important; }
 
@@ -151,6 +157,9 @@ p:not(.title) {
 
 .text-uppercase {
   text-transform: uppercase !important; }
+
+.text-center {
+  text-align: center !important; }
 
 .d-none {
   display: none !important; }
@@ -329,6 +338,24 @@ p:not(.title) {
     width: 100%;
     height: 0.1rem;
     background-color: #e94822; }
+
+.confirm {
+  padding-left: calc((100% - 111.9rem) / 2);
+  padding-right: calc((100% - 111.9rem) / 2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh; }
+  @media only screen and (max-width: 69.95em) {
+    .confirm {
+      padding: 0 10rem; } }
+  @media only screen and (max-width: 50.25em) {
+    .confirm {
+      padding: 0 5rem; } }
+  @media only screen and (max-width: 30.5em) {
+    .confirm {
+      padding: 0 2rem; } }
 
 .features {
   list-style: none;
@@ -667,12 +694,13 @@ p:not(.title) {
   display: flex;
   position: fixed;
   align-items: center;
+  overflow: visible;
   top: 0;
   left: 0;
   width: 100%;
   height: 5.6rem;
   background-color: rgba(44, 45, 52, 0.75);
-  z-index: 100; }
+  z-index: 1000; }
   @media only screen and (max-width: 69.95em) {
     .navbar {
       padding: 0 10rem; } }

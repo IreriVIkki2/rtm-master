@@ -43,6 +43,28 @@ class FirebaseCrud {
     }
 
     /**
+     * @method createUserProfile This method creates a new user profile upon registration
+     *
+     * @param {String} uid id of the user
+     *
+     * @returns {Promise <{profile}>} This returns a promise which resolves to a profile object
+     */
+
+    createSale(sale) {
+        return new Promise(async (resolve, reject) => {
+            await firebaseClient()
+                .db.collection("sales")
+                .doc(sale.paymentID)
+                .set(sale)
+                .then(() => resolve(sale))
+                .catch(err => {
+                    console.error(err);
+                    return reject(err);
+                });
+        });
+    }
+
+    /**
      * @method getALlPrograms This method fetches all the methods from a database and returns only the object that are useful
      *
      * @returns {Promise <[programs]>} This returns a promise which resolves an array of all programs
