@@ -75,8 +75,8 @@ const Navbar = ({}) => {
                             <ul className="navbar__userOptions">
                                 <li className="mb-1">
                                     <Link
-                                        as={`/u/${profile.displayName}`}
                                         href="/u/[username]"
+                                        as={`/u/${profile.displayName}`}
                                     >
                                         <a className="title text-secondary">
                                             {profile.displayName}
@@ -85,7 +85,10 @@ const Navbar = ({}) => {
                                 </li>
                                 <hr className="mb-1" />
                                 <li className="mb-1">
-                                    <Link href="/admin-panel/programs">
+                                    <Link
+                                        href="/u/[username]/settings"
+                                        as={`/u/${profile.displayName}/settings`}
+                                    >
                                         <a className="title navbar__userOptions-link">
                                             settings
                                         </a>
@@ -93,7 +96,7 @@ const Navbar = ({}) => {
                                 </li>
                                 <li className="mb-3">
                                     {profile.isAdmin && (
-                                        <Link href="/admin-panel/programs">
+                                        <Link href="/admin-panel">
                                             <a className="title navbar__userOptions-link">
                                                 Admin panel
                                             </a>
