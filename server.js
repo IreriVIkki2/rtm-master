@@ -39,17 +39,18 @@ app.prepare().then(() => {
 
     server.post("/api/login", (req, res) => {
         if (!req.body) return res.sendStatus(400);
+        console.log("req.body", req.body);
 
         const token = req.body.token;
         firebase
             .auth()
             .verifyIdToken(token)
-            .then(decodedToken => {
+            .then((decodedToken) => {
                 req.session.decodedToken = decodedToken;
                 return decodedToken;
             })
-            .then(decodedToken => res.json({ status: true, decodedToken }))
-            .catch(error => res.json({ error }));
+            .then((decodedToken) => res.json({ status: true, decodedToken }))
+            .catch((error) => res.json({ error }));
     });
 
     server.post("/api/logout", (req, res) => {
@@ -61,7 +62,7 @@ app.prepare().then(() => {
         return handle(req, res);
     });
 
-    server.listen(port, err => {
+    server.listen(port, (err) => {
         if (err) throw err;
         console.log(`> Ready on http://localhost:${port}`);
     });

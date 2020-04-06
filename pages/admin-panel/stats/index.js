@@ -1,7 +1,9 @@
+import DashLayout from "../../../components/admin/layout";
+
 export default () => {
     return (
-        <div>
+        <DashLayout>
             <p className="title">Statistics</p>
-        </div>
+        </DashLayout>
     );
 };

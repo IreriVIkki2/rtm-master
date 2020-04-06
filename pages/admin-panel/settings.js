@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { firebaseClient } from "../../utils/firebaseClient";
-import DashLayout from "../../containers/admin/layout";
+import DashLayout from "../../components/admin/layout";
 import Input from "../../components/forms/Input";
 
 export default class extends Component {
@@ -21,7 +21,7 @@ export default class extends Component {
         let removeKeysListener = firebaseClient()
             .db.collection("paypal")
             .doc("keys")
-            .onSnapshot(snapshot => {
+            .onSnapshot((snapshot) => {
                 this.setState({ ...this.state, ...snapshot.data() });
             });
 
@@ -58,7 +58,9 @@ export default class extends Component {
                         <Input
                             inputId="clientId"
                             initialValue={client}
-                            onInputChange={client => this.setState({ client })}
+                            onInputChange={(client) =>
+                                this.setState({ client })
+                            }
                             minLength={10}
                         />
                     </div>
@@ -83,7 +85,9 @@ export default class extends Component {
                         <Input
                             inputId="secretId"
                             initialValue={secret}
-                            onInputChange={secret => this.setState({ secret })}
+                            onInputChange={(secret) =>
+                                this.setState({ secret })
+                            }
                             minLength={10}
                         />
                     </div>
