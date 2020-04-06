@@ -2,18 +2,17 @@ import { firebaseClient } from "../../utils/firebaseClient";
 const paypal = require("paypal-rest-sdk");
 
 export default (req, res) => {
-    return new Promise(async resolve => {
+    return new Promise(async (resolve) => {
         const { paymentId, PayerID, total } = req.query;
-        console.log("req.query", req.query);
         let keys = null;
         await firebaseClient()
             .db.collection("paypal")
             .doc("keys")
             .get()
-            .then(doc => {
+            .then((doc) => {
                 keys = doc.data();
             })
-            .catch(err => {
+            .catch((err) => {
                 throw err;
             });
 
@@ -35,7 +34,7 @@ export default (req, res) => {
             ],
         };
 
-        paypal.payment.execute(paymentId, execute_payment_json, function(
+        paypal.payment.execute(paymentId, execute_payment_json, function (
             error,
             payment,
         ) {

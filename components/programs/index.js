@@ -5,7 +5,6 @@ export default ({ programs }) => {
         return <p className="title">No programs</p>;
     }
     const pMain = programs[0];
-    console.log("pMain", pMain);
     const allPrograms = programs.slice(1, programs.length);
     return (
         <div className="bg--color-text-light">
@@ -44,7 +43,7 @@ export default ({ programs }) => {
 
             <section className="">
                 <div>
-                    {programs.map(p => {
+                    {programs.map((p) => {
                         return (
                             <div key={p._id} className="program">
                                 <div className="program__banner">

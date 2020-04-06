@@ -8,8 +8,6 @@ export default ({
     closeModal,
     restartProgress,
 }) => {
-    console.log("programs", programs);
-    console.log("myPrograms", myPrograms);
     if (!programs) return <p className="title title--sm">loading...</p>;
 
     const confirmModal = () =>
@@ -67,7 +65,6 @@ export default ({
             <ul className="">
                 {programs.map((program) => {
                     const pp = myPrograms.find((p) => p._id === program._id);
-                    console.log("pp", pp, program);
                     return (
                         <li key={program._id} className="mb-3">
                             <p className="title--md bolder">{program.title}</p>

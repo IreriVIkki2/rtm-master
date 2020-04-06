@@ -5,6 +5,7 @@ export default ({
     routines,
     createNewRoutine,
     setRid,
+    rid,
     deleteRoutine,
     updateRoutine,
 }) => {
@@ -34,7 +35,6 @@ export default ({
         setIndex(rl - 1);
         return <p className="">Refreshing</p>;
     }
-    const routine = routines[index];
 
     if (index <= 3) {
         start = start;
@@ -43,6 +43,11 @@ export default ({
     } else {
         start = index - 3;
     }
+
+    const routine =
+        routines.length > 0 && rid
+            ? routines.find((r) => r._id === rid)
+            : routines[0];
 
     return (
         <div>
@@ -55,9 +60,10 @@ export default ({
                                 setIndex(i + 1);
                                 setRid(routine._id);
                             }}
-                            className={`day-edit-routine-step__item btn ${index ==
-                                routine.order &&
-                                "day-edit-routine-step__item--visited"}`}
+                            className={`day-edit-routine-step__item btn ${
+                                index == routine.order &&
+                                "day-edit-routine-step__item--visited"
+                            }`}
                         >
                             <p className="mu">
                                 {routine.name || `Routine ${i + 1}`}
@@ -74,13 +80,11 @@ export default ({
                 </button>
             </ul>
 
-            <div className="">
-                <RoutineForm
-                    routine={routine}
-                    deleteRoutine={() => deleteRoutine(routine._id)}
-                    onRoutinePublish={routine => updateRoutine(routine)}
-                />
-            </div>
+            <RoutineForm
+                routine={routine}
+                deleteRoutine={() => deleteRoutine(routine._id)}
+                onRoutinePublish={(routine) => updateRoutine(routine)}
+            />
         </div>
     );
 };

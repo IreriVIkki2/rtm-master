@@ -67,7 +67,6 @@ export default class extends Component {
                 payment = res.data.payment;
             });
 
-        console.log("extends -> approvePayment -> payment", payment);
         crud.createSale({
             paymentID: payment.id,
             userId: profile._id,

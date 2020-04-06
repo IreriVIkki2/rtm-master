@@ -26,7 +26,7 @@ export default ({ routine, deleteRoutine, onRoutinePublish }) => {
                         <Input
                             inputId="name"
                             initialValue={r.name}
-                            onInputChange={name => setR({ ...r, name })}
+                            onInputChange={(name) => setR({ ...r, name })}
                             type="string"
                             placeholder="eg. Sit Ups, Push Ups ..."
                         />
@@ -49,7 +49,7 @@ export default ({ routine, deleteRoutine, onRoutinePublish }) => {
                         <Input
                             inputId="youtubeUrl"
                             initialValue={r.youtubeUrl}
-                            onInputChange={youtubeUrl =>
+                            onInputChange={(youtubeUrl) =>
                                 setR({ ...r, youtubeUrl })
                             }
                             type="string"
@@ -75,7 +75,7 @@ export default ({ routine, deleteRoutine, onRoutinePublish }) => {
                         <TextArea
                             textAreaId="description"
                             initialValue={r.description}
-                            onInputChange={description =>
+                            onInputChange={(description) =>
                                 setR({ ...r, description })
                             }
                         />
@@ -101,7 +101,7 @@ export default ({ routine, deleteRoutine, onRoutinePublish }) => {
                         <Input
                             inputId="lengthInSecs"
                             initialValue={r.lengthInSecs}
-                            onInputChange={lengthInSecs =>
+                            onInputChange={(lengthInSecs) =>
                                 setR({ ...r, lengthInSecs })
                             }
                             type="number"
@@ -140,10 +140,10 @@ export default ({ routine, deleteRoutine, onRoutinePublish }) => {
                                     label: `X 0`,
                                 }
                             }
-                            onInputChange={repeatCount =>
+                            onInputChange={(repeatCount) =>
                                 setR({ ...r, repeatCount })
                             }
-                            selectValues={range(0, 100).map(num => {
+                            selectValues={range(0, 100).map((num) => {
                                 return {
                                     value: `X ${num}`,
                                     label: `X ${num}`,

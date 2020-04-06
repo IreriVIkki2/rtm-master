@@ -48,8 +48,10 @@ export default class extends Component {
     }
 
     render() {
+        const { rid } = this.state;
         return (
             <Routines
+                rid={rid}
                 routines={this.state.routines}
                 createNewRoutine={this.createNewRoutine}
                 setRid={(rid) => this.setState({ rid })}

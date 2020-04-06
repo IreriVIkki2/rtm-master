@@ -13,7 +13,6 @@ export default ({
     const showRoutines = () => {
         const el = document.getElementById("uw__main--content");
         el.style.left = "-100%";
-        console.log("showRoutines -> el.style.right", el);
     };
 
     const showRoutine = () => {

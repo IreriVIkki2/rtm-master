@@ -14,11 +14,9 @@ export default class extends Component {
 
     componentDidMount() {
         const pid = Router.query.pid.split("_id")[1];
-        const ref = firebaseClient()
-            .db.collection("program")
-            .doc(pid);
+        const ref = firebaseClient().db.collection("program").doc(pid);
 
-        ref.get().then(doc => {
+        ref.get().then((doc) => {
             if (!doc.exists) {
                 Router.push("/404");
             } else {
@@ -29,7 +27,7 @@ export default class extends Component {
         ref.collection("sales")
             .doc("salesDoc")
             .get()
-            .then(doc => {
+            .then((doc) => {
                 if (!doc.exists) {
                     Router.push("/404");
                 } else {
@@ -40,7 +38,7 @@ export default class extends Component {
         ref.collection("plans")
             .doc("plansDoc")
             .get()
-            .then(doc => {
+            .then((doc) => {
                 if (!doc.exists) {
                     Router.push("/404");
                 } else {
@@ -65,12 +63,8 @@ export default class extends Component {
                     pid: Router.query.pid,
                 },
             })
-            .then(res => {
+            .then((res) => {
                 if (res.data.link) {
-                    console.log(
-                        "extends -> handlePay -> res.data.link",
-                        res.data.link,
-                    );
                     closeModal();
                     window.open(res.data.link, "_blank");
                 }
