@@ -1,79 +1,155 @@
-.user-workout {
-    @include content-width-lg;
-    padding-top: 7rem;
-    min-height: 100vh;
+.uw {
+    &__main {
+        margin: 3rem 0;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
 
-    &__container {
-        display: flex;
+        &--content {
+            transition: left ease 0.5s;
+            width: 300%;
+            position: absolute;
+            min-height: 30vh;
+            top: 0;
+            left: 0;
+            display: flex;
+        }
+
+        &--weeks {
+            flex-basis: 100%;
+            & > :first-child {
+                @include content-width-lg;
+            }
+        }
+
+        &--routines {
+            flex-basis: 100%;
+            & > :first-child {
+                @include content-width-lg;
+            }
+        }
+
+        &--routine {
+            flex-basis: 100%;
+            & > :first-child {
+                @include content-width-lg;
+            }
+        }
+
+        @include respond-mobile-first(desktop) {
+            &--content {
+                width: 200%;
+            }
+
+            &--weeks {
+                flex-basis: 50%;
+                & > :first-child {
+                    padding: 0;
+                    padding-left: 10rem;
+                }
+            }
+
+            &--routines {
+                flex-basis: 50%;
+                & > :first-child {
+                    padding: 0;
+                    padding-right: 10rem;
+                }
+            }
+
+            &--routine {
+                flex-basis: 100%;
+                & > :first-child {
+                    @include content-width-lg;
+                }
+            }
+        }
     }
 
-    &__aside {
-        flex: 0 0 20rem;
-        padding: 3rem 0;
-    }
-
-    &__aside-banner-container {
+    &__header {
+        position: relative;
         width: 100%;
         height: auto;
-        margin-bottom: 1rem;
-        border-radius: 0.5rem;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(40%);
+        }
+
+        &--content {
+            position: absolute;
+            @include absolute-cover;
+            @include content-width-lg;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            color: $color-white;
+        }
+    }
+
+    &__week {
         overflow: hidden;
-        @include shadow-sm;
-    }
-
-    &__aside-banner-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: brightness(50%);
-    }
-
-    &__days {
-    }
-
-    &__day {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        margin-bottom: 0.5rem;
-
-        &--completed {
-            background-color: $color-text-light;
-            color: $color-black;
-        }
-
-        &--selected,
-        &:hover {
-            background-color: $color-secondary;
-        }
-    }
-
-    &__main {
-        padding: 3rem;
-        width: calc(100% - 20rem);
-    }
-
-    &__routines {
-        display: flex;
-
-        &-nav {
-            flex: 0 0 30rem;
-        }
-    }
-
-    &__routine {
-        flex: 0 0 calc(100% - 30rem);
         display: flex;
         flex-direction: column;
+        transition: all ease-in-out 0.5s;
 
-        &-video-container {
-            flex: 0 0 50%;
+        &--checkbox {
+            display: none;
         }
 
-        &-info {
-            flex: 0 0 50%;
+        &--label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+            border-bottom: 0.1rem solid $color-text-light;
+            flex: 0 0 7rem;
+        }
+
+        &--days {
+            z-index: 1;
+            flex-grow: 1;
+            list-style: none;
+            padding-left: 2rem;
+        }
+
+        &--checkbox ~ &--label > &--label-minus {
+            display: none;
+        }
+
+        &--checkbox ~ &--label > &--label-plus {
+            display: inline-block;
+        }
+
+        &--checkbox:checked ~ &--label > &--label-minus {
+            display: inline;
+        }
+
+        &--checkbox:checked ~ &--label > &--label-plus {
+            display: none;
+        }
+
+        &--day {
+            padding-top: 2rem;
+            display: block;
+            cursor: pointer;
+        }
+
+        &--checkbox ~ &--days {
+            transition: all ease-in-out 0.5s;
+            transform: translateY(-110%);
+            height: 0;
+        }
+
+        &--checkbox:checked ~ &--days {
+            transform: translateY(0);
+            height: 100%;
         }
     }
 }

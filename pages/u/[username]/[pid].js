@@ -1,1 +1,3 @@
-export default () => <p>User Program</p>;
+import UserProgram from "../../../containers/user/pid";
+
+export default () => <UserProgram />;

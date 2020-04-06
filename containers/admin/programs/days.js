@@ -25,16 +25,25 @@ export default class extends Component {
     }
 
     createNewDay = () => {
+        const pid = Router.query.pid.split("_id")[1];
         const { days, ref } = this.state;
         const { showEvent } = this.context;
-        const day = dayInit(days.length + 1);
+        const daysCount = days.length + 1;
+        const day = dayInit(daysCount);
         showEvent(<p>Creating new day</p>);
         ref.doc(day._id)
             .set(day, { merge: true })
             .then(() => {
-                showEvent(<p>New Day Created</p>);
+                return firebaseClient()
+                    .db.collection("program")
+                    .doc(pid)
+                    .set(
+                        { daysCount, weeksCount: Math.ceil(daysCount / 7) },
+                        { merge: true },
+                    );
             })
-            .catch(err => {
+            .then(() => showEvent(<p>New Day Created</p>))
+            .catch((err) => {
                 console.error(err);
                 showEvent(<p>Error Creating new day</p>);
             });
@@ -47,16 +56,16 @@ export default class extends Component {
                 days={days}
                 createNewDay={this.createNewDay}
                 did={did}
-                setDid={did => this.setState({ did })}
+                setDid={(did) => this.setState({ did })}
             />
         );
     }
 
-    addDaysListener = ref => {
+    addDaysListener = (ref) => {
         let { did } = this.state;
-        let removeDaysListener = ref.orderBy("order").onSnapshot(snap => {
+        let removeDaysListener = ref.orderBy("order").onSnapshot((snap) => {
             let days = [];
-            snap.forEach(doc => {
+            snap.forEach((doc) => {
                 days.push(doc.data());
             });
 

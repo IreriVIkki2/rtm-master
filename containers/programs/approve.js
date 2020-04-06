@@ -15,11 +15,9 @@ export default class extends Component {
 
     componentDidMount() {
         const pid = Router.query.pid.split("_id")[1];
-        const ref = firebaseClient()
-            .db.collection("program")
-            .doc(pid);
+        const ref = firebaseClient().db.collection("program").doc(pid);
 
-        ref.get().then(doc => {
+        ref.get().then((doc) => {
             if (!doc.exists) {
                 Router.push("/404");
             } else {
@@ -65,7 +63,7 @@ export default class extends Component {
             .get("/api/approve", {
                 params: { ...Router.query },
             })
-            .then(res => {
+            .then((res) => {
                 payment = res.data.payment;
             });
 
@@ -98,6 +96,7 @@ export default class extends Component {
                 routinesCompleted: 0,
                 progress: 0,
                 plan: "basic",
+                purchasedAt: Date.now(),
             })
             .then(() => {
                 showModal(

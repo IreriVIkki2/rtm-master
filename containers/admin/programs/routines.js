@@ -20,6 +20,13 @@ export default class extends Component {
             .doc(pid)
             .collection("days");
 
+        firebaseClient()
+            .db.collection("program")
+            .doc(pid)
+            .onSnapshot((doc) => {
+                this.setState({ program: doc.data() });
+            });
+
         this.addRoutinesListener(ref);
         this.setState({ ref, did: this.props.did });
     }
@@ -45,14 +52,14 @@ export default class extends Component {
             <Routines
                 routines={this.state.routines}
                 createNewRoutine={this.createNewRoutine}
-                setRid={rid => this.setState({ rid })}
+                setRid={(rid) => this.setState({ rid })}
                 deleteRoutine={this.deleteRoutine}
-                updateRoutine={r => this.updateRoutine(r)}
+                updateRoutine={(r) => this.updateRoutine(r)}
             />
         );
     }
 
-    updateRoutine = routine => {
+    updateRoutine = (routine) => {
         const { ref } = this.state;
         const { showEvent } = this.context;
         showEvent(<p>saving changes</p>);
@@ -61,28 +68,38 @@ export default class extends Component {
             .doc(routine._id)
             .set(routine, { merge: true })
             .then(() => showEvent(<p>Routine updated successfully</p>))
-            .catch(err => {
+            .catch((err) => {
                 console.error(err);
                 showEvent(<p>Error updating routine</p>);
             });
     };
 
-    deleteRoutine = rid => {
-        const { ref } = this.state;
+    deleteRoutine = (rid) => {
+        const pid = Router.query.pid.split("_id")[1];
+        const { ref, program } = this.state;
         const { showEvent } = this.context;
         showEvent(<p>Deleting routine</p>);
         ref.doc(this.props.did)
             .collection("routines")
             .doc(rid)
             .delete()
+            .then(() => {
+                return firebaseClient()
+                    .db.collection("program")
+                    .doc(pid)
+                    .set(
+                        { routinesCount: program.routinesCount - 1 },
+                        { merge: true },
+                    );
+            })
             .then(() => showEvent(<p>Routine deleted successfully</p>))
-            .catch(err => {
+            .catch((err) => {
                 console.error(err);
                 showEvent(<p>Error deleting routine</p>);
             });
     };
 
-    addRoutinesListener = ref => {
+    addRoutinesListener = (ref) => {
         if (this.state.removeRoutinesListener) {
             this.state.removeRoutinesListener();
         }
@@ -91,9 +108,9 @@ export default class extends Component {
             .doc(this.props.did)
             .collection("routines")
             .orderBy("order")
-            .onSnapshot(snap => {
+            .onSnapshot((snap) => {
                 let routines = [];
-                snap.forEach(doc => {
+                snap.forEach((doc) => {
                     routines.push(doc.data());
                 });
 
@@ -105,7 +122,8 @@ export default class extends Component {
         this.setState({ removeRoutinesListener });
     };
 
-    createNewRoutine = order => {
+    createNewRoutine = (order) => {
+        const pid = Router.query.pid.split("_id")[1];
         const { showEvent } = this.context;
         showEvent(<p>Creating new routine</p>);
 
@@ -116,9 +134,21 @@ export default class extends Component {
             .doc(routine._id)
             .set(routine)
             .then(() => {
-                showEvent(<p>New routine Created</p>);
+                return firebaseClient()
+                    .db.collection("program")
+                    .doc(pid)
+                    .set(
+                        { routinesCount: this.state.program.routinesCount + 1 },
+                        { merge: true },
+                    );
             })
-            .catch(err => {
+            .then(() => {
+                return ref
+                    .doc(did)
+                    .set({ routinesCount: order }, { merge: true });
+            })
+            .then(() => showEvent(<p>New routine Created</p>))
+            .catch((err) => {
                 console.error(err);
                 showEvent(<p>Error creating routine</p>);
             });

@@ -7,7 +7,7 @@ const { v4: uuid } = require("uuid");
  *
  * @returns {Object} This returns a new user profile object
  */
-const profile = user => {
+const profile = (user) => {
     return {
         _id: user.uid,
 
@@ -69,7 +69,7 @@ const newProgramObject = () => {
  *
  * @returns {Object} This returns an object with set defaults that is then used to create a new exercise/day in firestore
  */
-const dayInit = order => {
+const dayInit = (order) => {
     const dayId = uuid().replace(/-/g, "");
     return {
         _id: dayId,
@@ -78,7 +78,6 @@ const dayInit = order => {
         isRestDay: false,
         lengthInSecs: 0,
         viewCount: 0,
-        completionCount: "X 0",
         routinesCount: 0,
     };
 };
@@ -91,7 +90,7 @@ const dayInit = order => {
  *
  * @returns {Object} This returns an object with set defaults that is then used to create a new exercise/day in firestore
  */
-const routineInit = order => {
+const routineInit = (order) => {
     const _id = uuid().replace(/-/g, "");
     return {
         _id,

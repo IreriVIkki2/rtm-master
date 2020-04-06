@@ -10,7 +10,7 @@
         position: relative;
         background-clip: padding-box;
         transition: all 0.3s ease-out;
-        padding: 1rem 2rem;
+        padding: 0.8rem 2rem;
         background-color: transparent;
         font-family: $font-condensed;
         font-size: $font-size;
@@ -20,13 +20,23 @@
         border-color: currentColor;
         transition: all 0.3s ease-out;
     }
+
+    &--sm {
+        padding: 0.5rem 2rem;
+    }
+
     &--light {
         border-color: $color-text-light;
         color: $color-light;
     }
 
     &--primary {
-        color: $color-primary;
+        color: $color-text-light;
+    }
+
+    &--primary:hover {
+        color: $color-black;
+        border-color: $color-black;
     }
 
     &--secondary {
@@ -34,7 +44,7 @@
     }
 
     &--secondary:hover {
-        color: $color-tertiary;
+        color: $color-tertiary-2;
     }
 
     &--tertiary {

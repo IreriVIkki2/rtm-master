@@ -6,6 +6,10 @@
     font-weight: 400 !important;
 }
 
+.text-bolder {
+    font-weight: 500 !important;
+}
+
 .font-smaller {
     font-size: 1.5rem;
 }
@@ -36,6 +40,14 @@
 
 .pr-2 {
     padding-right: 2rem !important;
+}
+
+.px-2 {
+    padding: initial 2rem !important;
+}
+
+.py-4 {
+    padding: 4rem initial !important;
 }
 
 .mr-3 {

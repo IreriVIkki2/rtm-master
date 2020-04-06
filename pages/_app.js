@@ -18,17 +18,15 @@ export default class MyApp extends App {
         super(props);
         this.state = {
             user: this.props.user,
-            profile: null,
             auth: false,
         };
     }
 
-    addProfileListener = async uid => {
-        console.log("uid", uid);
+    addProfileListener = async (uid) => {
         let removeProfileListener = await firebaseClient()
             .db.collection("profiles")
             .doc(uid)
-            .onSnapshot(doc => {
+            .onSnapshot((doc) => {
                 localStorage.setItem("profile", JSON.stringify(doc.data()));
                 this.setState({
                     removeProfileListener,
@@ -41,22 +39,20 @@ export default class MyApp extends App {
     componentDidMount() {
         const { user } = this.state;
         if (user) this.addProfileListener(user.uid);
-        firebaseClient().auth.onAuthStateChanged(user => {
+        firebaseClient().auth.onAuthStateChanged((user) => {
             if (user) {
                 this.setState({ user: user });
-                return user
-                    .getIdToken()
-                    .then(token => {
-                        return fetch("/api/login", {
-                            method: "POST",
-                            headers: new Headers({
-                                "Content-Type": "application/json",
-                            }),
-                            credentials: "same-origin",
-                            body: JSON.stringify({ token }),
-                        });
-                    })
-                    .then(() => console.log("add listener"));
+                return user.getIdToken().then((token) => {
+                    return fetch("/api/login", {
+                        method: "POST",
+                        headers: new Headers({
+                            "Content-Type": "application/json",
+                        }),
+                        credentials: "same-origin",
+                        body: JSON.stringify({ token }),
+                    });
+                });
+                // .then(() => {});
             } else {
                 this.setState({ user: null });
                 fetch("/api/logout", {
@@ -71,12 +67,16 @@ export default class MyApp extends App {
         const { Component } = this.props;
         const { user, profile, auth } = this.state;
 
+        if (user && !profile) {
+            return null;
+        }
+
         return (
             <Layout
                 context={{
                     user,
                     auth,
-                    profile: user && profile,
+                    profile,
                     googleLogin: this.handleGoogleLogin,
                     facebookLogin: this.handleFacebookLogin,
                     emailAndPasswordLogin: this.handleEmailAndPasswordLogin,
@@ -91,18 +91,14 @@ export default class MyApp extends App {
     }
 
     handleEmailAndPasswordRegister = (email, password, displayName) => {
-        console.log(
-            "handleEmailAndPasswordRegister -> displayName",
-            displayName,
-        );
         firebaseClient()
             .auth.createUserWithEmailAndPassword(email, password)
-            .then(result => {
+            .then((result) => {
                 if (result.additionalUserInfo.isNewUser) {
                     crud.createUserProfile({
                         ...result.user,
                         displayName,
-                    }).then(profile => {
+                    }).then((profile) => {
                         localStorage.setItem(
                             "profile",
                             JSON.stringify(profile),
@@ -111,7 +107,7 @@ export default class MyApp extends App {
                     });
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 const errorCode = error.code;
                 if (errorCode && errorCode === "auth/email-already-in-use") {
                     return alert(errorCode);
@@ -122,10 +118,8 @@ export default class MyApp extends App {
     handleEmailAndPasswordLogin = (email, password) => {
         firebaseClient()
             .auth.signInWithEmailAndPassword(email, password)
-            .then(result => {
-                console.log("handleEmailAndPassword -> result", result);
-            })
-            .catch(error => {
+            .then((result) => {})
+            .catch((error) => {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -144,9 +138,9 @@ export default class MyApp extends App {
         provider.addScope("https://www.googleapis.com/auth/userinfo.profile");
         firebaseClient()
             .auth.signInWithPopup(provider)
-            .then(result => {
+            .then((result) => {
                 if (result.additionalUserInfo.isNewUser) {
-                    crud.createUserProfile(result.user).then(profile => {
+                    crud.createUserProfile(result.user).then((profile) => {
                         localStorage.setItem(
                             "profile",
                             JSON.stringify(profile),
@@ -155,21 +149,17 @@ export default class MyApp extends App {
                     });
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 // Handle Errors here.
                 var errorCode = error.code;
-                console.log("handleGoogleLogin -> errorCode", errorCode);
                 var errorMessage = error.message;
-                console.log("handleGoogleLogin -> errorMessage", errorMessage);
                 // The email of the user's account used.
                 var email = error.email;
-                console.log("handleGoogleLogin -> email", email);
                 if (email) {
                     alert("account already in use");
                 }
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
-                console.log("handleGoogleLogin -> credential", credential);
                 // ...
             });
     };
@@ -181,8 +171,7 @@ export default class MyApp extends App {
                 // Sign-out successful.
                 localStorage.removeItem("profile");
             })
-            .catch(error => {
-                console.log("handleLogout -> error", error);
+            .catch((error) => {
                 // An error happened.
             });
     };
