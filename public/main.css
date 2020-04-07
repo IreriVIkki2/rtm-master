@@ -134,6 +134,9 @@ p:not(.title) {
 .mr-1 {
   margin-right: 1rem !important; }
 
+.ml-2 {
+  margin-left: 2rem !important; }
+
 .ml-1 {
   margin-left: 1rem !important; }
 
@@ -183,8 +186,8 @@ p:not(.title) {
   display: block !important; }
 
 .d-flex {
-  display: flex;
-  align-items: center; }
+  display: flex !important;
+  align-items: center !important; }
 
 .flex-grow {
   flex-grow: 1; }
@@ -246,6 +249,9 @@ p:not(.title) {
 
 .justify-center {
   justify-content: center; }
+
+.lowercase {
+  text-transform: lowercase !important; }
 
 .al {
   display: flex;
@@ -1114,6 +1120,28 @@ p:not(.title) {
     padding: 7rem 0; }
     .about-know__content > div {
       flex: 0 0 50%; }
+
+.auth {
+  overflow: hidden;
+  padding: 0 2rem;
+  box-sizing: border-box !important;
+  display: flex;
+  min-height: 100vh; }
+  @media only screen and (min-width: 30.5em) {
+    .auth {
+      padding: 0 5rem; } }
+  @media only screen and (min-width: 50.25em) {
+    .auth {
+      padding: 0 10rem; } }
+  @media only screen and (min-width: 69.95em) {
+    .auth {
+      padding-left: calc((100% - 111.9rem) / 2);
+      padding-right: calc((100% - 111.9rem) / 2); } }
+  .auth__inner {
+    max-width: 50rem;
+    margin: auto;
+    flex-grow: 1;
+    text-align: center; }
 
 .contact {
   overflow: hidden;

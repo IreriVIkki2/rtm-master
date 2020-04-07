@@ -6,6 +6,7 @@ import fetch from "isomorphic-unfetch";
 import "react-quill/dist/quill.snow.css";
 import "../public/main.css";
 import Layout from "../components/Layout";
+import Router from "next/router";
 
 export default class MyApp extends App {
     static async getInitialProps({ ctx }) {
@@ -43,7 +44,7 @@ export default class MyApp extends App {
             if (user) {
                 this.setState({ user: user });
                 return user.getIdToken().then((token) => {
-                    return fetch("/apiV1/login", {
+                    return fetch("/api/login", {
                         method: "POST",
                         headers: new Headers({
                             "Content-Type": "application/json",
@@ -55,7 +56,7 @@ export default class MyApp extends App {
                 // .then(() => {});
             } else {
                 this.setState({ user: null });
-                fetch("/apiV1/logout", {
+                fetch("/api/logout", {
                     method: "POST",
                     credentials: "same-origin",
                 });
@@ -106,11 +107,12 @@ export default class MyApp extends App {
                         this.setState({ profile });
                     });
                 }
+                Router.replace("/");
             })
             .catch((error) => {
                 const errorCode = error.code;
                 if (errorCode && errorCode === "auth/email-already-in-use") {
-                    return alert(errorCode);
+                    alert("Email already in use");
                 }
             });
     };
@@ -118,11 +120,14 @@ export default class MyApp extends App {
     handleEmailAndPasswordLogin = (email, password) => {
         firebaseClient()
             .auth.signInWithEmailAndPassword(email, password)
-            .then((result) => {})
+            .then((result) => {
+                Router.replace("/");
+            })
             .catch((error) => {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                alert("Could not log you in, Try again");
                 // ...
             });
     };
@@ -148,6 +153,7 @@ export default class MyApp extends App {
                         this.setState({ profile });
                     });
                 }
+                Router.replace("/");
             })
             .catch((error) => {
                 // Handle Errors here.
@@ -156,24 +162,29 @@ export default class MyApp extends App {
                 // The email of the user's account used.
                 var email = error.email;
                 if (email) {
-                    alert("account already in use");
+                    alert("Email already in use");
                 }
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
+                Router.replace("/");
                 // ...
             });
     };
 
     handleLogout = () => {
-        firebaseClient()
-            .auth.signOut()
-            .then(() => {
-                // Sign-out successful.
-                localStorage.removeItem("profile");
-            })
-            .catch((error) => {
-                // An error happened.
-            });
+        firebaseClient().auth.signOut();
+        window.localStorage.clear();
+        window.sessionStorage.clear();
+        document.cookie.split(";").forEach(function (c) {
+            document.cookie = c
+                .replace(/^ +/, "")
+                .replace(
+                    /=.*/,
+                    "=;expires=" + new Date().toUTCString() + ";path=/",
+                );
+        });
+        this.setState({ auth: false, user: null, profile: null });
+        // window.location.reload();
     };
 
     componentWillUnmount() {

@@ -5,6 +5,7 @@ const FileStore = require("session-file-store")(session);
 const next = require("next");
 const admin = require("firebase-admin");
 const cookieSecret = require("./config/cookieSecret");
+
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -19,6 +20,7 @@ const firebase = admin.initializeApp(
 
 app.prepare().then(() => {
     const server = express();
+
     server.use(bodyParser.json());
     server.use(
         session({
@@ -36,7 +38,7 @@ app.prepare().then(() => {
         next();
     });
 
-    server.post("/apiV1/login", (req, res) => {
+    server.post("/api/login", (req, res) => {
         if (!req.body) return res.sendStatus(400);
 
         const token = req.body.token;
@@ -51,7 +53,7 @@ app.prepare().then(() => {
             .catch((error) => res.json({ error }));
     });
 
-    server.post("/apiV1/logout", (req, res) => {
+    server.post("/api/logout", (req, res) => {
         req.session.decodedToken = null;
         res.json({ status: true });
     });

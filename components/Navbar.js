@@ -4,7 +4,7 @@ import Link from "./Link";
 import AppContext from "../context/AppContext";
 
 const Navbar = ({}) => {
-    const { googleLogin, signOut, profile, auth } = useContext(AppContext);
+    const { signOut, profile, auth } = useContext(AppContext);
     return (
         <nav className="navbar">
             <div className="navbar__toggler">
@@ -116,12 +116,9 @@ const Navbar = ({}) => {
                     </li>
                 ) : (
                     <li>
-                        <button
-                            className="btn btn--light"
-                            onClick={googleLogin}
-                        >
-                            Login
-                        </button>
+                        <Link href="/auth/login">
+                            <button className="btn btn--light">Login</button>
+                        </Link>
                     </li>
                 )}
             </ul>

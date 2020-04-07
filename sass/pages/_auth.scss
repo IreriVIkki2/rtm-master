@@ -1,0 +1,12 @@
+.auth {
+    @include content-width-lg;
+    display: flex;
+    min-height: 100vh;
+
+    &__inner {
+        max-width: 50rem;
+        margin: auto;
+        flex-grow: 1;
+        text-align: center;
+    }
+}
