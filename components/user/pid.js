@@ -1,14 +1,18 @@
-import { useEffect } from "react";
-import Weeks from "./weeks";
+import { useState, Fragment } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
+import Weeks from "./weeks";
+import Routine from "./routine";
 
 export default ({
+    cw,
+    cd,
     weeks,
     myProgram,
     program,
     routines,
     getRoutines,
     displayName,
+    saveProgress,
 }) => {
     const showRoutines = () => {
         const el = document.getElementById("uw__main--content");
@@ -33,16 +37,24 @@ export default ({
         }
     };
 
+    const [currentRoutine, setCurrentRoutine] = useState(null);
+    const [cr, setCr] = useState(0);
+
     return (
         <div className="uw" onLoad={size} onTransitionEnd={size}>
             <header className="uw__header">
                 <img src={program.banner} alt="" />
                 <div className="uw__header--content">
-                    <p className="title title--md">
-                        <span className="d-block mb-1">Welcome back</span>
-                        <span className="d-block mb-2">{displayName}</span>
+                    <p className="title--md d-flex mb-2">
+                        <span className="d-block">Welcome Back</span>
+                        <span className="d-block ml-1 bolder text-secondary">
+                            {displayName}!
+                        </span>
                     </p>
                     <p className="title--md mb-3">{program.title}</p>
+                    <p className="title title--md mb-2 text-secondary">
+                        {myProgram.progress}% Complete
+                    </p>
                 </div>
             </header>
 
@@ -53,6 +65,7 @@ export default ({
                         id="uw__main--weeks"
                     >
                         <Weeks
+                            currentWeek={myProgram.currentWeek || 1}
                             weeks={weeks}
                             getRoutines={(did) => {
                                 getRoutines(did);
@@ -61,56 +74,59 @@ export default ({
                         />
                     </div>
 
-                    <ul
-                        className="uw__routines uw__main--routines"
-                        id="uw__main--routines"
-                    >
+                    <ul className="uw__main--routines" id="uw__main--routines">
                         <div>
-                            <div>
-                                <p className="">
-                                    <span onClick={showWeeks} className="mr-2">
-                                        <AiOutlineLeft />
-                                    </span>
-                                    <span>Week 1 Day 2</span>
-                                </p>
-                            </div>
+                            <p
+                                onClick={showWeeks}
+                                className="title--md d-flex btn btn--sm btn__link btn__link--primary"
+                            >
+                                <span className="mr-2 title--md-icon">
+                                    <AiOutlineLeft />
+                                </span>
+                                <span>
+                                    {routines === "fetching"
+                                        ? "wait..."
+                                        : ` Week ${cw} Day ${cd}`}
+                                </span>
+                            </p>
                             {routines &&
-                                routines.map((routine) => {
+                                routines !== "fetching" &&
+                                routines.map((routine, i) => {
                                     return (
                                         <li
                                             key={routine._id}
-                                            className=""
-                                            onClick={showRoutine}
+                                            className="uw__routine--nav-item title"
+                                            onClick={() => {
+                                                setCurrentRoutine(routine);
+                                                setCr(i + 1);
+                                                showRoutine();
+                                            }}
                                         >
-                                            <p className="title">
-                                                {routine.name}
-                                            </p>
+                                            <span>
+                                                {routine.name ||
+                                                    `Routine ${i + 1}`}
+                                            </span>
+                                            <span className="ml-auto mr-3">
+                                                {routine.lengthInSeconds > 0
+                                                    ? routine.lengthInSeconds
+                                                    : routine.repeatCount}
+                                            </span>
                                         </li>
                                     );
                                 })}
                         </div>
                     </ul>
 
-                    <div
-                        className="uw__routine uw__main--routine"
-                        id="uw__main--routine"
-                    >
-                        <div>
-                            <p className="">
-                                <span onClick={showRoutines} className="mr-2">
-                                    <AiOutlineLeft />
-                                </span>
-                                <span>Day 2 Routine 1</span>
-                            </p>
-                            <div>
-                                This is th routine Lorem ipsum dolor sit, amet
-                                consectetur adipisicing elit. Vero reiciendis
-                                molestias officiis nam perferendis aut nemo
-                                blanditiis voluptatibus voluptatum unde
-                                similique, illum soluta vel sit tempore
-                                voluptates magnam. Iste, eligendi.
-                            </div>
-                        </div>
+                    <div className="uw__main--routine" id="uw__main--routine">
+                        <Routine
+                            routine={currentRoutine}
+                            showRoutines={showRoutines}
+                            cd={cd}
+                            cr={cr}
+                            saveProgress={(rid) => {
+                                saveProgress({ cd, cr, cw, rid });
+                            }}
+                        />
                     </div>
                 </div>
             </div>

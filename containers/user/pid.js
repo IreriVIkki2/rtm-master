@@ -61,7 +61,9 @@ export default class extends Component {
             });
     };
 
-    getRoutines = (did) => {
+    getRoutines = ({ did, cw, cd }) => {
+        this.setState({ routines: "fetching" });
+        console.log("extends -> getRoutines -> cw", cw);
         const { ref } = this.state;
 
         ref.collection("days")
@@ -71,7 +73,61 @@ export default class extends Component {
             .then((docs) => {
                 let routines = [];
                 docs.forEach((doc) => routines.push(doc.data()));
-                this.setState({ routines });
+                this.setState({ routines, cw, cd, did });
+            });
+    };
+
+    saveProgress = ({ cd, cr, cw, rid }) => {
+        console.log("saveProgress -> rid", rid);
+        const pid = Router.query.pid.split("_id")[1];
+        const { profile } = this.context;
+        const { program, myProgram, did, routines } = this.state;
+        const days = { ...myProgram.days };
+        const day = days[did];
+        let routinesCompleted = myProgram.routinesCompleted + 1;
+        let allRoutines = [rid];
+
+        if (day && Array.isArray(day.routines)) {
+            allRoutines = day.routines.includes(rid)
+                ? day.routines
+                : [...day.routines, rid];
+
+            routinesCompleted = day.routines.includes(rid)
+                ? routinesCompleted - 1
+                : routinesCompleted;
+        }
+
+        const complete = cr === routines.length;
+        const newComplete =
+            (day && !day.complete && complete) ||
+            (!day && routines.length === 1);
+
+        days[did] = {
+            ...day,
+            complete,
+            routines: allRoutines,
+        };
+        firebaseClient()
+            .db.collection("profiles")
+            .doc(profile._id)
+            .collection("programs")
+            .doc(pid)
+            .set({
+                ...myProgram,
+                days: {
+                    ...myProgram.days,
+                    ...days,
+                },
+                currentWeek: cw,
+                currentDay: cd,
+                currentRoutine: cr,
+                routinesCompleted,
+                daysCompleted: newComplete
+                    ? myProgram.daysCompleted + 1
+                    : myProgram.daysCompleted,
+                progress: Math.ceil(
+                    (routinesCompleted * 100) / program.routinesCount,
+                ),
             });
     };
 
@@ -82,7 +138,7 @@ export default class extends Component {
     }
 
     render() {
-        const { days, myProgram, program, routines } = this.state;
+        const { days, myProgram, program, routines, cw, cd } = this.state;
         const { displayName } = this.context.profile;
         if (!days) return null;
         let weeks = [];
@@ -92,6 +148,8 @@ export default class extends Component {
         }
         return (
             <WorkoutPage
+                cw={cw}
+                cd={cd}
                 updateMyProgram={this.updateMyProgram}
                 displayName={displayName}
                 weeks={weeks}
@@ -99,6 +157,7 @@ export default class extends Component {
                 program={program}
                 getRoutines={this.getRoutines}
                 routines={routines}
+                saveProgress={this.saveProgress}
             />
         );
     }

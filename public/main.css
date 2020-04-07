@@ -604,6 +604,9 @@ p:not(.title) {
   .title--md {
     line-height: 1.42;
     font-size: 3.4rem; }
+    .title--md-icon {
+      font-size: 2.2rem;
+      line-height: 1; }
   .title--sm {
     position: relative;
     font-size: 1.8rem;
@@ -1961,8 +1964,7 @@ p:not(.title) {
   .uw__week--days {
     z-index: 1;
     flex-grow: 1;
-    list-style: none;
-    padding-left: 2rem; }
+    list-style: none; }
   .uw__week--checkbox ~ .uw__week--label > .uw__week--label-minus {
     display: none; }
   .uw__week--checkbox ~ .uw__week--label > .uw__week--label-plus {
@@ -1972,9 +1974,15 @@ p:not(.title) {
   .uw__week--checkbox:checked ~ .uw__week--label > .uw__week--label-plus {
     display: none; }
   .uw__week--day {
-    padding-top: 2rem;
+    padding: 1.5rem 0;
+    padding-left: 2rem;
     display: block;
-    cursor: pointer; }
+    cursor: pointer;
+    border-bottom: solid 0.1rem #e5e5e5;
+    transition: all ease-in-out 0.2s; }
+    .uw__week--day:hover {
+      color: #2c2d34;
+      background-color: #f2910a; }
   .uw__week--checkbox ~ .uw__week--days {
     transition: all ease-in-out 0.5s;
     transform: translateY(-110%);
@@ -1982,3 +1990,15 @@ p:not(.title) {
   .uw__week--checkbox:checked ~ .uw__week--days {
     transform: translateY(0);
     height: 100%; }
+
+.uw__routine--nav-item {
+  padding: 1.6rem 2rem;
+  border-bottom: solid 0.1rem #e5e5e5;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  .uw__routine--nav-item:hover {
+    color: #2c2d34;
+    background-color: #f2910a; }

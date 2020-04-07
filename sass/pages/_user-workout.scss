@@ -116,7 +116,6 @@
             z-index: 1;
             flex-grow: 1;
             list-style: none;
-            padding-left: 2rem;
         }
 
         &--checkbox ~ &--label > &--label-minus {
@@ -136,9 +135,17 @@
         }
 
         &--day {
-            padding-top: 2rem;
+            padding: 1.5rem 0;
+            padding-left: 2rem;
             display: block;
             cursor: pointer;
+            border-bottom: solid 0.1rem $color-light;
+            transition: all ease-in-out 0.2s;
+
+            &:hover {
+                color: $color-primary;
+                background-color: $color-secondary;
+            }
         }
 
         &--checkbox ~ &--days {
@@ -151,5 +158,23 @@
             transform: translateY(0);
             height: 100%;
         }
+    }
+
+    &__routine--nav-item {
+        padding: 1.6rem 2rem;
+        border-bottom: solid 0.1rem $color-light;
+        transition: all ease-in-out 0.2s;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:hover {
+            color: $color-primary;
+            background-color: $color-secondary;
+        }
+    }
+
+    &__routine {
     }
 }
