@@ -63,7 +63,6 @@ export default class extends Component {
 
     getRoutines = ({ did, cw, cd }) => {
         this.setState({ routines: "fetching" });
-        console.log("extends -> getRoutines -> cw", cw);
         const { ref } = this.state;
 
         ref.collection("days")
@@ -78,7 +77,6 @@ export default class extends Component {
     };
 
     saveProgress = ({ cd, cr, cw, rid }) => {
-        console.log("saveProgress -> rid", rid);
         const pid = Router.query.pid.split("_id")[1];
         const { profile } = this.context;
         const { program, myProgram, did, routines } = this.state;

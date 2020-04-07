@@ -83,8 +83,6 @@ export default class extends Component {
     }
 
     updateRoutine = (routine) => {
-        console.log("extends -> updateRoutine -> routine", routine._id);
-
         const { ref } = this.state;
         const { showEvent } = this.context;
         showEvent(<p>saving changes</p>);

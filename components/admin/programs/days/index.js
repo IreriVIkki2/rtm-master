@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 const ProgramDays = ({ days, createNewDay, did, setDid, deleteDay }) => {
     const restDay = days.find((day) => day._id === did);
     const router = useRouter();
-    console.log("ProgramDays -> router", router.asPath);
     return (
         <div className="days">
             <aside className="days__aside">
