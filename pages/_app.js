@@ -43,7 +43,7 @@ export default class MyApp extends App {
             if (user) {
                 this.setState({ user: user });
                 return user.getIdToken().then((token) => {
-                    return fetch("/api/login", {
+                    return fetch("/apiV1/login", {
                         method: "POST",
                         headers: new Headers({
                             "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export default class MyApp extends App {
                 // .then(() => {});
             } else {
                 this.setState({ user: null });
-                fetch("/api/logout", {
+                fetch("/apiV1/logout", {
                     method: "POST",
                     credentials: "same-origin",
                 });

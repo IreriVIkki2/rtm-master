@@ -36,7 +36,7 @@ app.prepare().then(() => {
         next();
     });
 
-    server.post("/api/login", (req, res) => {
+    server.post("/apiV1/login", (req, res) => {
         if (!req.body) return res.sendStatus(400);
 
         const token = req.body.token;
@@ -51,7 +51,7 @@ app.prepare().then(() => {
             .catch((error) => res.json({ error }));
     });
 
-    server.post("/api/logout", (req, res) => {
+    server.post("/apiV1/logout", (req, res) => {
         req.session.decodedToken = null;
         res.json({ status: true });
     });
