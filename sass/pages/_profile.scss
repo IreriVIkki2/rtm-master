@@ -1,83 +1,65 @@
 .profile {
+    @include content-width-lg;
     min-height: 100vh;
-    &__purchases--title {
-        padding-top: 7rem;
-        background-color: $color-text-bold;
-        @include content-width-lg;
-        margin-bottom: 3rem;
-
-        &-item {
-            padding: 3rem 0;
-        }
-    }
-
-    &__purchases--programs {
-        @include content-width-lg;
-    }
-
-    &--none {
-        padding-top: 7rem;
-        @include content-width-lg;
-    }
-
-    &__programs {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-    }
-}
-
-.small-program {
-    width: 41rem;
-    height: 30rem;
-    position: relative;
-    display: inline-block;
-    background-color: $color-primary;
-    color: $color-white;
-    margin-bottom: 7rem;
-    margin-right: auto;
-    margin-left: 5rem;
-    box-shadow: 0 0.5rem 1rem rgba($color-primary, 0.3);
-
-    &__bg {
-        width: 100%;
-        height: 100%;
-        opacity: 0.3;
-
-        &--img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-
-    &__content {
-        @include absolute-cover;
-        padding: 3rem;
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-    }
-}
-
-.p-program {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    border-bottom: solid 1px $color-text-light;
-    padding: 2rem 0;
-    &:not(:last-child) {
-        margin-bottom: 3rem;
-    }
 
     &__info {
-        flex-grow: 1;
-        flex-shrink: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+
+        &--img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
     }
 
-    &__meta {
+    &__nav {
+        list-style: none;
         display: flex;
-        align-items: center;
+        justify-content: flex-start;
+        border-bottom: solid 0.1rem $color-light;
+        margin-bottom: 3rem;
+
+        &--item {
+            padding: 0.8rem 0;
+            transition: color ease-in-out 0.3s;
+
+            &:hover {
+                color: $color-black;
+            }
+
+            &-label {
+                cursor: pointer;
+                padding: 0.7rem 0;
+            }
+
+            &-check:checked + &-label {
+                border-bottom: solid 0.1rem $color-primary;
+            }
+
+            &-check {
+                display: none;
+            }
+
+            &:not(:last-child) {
+                margin-right: 3rem;
+            }
+        }
+    }
+
+    &__program {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 3rem;
+        padding-bottom: 3rem;
+        border-bottom: solid 1px $color-light;
+
+        @include respond-mobile-first(tab-land) {
+            flex-direction: row;
+            justify-content: space-between;
+        }
     }
 }

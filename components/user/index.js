@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Link from "next/link";
 
 export default ({
@@ -9,6 +10,7 @@ export default ({
     restartProgress,
 }) => {
     if (!programs) return <p className="title title--sm">loading...</p>;
+    const [checked, setChecked] = useState("programs");
 
     const confirmModal = () =>
         showModal(
@@ -33,51 +35,94 @@ export default ({
         );
 
     return (
-        <div className="pt-7">
-            <div className="d-flex">
+        <div className="pt-7 profile">
+            <div className="profile__info">
                 <div className="">
                     <p className="text-bolder title--md text-black">
                         {profile.displayName}
                     </p>
                 </div>
-                <div className="">
-                    <img width="100px" height="auto" src={profile.photoUrl} />
+                <div className="profile__info--img">
+                    <img
+                        className="img-cover"
+                        height="auto"
+                        src={profile.photoUrl}
+                    />
                 </div>
             </div>
 
-            <div>
-                <ul className="d-flex">
-                    <li>
-                        <label htmlFor="programs">programs</label>
-                        <input type="radio" name="user-menu" id="programs" />
-                    </li>
-                    <li>
-                        <label htmlFor="settings">settings</label>
-                        <input type="radio" name="user-menu" id="settings" />
-                    </li>
-                    <li>
-                        <label htmlFor="notifs">notifications</label>
-                        <input type="radio" name="user-menu" id="notifs" />
-                    </li>
-                </ul>
-            </div>
+            <ul className="profile__nav">
+                <li className="profile__nav--item">
+                    <input
+                        className="profile__nav--item-check"
+                        type="radio"
+                        name="user-menu"
+                        id="programs"
+                        onChange={() => setChecked("programs")}
+                        checked={checked === "programs"}
+                    />
+                    <label
+                        className="profile__nav--item-label"
+                        htmlFor="programs"
+                    >
+                        programs
+                    </label>
+                </li>
+                <li className="profile__nav--item">
+                    <input
+                        className="profile__nav--item-check"
+                        type="radio"
+                        name="user-menu"
+                        id="settings"
+                        onChange={() => setChecked("settings")}
+                        checked={checked === "settings"}
+                    />
+                    <label
+                        className="profile__nav--item-label"
+                        htmlFor="settings"
+                    >
+                        settings
+                    </label>
+                </li>
+                <li className="profile__nav--item">
+                    <input
+                        className="profile__nav--item-check"
+                        type="radio"
+                        name="user-menu"
+                        id="notifs"
+                        onChange={() => setChecked("notifs")}
+                        checked={checked === "notifs"}
+                    />
+                    <label
+                        className="profile__nav--item-label"
+                        htmlFor="notifs"
+                    >
+                        notifications
+                    </label>
+                </li>
+            </ul>
 
-            <ul className="">
+            <ul className="profile__programs">
                 {programs.map((program) => {
                     const pp = myPrograms.find((p) => p._id === program._id);
                     return (
-                        <li key={program._id} className="mb-3">
-                            <p className="title--md bolder">{program.title}</p>
-                            <div className="d-flex mb-2">
-                                <p className="mr-1">
-                                    {pp.progress} % completed
+                        <li key={program._id} className="profile__program">
+                            <div>
+                                <p className="title--md bolder">
+                                    {program.title}
                                 </p>
-                                <p className="">
-                                    week {Math.ceil(pp.daysCompleted / 7) || 1}{" "}
-                                    of {program.weeksCount}
-                                </p>
+                                <div className="d-flex">
+                                    <p className="mr-1">
+                                        {pp.progress} % completed
+                                    </p>
+                                    <p className="">
+                                        week{" "}
+                                        {Math.ceil(pp.daysCompleted / 7) || 1}{" "}
+                                        of {program.weeksCount}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="">
+                            <div className="d-flex mt-2">
                                 <button
                                     onClick={confirmModal}
                                     className="btn btn--sm btn--primary mr-3"
@@ -88,9 +133,9 @@ export default ({
                                     href="/u/[username]/[pid]"
                                     as={`/u/${profile.displayName}/${program.slug}`}
                                 >
-                                    <a className="btn btn--sm btn--secondary">
+                                    <button className="btn btn--sm btn--secondary">
                                         continue
-                                    </a>
+                                    </button>
                                 </Link>
                             </div>
                         </li>
