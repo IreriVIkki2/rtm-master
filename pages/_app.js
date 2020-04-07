@@ -144,6 +144,7 @@ export default class MyApp extends App {
         firebaseClient()
             .auth.signInWithPopup(provider)
             .then((result) => {
+                console.log("handleGoogleLogin -> result", result);
                 if (result.additionalUserInfo.isNewUser) {
                     crud.createUserProfile(result.user).then((profile) => {
                         localStorage.setItem(
@@ -158,6 +159,7 @@ export default class MyApp extends App {
             .catch((error) => {
                 // Handle Errors here.
                 var errorCode = error.code;
+                console.log("handleGoogleLogin -> errorCode", errorCode);
                 var errorMessage = error.message;
                 // The email of the user's account used.
                 var email = error.email;
