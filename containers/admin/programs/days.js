@@ -24,6 +24,19 @@ export default class extends Component {
         this.setState({ pid, ref });
     }
 
+    deleteDay = (did) => {
+        const { ref } = this.state;
+        const { showEvent } = this.context;
+        showEvent(<p>Deleting day</p>);
+        ref.doc(did)
+            .delete()
+            .then(() => showEvent(<p>Day deleted</p>))
+            .catch((err) => {
+                console.error(err);
+                showEvent(<p>Error deleting day</p>);
+            });
+    };
+
     createNewDay = () => {
         const pid = Router.query.pid.split("_id")[1];
         const { days, ref } = this.state;
@@ -53,9 +66,10 @@ export default class extends Component {
         const { days, did } = this.state;
         return (
             <ProgramDays
+                did={did}
                 days={days}
                 createNewDay={this.createNewDay}
-                did={did}
+                deleteDay={this.deleteDay}
                 setDid={(did) => this.setState({ did })}
             />
         );
@@ -69,10 +83,12 @@ export default class extends Component {
                 days.push(doc.data());
             });
 
-            if (did === undefined) {
+            if (!did) {
                 did = days.length > 0 ? days[0]._id : null;
+                this.setState({ days, did });
+            } else {
+                this.setState({ days });
             }
-            this.setState({ days, did });
         });
         this.setState({ removeDaysListener });
     };

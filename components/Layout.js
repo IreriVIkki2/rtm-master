@@ -10,7 +10,7 @@ const Layout = ({ children, context }) => {
     const [event, setEvent] = useState(null);
     const [timer, setTimer] = useState(null);
 
-    const showModal = content => {
+    const showModal = (content) => {
         document.getElementById("modalCheckBox").checked = true;
         setModalContent(content);
     };

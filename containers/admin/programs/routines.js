@@ -47,21 +47,44 @@ export default class extends Component {
         }
     }
 
+    setRestDay = (isRestDay) => {
+        const pid = Router.query.pid.split("_id")[1];
+        const { showEvent } = this.context;
+        firebaseClient()
+            .db.collection("program")
+            .doc(pid)
+            .collection("days")
+            .doc(this.props.did)
+            .set({ isRestDay }, { merge: true })
+            .then(() =>
+                showEvent(
+                    <p className="event__success">Day set to resting day</p>,
+                ),
+            )
+            .catch(() =>
+                showEvent(
+                    <p className="event__success">Error setting rest day</p>,
+                ),
+            );
+    };
+
     render() {
-        const { rid } = this.state;
+        const { routines } = this.state;
         return (
             <Routines
-                rid={rid}
-                routines={this.state.routines}
+                routines={routines}
                 createNewRoutine={this.createNewRoutine}
-                setRid={(rid) => this.setState({ rid })}
                 deleteRoutine={this.deleteRoutine}
                 updateRoutine={(r) => this.updateRoutine(r)}
+                setRestDay={this.setRestDay}
+                restDay={this.props.restDay}
             />
         );
     }
 
     updateRoutine = (routine) => {
+        console.log("extends -> updateRoutine -> routine", routine._id);
+
         const { ref } = this.state;
         const { showEvent } = this.context;
         showEvent(<p>saving changes</p>);

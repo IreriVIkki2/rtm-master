@@ -25,10 +25,10 @@ export default class extends Component {
     addProgramsListener = async () => {
         const removeProgramsListener = await firebaseClient()
             .db.collection("program")
-            .onSnapshot(snap => {
+            .onSnapshot((snap) => {
                 let programs = [];
 
-                snap.forEach(program => {
+                snap.forEach((program) => {
                     programs.push(program.data());
                 });
 
@@ -36,27 +36,6 @@ export default class extends Component {
             });
 
         this.setState({ removeProgramsListener });
-    };
-
-    confirmDelete = id => {
-        const { showModal, closeModal } = this.context;
-        showModal(
-            <div>
-                <p>
-                    Are you sure you want to delete this program,
-                    <span>Note that this operation cannot be reversed</span>
-                    <button onClick={closeModal} className="btn btn--primary">
-                        Cancel
-                    </button>
-                    <button
-                        onClick={() => this.deleteProgram(id)}
-                        className="btn btn--secondary"
-                    >
-                        yes, delete
-                    </button>
-                </p>
-            </div>,
-        );
     };
 
     publish = async (id, published) => {
@@ -73,7 +52,7 @@ export default class extends Component {
                     ? showEvent(<p>Program published</p>)
                     : showEvent(<p>Program reverted to draft</p>),
             )
-            .catch(err => {
+            .catch((err) => {
                 console.error(err);
                 published
                     ? showEvent(<p>Error publishing program</p>)
@@ -81,31 +60,25 @@ export default class extends Component {
             });
     };
 
-    deleteProgram = async id => {
+    deleteProgram = async (id) => {
         const { showEvent, closeModal } = this.context;
-        const pRef = firebaseClient()
-            .db.collection("program")
-            .doc(id);
+        const pRef = firebaseClient().db.collection("program").doc(id);
+        showEvent(<p>Deleting program...</p>);
 
         pRef.delete()
-            .then(() =>
-                pRef
-                    .collection("sales")
-                    .doc("salesDoc")
-                    .delete(),
-            )
+            .then(() => pRef.collection("sales").doc("salesDoc").delete())
             .then(() => {
-                showEvent(<p>program deleted</p>);
                 closeModal();
+                showEvent(<p>program deleted</p>);
             })
-            .catch(err => {
+            .catch((err) => {
                 closeModal();
                 showEvent(<p>Failed! Could not delete program</p>);
                 throw err;
             });
     };
 
-    editProgram = slug =>
+    editProgram = (slug) =>
         Router.push(
             "/admin-panel/programs/edit/[pid]",
             `/admin-panel/programs/edit/${slug}`,
@@ -113,12 +86,15 @@ export default class extends Component {
 
     render() {
         const { programs } = this.state;
+        const { showModal, closeModal } = this.context;
         return (
             <Fragment>
                 <NewProgram />
                 <AllPrograms
+                    showModal={showModal}
+                    closeModal={closeModal}
                     programs={programs}
-                    del={this.confirmDelete}
+                    del={this.deleteProgram}
                     edit={this.editProgram}
                     publish={this.publish}
                 />

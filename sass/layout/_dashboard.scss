@@ -1,13 +1,49 @@
 .dashboard {
-    max-width: 100%;
-    $aside-width: 20rem;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    $aside-width: 25rem;
 
     &__aside {
-        width: $aside-width;
         position: fixed;
+        width: $aside-width;
+        padding: 3rem;
+        height: 100vh;
+        background-color: $color-primary;
+        color: $color-white;
     }
 
     &__main {
+        padding: 3rem;
         padding-left: $aside-width;
+        margin-left: 3rem;
+        min-height: 100vh;
+    }
+
+    &__link {
+        border-bottom: solid 0.1rem $color-text-light;
+        cursor: pointer;
+
+        & > :first-child {
+            display: block;
+            padding: 1rem;
+        }
+
+        &--items {
+            padding-left: 2rem;
+        }
+
+        &--active-inner {
+            background-color: $color-text-light;
+            color: $color-text-bold;
+            border-color: $color-black;
+        }
+
+        &--active,
+        &:hover {
+            background-color: $color-secondary;
+            color: $color-text-bold;
+            border-color: $color-black;
+        }
     }
 }

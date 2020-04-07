@@ -52,11 +52,11 @@ const newProgramObject = () => {
         publishedAt: Date.now(),
         updatedAt: Date.now(),
 
-        daysCount: 60,
-        weeksCount: 12,
-        routinesCount: 540,
-        restDaysCount: 24,
-        visitationCount: 12,
+        daysCount: 0,
+        weeksCount: 0,
+        routinesCount: 0,
+        restDaysCount: 0,
+        visitationCount: 0,
         hasPremium: true,
         isFree: false,
     };

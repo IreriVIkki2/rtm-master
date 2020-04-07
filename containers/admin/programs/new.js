@@ -10,7 +10,7 @@ export default () => {
     const createProgram = () => {
         showEvent(<p>Creating new program</p>, true);
         crud.createNewProgram()
-            .then(pid => {
+            .then((pid) => {
                 closeEvent();
                 showEvent(
                     <p>
@@ -22,16 +22,19 @@ export default () => {
                         >
                             Edit now
                         </a>
-                    </p>, 
+                    </p>,
                 );
             })
-            .catch(err => {
+            .catch((err) => {
                 showEvent(<p>Failed! Could not create a new program</p>);
             });
     };
     return (
-        <button onClick={createProgram} className="btn btn--secondary">
-            New Program
+        <button
+            onClick={createProgram}
+            className="btn btn--secondary btn--sm mb-3"
+        >
+            create New Program
         </button>
     );
 };

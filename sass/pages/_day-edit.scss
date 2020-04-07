@@ -1,14 +1,85 @@
+.day-edit {
+    &-routine-step {
+        &__container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 0;
+
+            &::after {
+                position: absolute;
+                content: "";
+                left: 0;
+                right: 0;
+                top: 50%;
+                height: 0.3rem;
+                background-color: $color-primary;
+            }
+        }
+
+        &__item {
+            background-color: $color-white;
+            z-index: 2;
+
+            &--visited {
+                z-index: 2;
+                color: $color-primary;
+                background-color: $color-secondary;
+            }
+        }
+    }
+}
+
 .days {
     width: 100%;
     position: relative;
     height: 100%;
 
     &__aside {
-        width: 15rem;
         position: fixed;
+        width: 25rem;
+        padding: 3rem;
+        height: 100vh;
+        background-color: $color-primary;
+        color: $color-white;
+        overflow-y: scroll;
+    }
+
+    &__day {
+        padding: 1rem;
+        border-bottom: solid 0.1rem $color-text-light;
+        cursor: pointer;
+
+        &--delete {
+            opacity: 0;
+            display: none;
+            height: $font-size;
+
+            &:hover {
+                color: $color-tertiary;
+            }
+        }
+
+        &:hover &--delete {
+            display: inline-block;
+            opacity: 1;
+        }
+
+        &--current,
+        &:hover {
+            background-color: $color-secondary;
+            color: $color-text-bold;
+            border-color: $color-black;
+        }
     }
 
     &__main {
-        margin-left: 17rem;
+        margin-left: 26rem;
+        padding: 3rem;
+        min-height: 100vh;
+    }
+
+    &__no-routines {
     }
 }

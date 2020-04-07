@@ -35,8 +35,9 @@
     }
 
     &--primary:hover {
-        color: $color-black;
+        color: $color-white;
         border-color: $color-black;
+        background-color: $color-primary;
     }
 
     &--secondary {
@@ -44,11 +45,28 @@
     }
 
     &--secondary:hover {
-        color: $color-tertiary-2;
+        color: $color-black;
+        border-color: $color-secondary;
+        background-color: $color-secondary;
+    }
+
+    &--secondary-fill {
+        color: $color-primary;
+        background-color: $color-secondary;
+    }
+
+    &--secondary-fill:hover {
+        color: $color-primary;
+        background-color: $color-tertiary-2;
     }
 
     &--tertiary {
         color: $color-tertiary;
+    }
+
+    &--tertiary:hover {
+        color: $color-primary;
+        background-color: $color-tertiary;
     }
 
     &__link {
@@ -59,38 +77,62 @@
         cursor: pointer;
 
         &--secondary {
-            &:hover {
-                color: $color-secondary;
-            }
-
+            color: $color-secondary;
             &::after {
                 @include btn__link--after;
                 background-color: $color-secondary;
             }
         }
 
+        &--secondary:hover {
+            color: $color-black;
+            &::after {
+                height: 100%;
+            }
+        }
+
         &--light {
+            color: $color-light;
             &::after {
                 @include btn__link--after;
                 background-color: $color-light;
             }
         }
 
+        &--light:hover {
+            color: $color-black;
+            &::after {
+                height: 100%;
+            }
+        }
+
         &--primary {
+            color: $color-primary;
             &::after {
                 @include btn__link--after;
                 background-color: $color-primary;
             }
         }
 
-        &--tertiary {
-            &:hover {
-                color: $color-tertiary;
+        &--primary:hover {
+            color: $color-white;
+            &::after {
+                height: 100%;
             }
+        }
 
+        &--tertiary {
+            color: $color-tertiary;
             &::after {
                 @include btn__link--after;
                 background-color: $color-tertiary;
+            }
+        }
+
+        &--tertiary:hover {
+            color: $color-black;
+            &::after {
+                height: 100%;
             }
         }
     }

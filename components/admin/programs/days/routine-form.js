@@ -1,10 +1,15 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import SelectInput from "../../../forms/SelectInput";
 import Input from "../../../forms/Input";
 import TextArea from "../../../forms/TextArea";
 
 export default ({ routine, deleteRoutine, onRoutinePublish }) => {
-    const [r, setR] = useState(routine);
+    const [r, setR] = useState(null);
+    useEffect(() => {
+        setR(routine);
+    }, [routine]);
+
+    if (!r) return null;
     return (
         <Fragment>
             <p className="title title--md text-secondary mt-7">

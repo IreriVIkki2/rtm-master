@@ -155,6 +155,10 @@
     align-items: center;
 }
 
+.flex-grow {
+    flex-grow: 1;
+}
+
 .d-inline-block {
     display: inline-block;
 }
@@ -215,4 +219,18 @@
     justify-self: center;
     color: $color-text-bold;
     border-radius: 0.5rem;
+}
+
+.link-unset {
+    unset: all;
+    text-decoration: none;
+    color: currentColor;
+}
+
+.pointer {
+    cursor: pointer !important;
+}
+
+.justify-center {
+    justify-content: center;
 }

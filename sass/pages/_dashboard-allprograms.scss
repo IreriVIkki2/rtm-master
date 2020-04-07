@@ -1,61 +1,17 @@
-.dashall {
-    padding: 2rem 1rem;
-    list-style: none;
+.a-programs {
+    display: flex;
+    flex-direction: column;
+}
 
-    &__item {
-        padding: 1rem 0;
-        width: 100%;
-        display: grid;
-        grid-template-areas: "title published days routines actions";
-        grid-template-columns: 3fr 0.5fr 0.5fr 0.5fr 2fr;
-        grid-gap: 1rem;
-        border-bottom: solid 1px $color-light;
-        margin-bottom: 1rem;
+.a-program {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+    border-bottom: solid 0.1rem $color-text-light;
+    margin-bottom: 2rem;
 
-        &-title {
-            grid-area: title;
-        }
-
-        &-published {
-            grid-area: published;
-        }
-
-        &-days {
-            grid-area: days;
-        }
-
-        &-routines {
-            grid-area: routines;
-        }
-
-        &-actions {
-            grid-area: actions;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            &:last-child {
-                margin-right: auto;
-            }
-        }
-
-        &-action {
-            margin-right: 1rem;
-            display: inline-flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-
-            &:hover {
-                color: $color-secondary;
-            }
-
-            &:last-child {
-                &:hover {
-                    color: $color-tertiary;
-                }
-            }
-        }
+    &__delete-modal {
+        background-color: $color-light;
+        padding: 6rem 3rem;
     }
 }

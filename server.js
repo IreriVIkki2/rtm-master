@@ -19,7 +19,6 @@ const firebase = admin.initializeApp(
 
 app.prepare().then(() => {
     const server = express();
-
     server.use(bodyParser.json());
     server.use(
         session({
@@ -39,7 +38,6 @@ app.prepare().then(() => {
 
     server.post("/api/login", (req, res) => {
         if (!req.body) return res.sendStatus(400);
-        console.log("req.body", req.body);
 
         const token = req.body.token;
         firebase

@@ -1,65 +1,81 @@
-import React from "react";
+import { AiOutlineLeft } from "react-icons/ai";
 import Link from "../Link";
 
 const DashLayout = ({ children }) => {
     return (
         <div className="dashboard">
             <aside className="dashboard__aside">
-                <div className="navbar__brand">
+                <button className="btn btn__link btn__link--light mb-2 font-smaller w-100">
                     <Link href="/">
-                        <h1 className="text-black">Return to site</h1>
+                        <p className>
+                            <span className="mr-1">
+                                <AiOutlineLeft />
+                            </span>
+                            return to site
+                        </p>
                     </Link>
-                </div>
+                </button>
                 <ul className="">
                     <li>
-                        <p className="">Programs</p>
-                        <ul className="ml-1">
-                            <li>
+                        <p className="dashboard__link">
+                            <Link
+                                activeClassName="dashboard__link--active"
+                                href="/admin-panel/programs/all"
+                            >
+                                <a className="link-unset">Programs</a>
+                            </Link>
+                        </p>
+                        <ul className="dashboard__link--items">
+                            <li className="dashboard__link">
                                 <Link
-                                    activeClassName=""
+                                    activeClassName="dashboard__link--active-inner"
                                     href="/admin-panel/programs/all"
                                 >
-                                    <a className="">All</a>
+                                    <a className="link-unset">All</a>
                                 </Link>
                             </li>
 
-                            <li>
+                            <li className="dashboard__link">
                                 <Link
-                                    activeClassName=""
+                                    activeClassName="dashboard__link--active-inner"
                                     href="/admin-panel/programs/drafts"
                                 >
-                                    <a className="">Drafts</a>
+                                    <a className="link-unset">Drafts</a>
                                 </Link>
                             </li>
 
-                            <li>
+                            <li className="dashboard__link">
                                 <Link
-                                    activeClassName=""
+                                    activeClassName="dashboard__link--active-inner"
                                     href="/admin-panel/programs/published"
                                 >
-                                    <a className="">Published</a>
+                                    <a className="link-unset">Published</a>
                                 </Link>
                             </li>
                         </ul>
                     </li>
 
-                    <li>
-                        <Link activeClassName="" href="/admin-panel/stats">
-                            <a className="">Stats</a>
+                    <li className="dashboard__link">
+                        <Link
+                            activeClassName="dashboard__link--active"
+                            href="/admin-panel/stats"
+                        >
+                            <a className="link-unset">Stats</a>
                         </Link>
                     </li>
 
-                    <li>
-                        <Link activeClassName="" href="/admin-panel/settings">
-                            <a className="">Settings</a>
+                    <li className="dashboard__link">
+                        <Link
+                            activeClassName="dashboard__link--active"
+                            href="/admin-panel/settings"
+                        >
+                            <a className="link-unset">Settings</a>
                         </Link>
                     </li>
                 </ul>
             </aside>
 
-            <main className="dashboard__main">
-                <div className="pr-2">{children}</div>
-            </main>
+            <main className="dashboard__main">{children}</main>
         </div>
     );
 };
