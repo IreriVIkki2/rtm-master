@@ -5,22 +5,18 @@ const FileStore = require("session-file-store")(session);
 const next = require("next");
 const admin = require("firebase-admin");
 const cookieSecret = require("./config/cookieSecret");
-
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
 const firebase = admin.initializeApp(
     {
         credential: admin.credential.cert(require("./config/server")),
     },
     "server",
 );
-
 app.prepare().then(() => {
     const server = express();
-
     server.use(bodyParser.json());
     server.use(
         session({
@@ -32,15 +28,12 @@ app.prepare().then(() => {
             cookie: { maxAge: 604800000, httpOnly: true }, // week
         }),
     );
-
     server.use((req, res, next) => {
         req.firebaseServer = firebase;
         next();
     });
-
     server.post("/api/login", (req, res) => {
         if (!req.body) return res.sendStatus(400);
-
         const token = req.body.token;
         firebase
             .auth()
@@ -52,16 +45,13 @@ app.prepare().then(() => {
             .then((decodedToken) => res.json({ status: true, decodedToken }))
             .catch((error) => res.json({ error }));
     });
-
     server.post("/api/logout", (req, res) => {
         req.session.decodedToken = null;
         res.json({ status: true });
     });
-
     server.get("*", (req, res) => {
         return handle(req, res);
     });
-
     server.listen(port, (err) => {
         if (err) throw err;
         console.log(`> Ready on http://localhost:${port}`);
