@@ -23,7 +23,7 @@
         "isomorphic-unfetch": "2.0.0",
         "paypal-rest-sdk": "^1.8.1",
         "moment": "^2.24.0",
-        "next": "^9.3.0",
+        "next": "^11.1.0",
         "quill-image-resize-module-react": "^3.0.0",
         "quill-image-uploader": "^1.0.2",
         "react": "^16.7.0",
